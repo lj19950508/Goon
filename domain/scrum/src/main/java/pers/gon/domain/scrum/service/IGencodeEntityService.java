@@ -1,8 +1,8 @@
-package pers.gon.domain.gencode.service;
+package pers.gon.domain.scrum.service;
 
 
 import freemarker.template.Configuration;
-import pers.gon.domain.gencode.entity.GencodeEntity;
+import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.infrastructure.common.service.IBaseService;
 
 import java.io.IOException;

@@ -63,7 +63,7 @@
             </dependency>
             <dependency>
                 <groupId>pers.gon</groupId>
-                <artifactId>gencode</artifactId>
+                <artifactId>scrum</artifactId>
                 <version>${gon.version}</version>
             </dependency>
             <dependency>

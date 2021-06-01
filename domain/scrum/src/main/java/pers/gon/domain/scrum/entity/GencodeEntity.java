@@ -1,4 +1,4 @@
-package pers.gon.domain.gencode.entity;
+package pers.gon.domain.scrum.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
-import pers.gon.domain.gencode.vo.GencodeEntityItem;
+import pers.gon.domain.scrum.vo.GencodeEntityItem;
 import pers.gon.domain.upms.entity.UpmsMenu;
 import pers.gon.infrastructure.common.valid.SaveGroup;
 

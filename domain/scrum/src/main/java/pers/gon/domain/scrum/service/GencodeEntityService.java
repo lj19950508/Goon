@@ -1,4 +1,4 @@
-package pers.gon.domain.gencode.service;
+package pers.gon.domain.scrum.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
@@ -10,8 +10,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.gon.domain.gencode.entity.GencodeEntity;
-import pers.gon.domain.gencode.repository.GencodeEntityRepositroy;
+import pers.gon.domain.scrum.entity.GencodeEntity;
+import pers.gon.domain.scrum.repository.GencodeEntityRepositroy;
 import pers.gon.domain.upms.entity.UpmsMenu;
 import pers.gon.domain.upms.service.IUpmsMenuService;
 import pers.gon.infrastructure.common.service.BaseService;

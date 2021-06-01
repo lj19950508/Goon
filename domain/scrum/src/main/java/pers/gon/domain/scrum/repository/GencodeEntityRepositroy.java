@@ -1,6 +1,6 @@
-package pers.gon.domain.gencode.repository;
+package pers.gon.domain.scrum.repository;
 
-import pers.gon.domain.gencode.entity.GencodeEntity;
+import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.infrastructure.common.repository.BaseRepository;
 
 /**

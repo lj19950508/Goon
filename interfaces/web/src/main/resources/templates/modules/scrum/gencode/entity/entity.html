@@ -39,20 +39,20 @@
                 <div class="fixed-table-toolbar">
                     <div class="bs-bars float-left">
                         <div id="toolbar">
-                            <@ if(shiro.hasPermission("GENCODE:ENTITY:ADD") ){ @>
+                            <@ if(shiro.hasPermission("SCRUM:GENCODE:ADD") ){ @>
 
                             <button id="add" class="btn btn-primary waves-effect w-xs waves-light"
                                     onclick="pageObject.add()"><i
                                 class="fa fa-plus"></i> 新建
                             </button>
                             <@ } @>
-                            <@ if(shiro.hasPermission("GENCODE:ENTITY:EDIT") ){ @>
+                            <@ if(shiro.hasPermission("SCRUM:GENCODE:EDIT") ){ @>
                             <button id="edit" class="btn btn-default waves-effect w-xs waves-light" disabled=""
                                     onclick="pageObject.edit(pageObject.getIdSelections())">
                                 <i class="fa fa-edit"></i> 修改
                             </button>
                             <@ } @>
-                            <@ if(shiro.hasPermission("GENCODE:ENTITY:DEL") ){ @>
+                            <@ if(shiro.hasPermission("SCRUM:GENCODE:DEL") ){ @>
                             <button id="remove" class="btn btn-outline-danger waves-effect w-xs waves-light"
                                     disabled=""
                                     onclick="pageObject.del(pageObject.getIdSelections())">

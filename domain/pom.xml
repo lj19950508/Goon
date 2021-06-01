@@ -15,7 +15,7 @@
     <modules>
         <module>upms</module>
         <module>sys</module>
-        <module>gencode</module>
+        <module>scrum</module>
     </modules>
     <artifactId>domain</artifactId>
     <packaging>pom</packaging>

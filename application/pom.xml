@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>pers.gon</groupId>
-            <artifactId>gencode</artifactId>
+            <artifactId>scrum</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>

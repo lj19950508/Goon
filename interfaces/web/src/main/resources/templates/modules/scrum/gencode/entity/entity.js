@@ -67,13 +67,13 @@ var pageObject = {
         });
     },
     add: function () {
-        go_into("${ctx}/gencode/entity/form/add");
+        go_into("${ctx}/scrum/gencode/entity/form/add");
     },
     view: function (id) {
-        go_into("${ctx}/gencode/entity/form/view?id=" + id);
+        go_into("${ctx}/scrum/gencode/entity/form/view?id=" + id);
     },
     edit: function (id) {
-        go_into("${ctx}/gencode/entity/form/edit?id=" + id);
+        go_into("${ctx}/scrum/gencode/entity/form/edit?id=" + id);
     },
     del: function (id) {
         let idarr = [];

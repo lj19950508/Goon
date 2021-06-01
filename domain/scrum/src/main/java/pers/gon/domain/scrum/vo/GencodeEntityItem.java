@@ -1,4 +1,4 @@
-package pers.gon.domain.gencode.vo;
+package pers.gon.domain.scrum.vo;
 
 import lombok.Getter;
 import lombok.Setter;
