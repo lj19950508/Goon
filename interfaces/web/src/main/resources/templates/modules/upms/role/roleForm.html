@@ -1,0 +1,90 @@
+<@ layout("/include/_container.html", {title:"人员管理", parent:"主模块"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+
+        <form id="roleForm" action="${ctx}/upms/role/save" method="post">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="col-24 pl-0 ">
+                        <button type="button" onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button" class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#roleForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${upmsRole.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">基本信息</h5></td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger">*</span>角色名称：
+                                    </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${upmsRole.name!}" name="name" required="required" placeholder="角色名称">
+                                    <div class="invalid-feedback">输入角色名称！</div>
+
+                                </td>
+                                <td class=" active width-15  ">
+                                    <span class="pull-right col-form-label ">
+                                        <span class="text-danger">*</span>角色编码：
+                                    </span>
+                                </td>
+                                <td >
+                                    <input type="text" value="${upmsRole.code!}" class="form-control" required="required" name="code" placeholder="输入角色编码">
+                                    <div class="invalid-feedback">输入角色编码！</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">默认数据权限</h5></td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>数据权限：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#select  value="${upmsRole.datascopeValue!}" path="datascopeValue" items="${dict.get('upms_datascope_type')}" itemLabel="name" itemValue="value" notAllowNull="false"/>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <@ if(mode=='edit'){@>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">分配权限(右键可分配数据权限)</h5></td>
+                                <@ }else{ @>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">分配权限 </h5></td>
+                                <@ } @>
+                            </tr>
+                            <tr>
+                                <td c class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger"></span>分配权限：
+                                    </span>
+                                </td>
+                                <td colspan="6">
+                                    <div id="menuTree" class="ztree"></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<@ } @>
+
+<@ include("roleForm.js"){} @>

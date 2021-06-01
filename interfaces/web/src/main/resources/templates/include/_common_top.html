@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark menubar">
+  <a class="navbar-brand" href="#">Gooooooooooooooooooooon</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <@ for(menu in currentAdmin.currentMenuTree() ){ @>
+        <@ if(menu.children==null || menu.children.~size == 0 ) { @>
+            <li class="nav-item">
+                <@ if(menu.url!=null) { @>
+                   <a id="'${menu.id}'" data-url="${ctx}${menu.url}" class="nav-link" href="javascript:openTab('${ctx}${menu.url}','${menu.name}',false)">${menu.name}</a>
+                <@ }else {@>
+                <a id="${menu.id}" data-url="${ctx}${menu.url}" class="nav-link" href="#">${menu.name}</a>
+                <@ }@>
+
+            </li>
+        <@ } @>
+        <@ else{ @>
+          <li class="nav-item dropdown">
+            <a id="${menu.id}" data-url="${ctx}${menu.url}" class="nav-link" href="javascript:openTab('${ctx}${menu.url}','${menu.name}',false)" id="navbarDropdown" role="button" data-toggle="dropdown" >
+              ${menu.name}
+            </a>
+            <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown">
+              <@ for(submenu in menu.children ) {@>
+              <a id="${menu.id}" data-url="${ctx}${submenu.url}" class="dropdown-item" href="javascript:openTab('${ctx}${submenu.url}','${submenu.name}',false)">${submenu.name}</a>
+              <@ } @>
+            </div>
+          </li>
+        <@ } @>
+      <@ } @>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="请输入关键字" aria-label="Search">
+      <button class="btn btn-outline-light mr-sm-2" type="submit">搜索</button>
+      <a class="btn btn-outline-light mr-sm-2" href="${ctx}/logout" type="submit">退出</a>
+    </form>
+  </div>
+</nav>
+
+<@ include("/include/_common_top.js"){} @>
+
+

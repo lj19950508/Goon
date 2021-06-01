@@ -1,0 +1,106 @@
+<@ layout("/include/_container.html", {title:"人员管理", parent:"主模块"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+
+        <form id="adminForm" action="${ctx}/upms/admin/save" method="post" novalidate>
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="col-24 pl-0 ">
+                        <button type="button" onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button" class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#adminForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${upmsAdmin.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">基本信息</h5></td>
+                            </tr>
+                            <tr>
+                                <@ if(mode=='add'){ @>
+                                <td class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger">*</span>登录账户：
+                                    </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${upmsAdmin.nickname!}" name="account" placeholder="输入登录账户" required="required">
+                                    <div class="invalid-feedback">请输入昵称!</div>
+                                </td>
+                                <@ } @>
+                                <td class=" active width-15  ">
+                                    <span class="pull-right col-form-label ">
+                                        <span class="text-danger">*</span>昵称：
+                                    </span>
+                                </td>
+                                <td >
+                                    <input type="text" value="${upmsAdmin.nickname!}" class="form-control" name="nickname" placeholder="输入昵称" required>
+                                    <div class="invalid-feedback">请输入昵称!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <@ if(mode=='add'){ @>
+                                <td class="active width-15">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger">*</span>登录密码：
+                                    </span>
+                                </td>
+                                <td colspan="1">
+                                    <input type="password" class="form-control" name="password" placeholder="输入密码" required pattern="[A-Za-z0-9]{6,30}">
+                                    <div class="invalid-feedback">密码长度至少为六位,只能是大小写字母或数字！</div>
+                                </td>
+                                <@ } @>
+                            </tr>
+                            <tr>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">分配职能</h5></td>
+                            </tr>
+
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>部门：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#treeselect id="dept" name="dept.id"
+                                    value="${upmsAdmin.dept.id!}"
+                                    labelValue="${upmsAdmin.dept.name!}"
+                                    labelName="detp.name"
+                                    placeholder="选择单位"
+                                    title="所属单位" url="/upms/dept/list"
+                                    required="required"
+                                    checked="false"
+                                    allowClear="true"
+                                    allowSearch="true" />
+                                </td>
+                                <td class=" active  width-15 ">
+                                        <span class="pull-right col-form-label ">
+                                            角色：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#checkbox path="roles" items="${roleList}" itemLabel="name" itemValue="id"  values="${selectRoleList!}"     />
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<@ } @>
+
+<@ include("adminForm.js"){} @>

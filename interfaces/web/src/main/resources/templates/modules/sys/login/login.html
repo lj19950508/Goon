@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<@ include("/include/_common_header.html"){} @>
+<!--转换成include格式-->
+<head>
+    <@include("login.css"){}@>
+</head>
+<body>
+    <div class="container login-container">
+            <form method="POST" action="${ctx}/login">
+                    <div class="form-group row no-gutters">
+                        <label for="account" class="col-sm-4 col-form-label">账户</label>
+                        <div class="col-sm-20">
+                            <input id="account" type="text" name="account" required
+                                   placeholder="请输入账户" autocomplete="off" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row no-gutters">
+                        <label for="password" class="col-sm-4 col-form-label">密码</label>
+                        <div class="col-sm-20">
+                            <input id="password" type="password" name="password" required
+                                   placeholder="请输入密码" autocomplete="off" class="form-control">
+                        </div>
+                    </div>
+                <div class="form-group row justify-content-end button-container">
+
+                    <button   type="submit" id="loginBtn" class="btn btn-primary col-sm-4 col-form-label mr-sm-2">登录</button>
+                    <button  type="reset" class="btn btn-default col-sm-4 col-form-label ">重置</button>
+                </div>
+                    <@ if(null!=msg! ) { @>
+                        <div class="form-group alert alert-danger " role="alert">
+                            ${msg}
+                        </div>
+                    <@ } @>
+            </form>
+    </div>
+</body>
+</html>
+<@ include("login.js"){} @>

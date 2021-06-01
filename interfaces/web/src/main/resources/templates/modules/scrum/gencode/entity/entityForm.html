@@ -1,0 +1,187 @@
+<@ layout("/include/_container.html", {title:"实体表单", parent:"生成代码"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+        <form id="gencodeForm" action="${ctx}/scrum/gencode/entity/save" method="post" novalidate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-24  pl-0 ">
+                        <button type="button" onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button" class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#entityForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${gencodeEntity.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="table-title-td" colspan="6"><h5 class="table-title-info">基本信息</h5></td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>对象名：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.entityName!}"
+                                           name="entityName" placeholder="输入对象名（如:entityName）" required="required">
+                                    <div class="invalid-feedback">请输入对象名!</div>
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>对象描述：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.entityDesc!}"
+                                           name="entityDesc" placeholder="输入对象描述(如:实体名称)" required="required">
+                                    <div class="invalid-feedback">请输入对象描述!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>代码模板：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#select value="${gencodeEntity.templateType!}" path="templateType"
+                                    items="${dict.get('gencode_template_type')}" itemLabel="name" itemValue="value"
+                                    notAllowNull="false"/>
+                                    <div class="invalid-feedback">请选择模板!</div>
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>是否逻辑删除：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#radio path="isLogicDelete" required="required" items="${dict.get('yes_no')}"
+                                    value="${gencodeEntity.isLogicDelete!}"/>
+                                    <div class="invalid-feedback">请选择!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>所属菜单：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#treeselect id="parentId" name="parent.id"
+                                    value="${gencodeEntity.parentMenu.id!}"
+                                    labelValue="${gencodeEntity.parentMenu.name!}"
+                                    labelName="parent.name"
+                                    placeholder="选择上级菜单"
+                                    title="上级菜单" url="/upms/menu/list"
+                                    checked="false"
+                                    allowClear="true" allowInput="false"
+                                    allowSearch="true" />
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>所属模块：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.moduleName!}"
+                                           name="moduleName" placeholder="输入所属模块（如:upms）" required="required">
+                                    <div class="invalid-feedback">请输入对象描述!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="table-title-td" colspan="6">
+                                    <h5 class="table-title-info">字段信息
+                                        <button type="button" id="add"
+                                                class="btn btn-primary waves-effect w-xs waves-light">
+                                            <i class="fa fa-plus"></i> 添加字段
+                                        </button>
+                                    </h5>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="12">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="moduleName" placeholder="字段名"
+                                                   required="required">
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="moduleName" placeholder="字段描述"
+                                                   required="required">
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="选择表单组件" value="${gencodeEntity.templateType!}"
+                                            path="n1" items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+
+                                        <div class="col-2">
+                                            <#select placeholder="选择Java类型" value="${gencodeEntity.templateType!}"
+                                            path="k1" items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="选择Mysql类型" value="${gencodeEntity.templateType!}"
+                                            path="k2" items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+
+                                        <div class="col-2">
+                                            <#select placeholder="查询组件" value="${gencodeEntity.templateType!}" path="n2"
+                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="查询表达式" value="${gencodeEntity.templateType!}"
+                                            path="n3" items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-1">
+                                            <input type="text" class="form-control" name="moduleName" placeholder="列长"
+                                                   required="required">
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="必填" value="${gencodeEntity.templateType!}" path="b1"
+                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="唯一" value="${gencodeEntity.templateType!}" path="b2"
+                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="可排序" value="${gencodeEntity.templateType!}" path="b3"
+                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-2">
+                                            <#select placeholder="关联字典" value="${gencodeEntity.templateType!}" path="n4"
+                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
+                                            itemValue="value" />
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<@ } @>
+
+<@ include("entityForm.js"){} @>

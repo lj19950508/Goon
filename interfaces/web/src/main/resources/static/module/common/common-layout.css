@@ -1,0 +1,61 @@
+/* y =  8 + 8 * n */
+html,body{
+    height: 100%;
+}
+
+.page-container{
+    height: 100%;
+}
+
+.iframe-container{
+    padding: 15px ;
+}
+.menubar{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.width-15{
+    width: 15%;
+}
+.width-30{
+    width: 30%;
+}
+.width-45{
+    width: 45%;
+}
+.width-50{
+    width: 50%;
+}
+.width-60{
+    width: 60%;
+}
+.width-75{
+    width: 75%;
+}
+.width-85{
+    width: 85%;
+}
+.width-90{
+    width: 90%;
+}
+.table-title-td{
+    background-color: #e9ecef;
+}
+.table-title-info{
+    border-left: 0.3rem solid #007bff;
+    padding-left: 0.5rem;
+    margin: 0px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.query-container{
+    padding-left: 10px;border: 1px solid #ced4da;border-bottom-right-radius: .25rem;border-top-right-radius: .25rem;display: flex;align-items: center
+}
+

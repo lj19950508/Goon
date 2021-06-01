@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>goon</artifactId>
+        <groupId>pers.gon</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <packaging>jar</packaging>
+    <!--   event：事件 -->
+    <!--   service：对外部服务封装 提供粗粒度的服务 -->
+    <name>应用层</name>
+    <artifactId>application</artifactId>
+
+    <dependencies>
+
+
+        <dependency>
+            <groupId>pers.gon</groupId>
+            <artifactId>upms</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pers.gon</groupId>
+            <artifactId>sys</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pers.gon</groupId>
+            <artifactId>gencode</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,142 @@
+@CHARSET "UTF-8";
+
+/**tab css样式*/
+
+.content-tabs {
+    position: relative;
+    height: 42px;
+    background: #ffffff;
+    line-height: 40px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.content-tabs .roll-nav,
+.page-tabs-list {
+    position: absolute;
+    width: 41px;
+    height: 41px;
+    text-align: center;
+    color: rgba(0,0,0,.5);
+    z-index: 2;
+    top: 0;
+}
+.content-tabs .roll-left-0 {
+    left: 0;
+    border-right: solid 1px #dee2e6;
+}
+.content-tabs .roll-left {
+    left: 0px;
+    border-right: solid 1px #dee2e6;
+}
+
+.content-tabs .roll-right {
+    right: 0;
+    border-left: solid 1px #dee2e6;
+}
+
+.content-tabs button {
+    background: #fff;
+    border: 0;
+    height: 41px;
+    width: 41px;
+    outline: none;
+}
+
+.content-tabs button:hover {
+    background: #fafafa;
+}
+
+nav.page-tabs {
+    margin-left: 41px;
+    height: 42px;
+    overflow: hidden;
+}
+
+nav.page-tabs .page-tabs-content {
+    float: left;
+}
+
+.page-tabs a {
+    display: block;
+    float: left;
+    border-right: solid 1px #eee;
+    padding: 0 15px;
+}
+
+.page-tabs a i:hover {
+    color: #c00;
+}
+
+
+.page-tabs a:hover,
+.content-tabs .roll-nav:hover {
+    color: #16181b;
+    background: #f8f9fa;
+    cursor: pointer;
+}
+.page-tabs a {
+    color: rgba(0,0,0,.5);
+}
+
+.page-tabs a i {
+    color: rgba(0,0,0,.5);
+}
+
+.page-tabs a.active {
+    border-bottom: 2px solid #1890ff;
+}
+.roll-right.J_tabRight {
+}
+
+.roll-right.btn-group {
+    right: 60px;
+    width: 80px;
+    padding: 0;
+}
+
+.roll-right.btn-group button {
+    width: 80px;
+}
+
+.roll-right.J_tabExit {
+    background: #fff;
+    height: 41px;
+    width: 60px;
+    outline: none;
+}
+
+.dropdown-menu-right {
+    left: auto;
+}
+
+/* 右键面板 */
+.context-menu-item.context-menu-hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: #2c3e50;
+}
+.context-menu-icon.context-menu-icon--fa::before {
+    color: #2c3e50;
+}
+.J_menuTab{
+    text-decoration: none;
+}
+.J_menuTab:link{
+    text-decoration: none;
+}
+.J_menuTab:visited{
+    text-decoration: none;
+}
+.J_menuTab:hover{
+    text-decoration: none;
+}
+.J_menuTab.active{
+    color: #16181b;
+}
+
+.J_mainContent{
+    height: calc(100% - 111px);
+}
+.J_iframe{
+    min-height: 100%;
+}

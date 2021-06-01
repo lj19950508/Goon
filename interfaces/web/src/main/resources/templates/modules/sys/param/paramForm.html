@@ -1,0 +1,64 @@
+<@ layout("/include/_container.html", {title:"参数表单", parent:"参数管理"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+        <form id="paramForm" action="${ctx}/sys/param/save" method="post" novalidate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-24  pl-0 ">
+                        <button type="button" onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button" class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#paramForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${sysParam.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>描述：
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" value="${sysParam.name!}" name="name" placeholder="输入描述" required="required">
+                                        <div class="invalid-feedback">输入描述!</div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>编码：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <input type="text" value="${sysParam.code!}" class="form-control" name="code" placeholder="输入编码" required>
+                                        <div class="invalid-feedback">输入编码!</div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>参数值：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <#textarea id="textValue" name="value" maxlength="255" value="${sysParam.value!}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<@ } @>
+<@ include("paramForm.js"){} @>

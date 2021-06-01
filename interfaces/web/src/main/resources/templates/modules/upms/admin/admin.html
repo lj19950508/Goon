@@ -1,0 +1,124 @@
+<@ layout("/include/_container.html", {title:"人员管理", parent:"主模块"}){ @>
+
+<div class="row ">
+
+    <div class="col-sm-6 ">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">部门选择</h5>
+                <div class="white-box">
+                    <!-- 搜索 -->
+                    <div class="input-group pt-2 mb-3 pl-2 pr-2">
+                        <input id="search-q" type="text" class="form-control"   placeholder="查找..." >
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" ><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <ul id="deptTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-18">
+        <div class="col-sm-24 mb-2 collapse" id="search-collapse">
+            <div class="card">
+                <div class="card-body">
+                    <a class="close" onclick="$('#search-collapse').slideToggle()">
+                        <i class="fa fa-close"></i>
+                    </a>
+                    <form id="searchForm">
+                        <input type="hidden" id="deptCode" name="dept.code">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">账户</div>
+                                    </div>
+                                    <input type="text" class="form-control" name="account" placeholder="输入账户">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">昵称</div>
+                                    </div>
+                                    <input type="text" class="form-control" name="nickname" placeholder="输入昵称">
+                                </div>
+                            </div>
+
+                            <div class="col-auto">
+                                <button id="search" type="button" class="btn btn-default mb-2">查询</button>
+                                <button id="clear" type="button" class="btn btn-default mb-2">重置</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-24 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="fixed-table-toolbar">
+                        <div class="bs-bars float-left">
+                            <div id="toolbar">
+                                <@ if(shiro.hasPermission("UPMS:ADMIN:ADD") ){ @>
+                                <button id="add" class="btn btn-primary waves-effect w-xs waves-light" onclick="pageObject.add()"><i
+                                    class="fa fa-plus"></i> 新建
+                                </button>
+                                <@ } @>
+                                <@ if(shiro.hasPermission("UPMS:ADMIN:EDIT") ){ @>
+                                <button id="edit" class="btn btn-default waves-effect w-xs waves-light" disabled=""
+                                        onclick="pageObject.edit(pageObject.getIdSelections())">
+                                    <i class="fa fa-edit"></i> 修改
+                                </button>
+                                <@ } @>
+                                <@ if(shiro.hasPermission("UPMS:ADMIN:DEL") ){ @>
+                                <button id="remove" class="btn btn-outline-danger waves-effect w-xs waves-light" disabled=""
+                                        onclick="pageObject.del(pageObject.getIdSelections())">
+                                    <i class="fa fa-remove"></i> 删除
+                                </button>
+                                <@ } @>
+                                <@ if(shiro.orPermission("UPMS:ADMIN:VIEW", "UPMS:ADMIN:ADD", "UPMS:ADMIN:EDIT")){ @>
+                                <div  class="dropdown inline-block">
+                                    <button type="button" class="btn btn-default waves-effect w-xs waves-light dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-file-excel-o"></i>  Excel
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <@ if(shiro.orPermission("UPMS:ADMIN:VIEW", "UPMS:ADMIN:ADD", "UPMS:ADMIN:EDIT")){ @>
+                                        <a class="dropdown-item" onclick="pageObject.export(pageObject.getIdSelections())" >导出</a>
+                                        <@ } @>
+                                        <@ if(shiro.hasPermission("UPMS:ADMIN:ADD") ){ @>
+<!--                                        <a class="dropdown-item" onclick="pageObject.selectFile()">导入</a>-->
+                                        <@ } @>
+                                        <@ if(shiro.orPermission("UPMS:ADMIN:VIEW", "UPMS:ADMIN:ADD", "UPMS:ADMIN:EDIT")){ @>
+<!--                                        <a class="dropdown-item" onclick="pageObject.template()">模板</a>-->
+                                        <@ } @>
+                                        <div class="d-none"><input  type="file" id="excelFile" onchange="pageObject.import()"></div>
+                                    </div>
+                                </div>
+                                <@ } @>
+                            </div>
+                        </div>
+                        <div class="columns columns-right btn-group float-right">
+                            <button class="btn btn-default" type="button" name="showSearch" aria-label="Search" onclick="$('#search-collapse').slideToggle()"
+                                    title="搜索">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            <button class="btn btn-default" type="button" name="refresh" aria-label="Refresh" title="刷新" onclick="pageObject.refresh()">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                    <table id="adminTable" class="table-bordered table-striped" data-toolbar="#toolbar"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<@ } @>
+
+<@ include("admin.js"){} @>

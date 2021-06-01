@@ -1,0 +1,118 @@
+<@ layout("/include/_container.html", {title:"菜单表单", parent:"主模块"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+        <form id="menuForm" action="${ctx}/upms/menu/save" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-24 pl-0 ">
+                        <button type="button"  onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button"  class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#menuForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${upmsMenu.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger">*</span>菜单名称：
+                                    </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${upmsMenu.name!}" name="name" placeholder="输入菜单名称" required="required">
+                                    <div class="invalid-feedback">输入菜单名称！</div>
+                                </td>
+                                <td class=" active width-15  ">
+                                    <span class="pull-right col-form-label ">
+                                        <span class="text-danger">*</span>菜单编码：
+                                    </span>
+                                </td>
+                                <td >
+                                    <input type="text" value="${upmsMenu.code!}" class="form-control" name="code" placeholder="输入菜单编码" required="required">
+                                    <div class="invalid-feedback">输入菜单编码！</div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        菜单图标：
+                                    </span>
+                                </td>
+                                <td >
+                                    <#iconselect id="icon" name="icon" value="${upmsMenu.icon!}"/>
+                                </td>
+                                <td class=" active width-15  ">
+                                    <span class="pull-right col-form-label ">
+                                        <span class="text-danger">*</span>权限标识：
+                                    </span>
+                                </td>
+                                <td >
+                                    <input type="text" value="${upmsMenu.permission!}" class="form-control" name="permission" placeholder="输入权限标识">
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>菜单路径：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <input type="text" value="${upmsMenu.url!}" class="form-control" name="url" placeholder="输入菜单路径">
+                                    </td>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>菜单类型：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <#radio path="type" required="required" items="${dict.get('upms_menu_type')}" value="${upmsMenu.type!}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>菜单排序：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <input type="text" value="${upmsMenu.sort!}" class="form-control" name="sort" placeholder="输入菜单排序">
+                                    </td>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>上级菜单：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <#treeselect id="parentId" name="parent.id"
+                                        value="${upmsMenu.parent.id!}"
+                                        labelValue="${upmsMenu.parent.name!}"
+                                        labelName="parent.name"
+                                        placeholder="选择上级菜单"
+                                        title="上级菜单" url="/upms/menu/list"
+                                        checked="false"
+                                        allowClear="true" allowInput="false"
+                                        allowSearch="true" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<@ } @>
+
+<@ include("menuForm.js"){} @>

@@ -1,0 +1,77 @@
+<@ layout("/include/_container.html", {title:"人员管理", parent:"主模块"}){ @>
+
+<div class="row ">
+    <div class="col-sm-24 ">
+
+        <form id="deptForm" action="${ctx}/upms/dept/save" method="post">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="col-24 pl-0 ">
+                        <button type="button"  onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button"  class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#deptForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${upmsDept.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="active width-15 ">
+                                    <span class="pull-right col-form-label">
+                                        <span class="text-danger">*</span>部门名称：
+                                    </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${upmsDept.name!}" required="required" name="name" placeholder="输入部门名称">
+                                    <div class="invalid-feedback">输入部门名称！</div>
+                                </td>
+                                <td class=" active width-15  ">
+                                    <span class="pull-right col-form-label ">
+                                        <span class="text-danger">*</span>部门编号：
+                                    </span>
+                                </td>
+                                <td >
+                                    <input type="text" value="${upmsDept.code!}" class="form-control" name="code" required="required" placeholder="输入部门编号">
+                                    <div class="invalid-feedback">输入部门编号！</div>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>所属单位：
+                                        </span>
+                                </td>
+                                <td colspan="6">
+                                    <#treeselect id="parentId" name="parent.id"
+                                    value="${upmsDept.parent.id!}"
+                                    labelValue="${upmsDept.parent.name!}"
+                                    labelName="parent.name"
+                                    placeholder="选择所属单位"
+                                    title="所属单位" url="/upms/dept/list"
+                                    required="required"
+                                    checked="false"
+                                    allowClear="true"
+                                    allowSearch="true" />
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<@ } @>
+
+<@ include("deptForm.js"){} @>

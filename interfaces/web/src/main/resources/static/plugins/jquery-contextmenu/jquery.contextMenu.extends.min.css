@@ -1,0 +1,18 @@
+.context-menu-icon::before {
+    color: #007bff;
+}
+.context-menu-icon.context-menu-icon--fa::before {
+    color: #007bff;
+}
+
+.context-menu-icon.context-menu-icon--fa5 i, .context-menu-icon.context-menu-icon--fa5 svg {
+    color: #007bff;
+}
+
+.context-menu-item.context-menu-hover {
+    background-color: #007bff;
+}
+.context-menu-list{
+    box-shadow:0px 3px 6px -4px rgba(0, 0, 0, 0.12),0px 6px 16px 0px rgba(0, 0, 0, 0.08),0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow:0px 3px 6px -4px rgba(0, 0, 0, 0.12),0px 6px 16px 0px rgba(0, 0, 0, 0.08),0px 9px 28px 8px rgba(0, 0, 0, 0.05);
+}

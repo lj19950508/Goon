@@ -1,0 +1,87 @@
+<@ layout("/include/_container.html", {title:"参数列表", parent:"参数管理"}){ @>
+<div class="row ">
+    <div class="col-sm-24 mb-2 collapse" id="search-collapse">
+        <div class="card">
+
+            <div class="card-body">
+                <a class="close" onclick="$('#search-collapse').slideToggle()">
+                    <i class="fa fa-close"></i>
+                </a>
+                <form id="searchForm">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">描述</div>
+                                </div>
+                                <input type="text" class="form-control" name="name" placeholder="输入描述">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">编码</div>
+                                </div>
+                                <input type="text" class="form-control" name="code" placeholder="输入编码">
+                            </div>
+                        </div>
+
+                        <div class="col-auto">
+                            <button id="search" type="button" class="btn btn-default mb-2">查询</button>
+                            <button id="clear" type="button" class="btn btn-default mb-2">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-24 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="fixed-table-toolbar"
+                >
+                    <div class="bs-bars float-left">
+                        <div id="toolbar">
+                            <@ if(shiro.hasPermission("SYS:PARAM:ADD") ){ @>
+
+                            <button id="add" class="btn btn-primary waves-effect w-xs waves-light" onclick="pageObject.add()"><i
+                                    class="fa fa-plus"></i> 新建
+                            </button>
+                            <@ } @>
+                            <@ if(shiro.hasPermission("SYS:PARAM:EDIT") ){ @>
+
+                            <button id="edit" class="btn btn-default waves-effect w-xs waves-light" disabled=""
+                                    onclick="pageObject.edit(pageObject.getIdSelections())">
+                                <i class="fa fa-edit"></i> 修改
+                            </button>
+                            <@ } @>
+                            <@ if(shiro.hasPermission("SYS:PARAM:DEL") ){ @>
+
+                            <button id="remove" class="btn btn-outline-danger waves-effect w-xs waves-light" disabled=""
+                                    onclick="pageObject.del(pageObject.getIdSelections())">
+                                <i class="fa fa-remove"></i> 删除
+                            </button>
+                            <@ } @>
+                        </div>
+                    </div>
+                    <div class="columns columns-right btn-group float-right">
+                        <button class="btn btn-default" type="button" name="showSearch" aria-label="Search" onclick="$('#search-collapse').slideToggle()"
+                                title="Search">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button class="btn btn-default" type="button" name="refresh" aria-label="Refresh" title="刷新" onclick="pageObject.refresh()">
+                            <i class="fa fa-refresh"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <table id="paramTable" class="table-bordered table-striped" data-toolbar="#toolbar"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<@ } @>
+
+<@ include("param.js"){} @>

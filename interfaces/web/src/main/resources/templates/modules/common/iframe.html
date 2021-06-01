@@ -1,0 +1,20 @@
+<%
+layout("/include/_container.html", {title:title!, parent:parent!}){
+%>
+<div class="white-box">
+	<iframe id="iframe" src="${url!}" style="border: 0px;width: 100%;">
+
+	</iframe>
+</div>
+<script>
+	$(document).ready(function () {
+	    var height = $(window).height() -150;
+		$("#iframe").css("height",height);
+
+        $(window).resize(function() {
+            var height = $(window).height() -150;
+            $("#iframe").css("height",height);
+        });
+    })
+</script>
+<% } %>

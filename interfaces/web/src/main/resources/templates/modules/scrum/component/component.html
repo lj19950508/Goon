@@ -1,0 +1,139 @@
+<@ layout("/include/_container.html", {title:"实体列表", parent:"生成代码"}){ @>
+
+
+    <div class="card">
+
+        <div class="card-body">
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td class="table-title-td" colspan="6"><h5 class="table-title-info">副标题</h5></td>
+        </tr>
+        <tr>
+
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>基本组件：
+                </span>
+            </td>
+            <td colspan="1">
+                <button id="add" class="btn btn-primary waves-effect w-xs waves-light"  ><i class="fa fa-plus"></i> 按钮
+                </button>
+                <button type="button" class="btn btn-default waves-effect w-xs waves-light dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-file-excel-o"></i>  下拉按钮
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="pageObject.export(pageObject.getIdSelections())">导出</a>
+                    <!--                                        <a class="dropdown-item" onclick="pageObject.selectFile()">导入</a>-->
+                    <!--                                        <a class="dropdown-item" onclick="pageObject.template()">模板</a>-->
+                    <div class="d-none"><input type="file" id="excelFile" onchange="pageObject.import()"></div>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>单选框：
+                </span>
+            </td>
+            <td colspan="1">
+                <#radio path="a" required="required" items="${dict.get('yes_no')}" />
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>下拉框：
+                </span>
+            </td>
+            <td colspan="1">
+                <#select  value="${upmsRole.datascopeValue!}" path="testt" items="${dict.get('upms_datascope_type')}" itemLabel="name" itemValue="value" notAllowNull="false"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>树形框：
+                </span>
+            </td>
+            <td colspan="1">
+                <#treeselect id="parentId" name="parent.id"
+                value="${gencodeEntity.parentMenu.id!}"
+                labelValue="${gencodeEntity.parentMenu.name!}"
+                labelName="parent.name"
+                placeholder="选择上级菜单"
+                title="上级菜单" url="/upms/menu/list"
+                checked="false"
+                allowClear="true" allowInput="false"
+                allowSearch="true" />
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>多行文本框：
+                </span>
+            </td>
+            <td colspan="1">
+                <#textarea id="textValue" name="value" maxlength="255" value="${sysParam.value!}"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>图标选择器：
+                </span>
+            </td>
+            <td colspan="1">
+                <#iconselect id="icon" name="icon" value=""/>
+
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>复选框：
+                </span>
+            </td>
+            <td colspan="1">
+                <#checkbox path="a1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>复选框（格式加中括号）：
+                </span>
+            </td>
+            <td colspan="1">
+                <#simpleCheckbox path="b1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
+            </td>
+        </tr>
+        <tr>
+            <td class="active width-15">
+                <span class="pull-right col-form-label">
+                    <span class="text-danger">*</span>连体框：
+                </span>
+            </td>
+            <td colspan="1">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">账户</div>
+                    </div>
+                    <input type="text" class="form-control" name="account" placeholder="输入账户">
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+        </div>
+    </div>
+
+
+
+
+
+<@ } @>
+<@ include("component.js"){} @>

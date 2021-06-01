@@ -1,0 +1,17 @@
+.nav-item:hover>.dropdown-menu {
+    display: block;
+}
+
+.bootstrap-table .fixed-table-toolbar .bs-bars{
+    margin-top: 0px !important;
+}
+
+.bootstrap-tree-table .treetable-bars .tool-left{
+    margin-top: 0px !important;
+}
+
+.bootstrap-tree-table .treetable-bordered{
+    border-left: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+}

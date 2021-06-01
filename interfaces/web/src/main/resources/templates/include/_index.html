@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<@ include("/include/_common_header.html"){} @>
+
+<body>
+<!--page loader-->
+<div class="page-container">
+<!--    包含   top rightrightmenu 的 大容器-->
+    <@ include("/include/_common_top.html"){} @>
+    <div class=" content-tabs ">
+        <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-fast-backward"></i>
+        </button>
+        <nav class="page-tabs J_menuTabs">
+            <div class="page-tabs-content">
+                <a href="javascript:;" class="active J_menuTab" data-id="${ctx}/home">工作台</a>
+            </div>
+        </nav>
+        <button class="roll-nav roll-right J_tabRight"><i class="fa fa-fast-forward"></i>
+        </button>
+
+    </div>
+    <div class=" J_mainContent " id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${ctx}/home" frameborder="0" data-id="${ctx}/home" seamless></iframe>
+    </div>
+
+</div>
+</body>
+<@ include("/include/_index.js"){} @>
+</html>
+
+
