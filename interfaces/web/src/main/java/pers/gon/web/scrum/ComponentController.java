@@ -13,7 +13,7 @@ import pers.gon.infrastructure.common.controller.BaseController;
 public class ComponentController extends BaseController {
 
 
-    @RequiresPermissions("SCRUM:GENCODE")
+    @RequiresPermissions("SCRUM:COMPONENT:LIST")
     @RequestMapping("")
     public String index(Model model) {
         return "modules/scrum/component/component.html";
