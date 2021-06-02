@@ -38,7 +38,7 @@ public class GencodeEntityController extends BaseController {
     @Autowired
     IUpmsMenuService upmsMenuService;
 
-    @RequiresPermissions("SCRUM:GENCODE")
+    @RequiresPermissions("SCRUM:GENCODE:LIST")
     @RequestMapping("")
     public String index(Model model) {
         return "modules/scrum/gencode/entity/entity.html";
