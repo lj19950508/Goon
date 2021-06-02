@@ -39,7 +39,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#radio path="a" required="required" items="${dict.get('yes_no')}" />
+                <#radio id="a" name="a" required="required" items="${dict.get('yes_no')}" />
             </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#select  value="${upmsRole.datascopeValue!}" path="testt" items="${dict.get('upms_datascope_type')}" itemLabel="name" itemValue="value" notAllowNull="false"/>
+                <#select  value="${upmsRole.datascopeValue!}" id="testt" name="testt" items="${dict.get('upms_datascope_type')}" itemLabel="name" itemValue="value" notAllowNull="false"/>
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#textarea id="textValue" name="value" maxlength="255" value="${sysParam.value!}"/>
+                <#textarea id="textValue" name="textValue"  maxlength="255" value="${sysParam.value!}"/>
             </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#iconselect id="icon" name="icon" value=""/>
+                <#iconselect id="icon" name="icon"  value=""/>
 
             </td>
         </tr>
@@ -98,7 +98,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#checkbox path="a1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
+                <#checkbox id="a1" name="a1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
             </td>
         </tr>
         <tr>
@@ -108,7 +108,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#simpleCheckbox path="b1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
+                <#bracketCheckbox id="b1" name="b1" items="${dict.get('yes_no')}" itemLabel="name" itemValue="value"       />
             </td>
         </tr>
         <tr>
@@ -118,7 +118,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#editor id="editor" name="editor"/>
+                <#editor id="editor" name="editor" />
             </td>
         </tr>
         <tr>
@@ -128,7 +128,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#datepicker path="datepicker"/>
+                <#datepicker id="datepicker" name="datepicker"/>
             </td>
         </tr>
         <tr>
@@ -138,7 +138,7 @@
                 </span>
             </td>
             <td colspan="1">
-                <#dateregionpicker path="dateregionpicker"/>
+                <#dateregionpicker id="dateregionpicker" name="dateregionpicker"/>
 
             </td>
         </tr>

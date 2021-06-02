@@ -47,7 +47,7 @@
                                     </span>
                                 </td>
                                 <td >
-                                    <#iconselect id="icon" name="icon" value="${upmsMenu.icon!}"/>
+                                    <#iconselect id="icon" name="icon"  value="${upmsMenu.icon!}"/>
                                 </td>
                                 <td class=" active width-15  ">
                                     <span class="pull-right col-form-label ">
@@ -73,7 +73,7 @@
                                         </span>
                                     </td>
                                     <td >
-                                        <#radio path="type" required="required" items="${dict.get('upms_menu_type')}" value="${upmsMenu.type!}"/>
+                                        <#radio id="type" name="type" required="required" items="${dict.get('upms_menu_type')}" value="${upmsMenu.type!}"/>
                                     </td>
                                 </tr>
                                 <tr>

@@ -1,4 +1,3 @@
-<%--富文本组件--%>
 <textarea  style="display: none" id="${id}" name="${name}"></textarea>
 <div id="${id}Editor"  >${value!''}</div>
 <script type="text/javascript">

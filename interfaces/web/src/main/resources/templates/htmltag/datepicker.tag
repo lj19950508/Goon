@@ -1,13 +1,12 @@
-<%--日期选择器组件--%>
-<input readonly ${required!true==true?'':'required="required"'}" class="form-control laydate-input"  id="${path}" name="${path}" />
+<input readonly ${required!true==true?'':'required="required"'}" class="form-control laydate-input"  id="${id}" name="${name}" />
 <script type="text/javascript">
     //对value进行格式化
-    let ${path}val = '${value!}';
+    let ${id}val = '${value!}';
     laydate.render({
-        elem: '#${path}'
+        elem: '#${id}'
         ,calendar: true
         ,trigger: 'click'
-        ,value: ${path}val
+        ,value: ${id}val
         ,theme:'#0069D9'
     });
     //value格式化

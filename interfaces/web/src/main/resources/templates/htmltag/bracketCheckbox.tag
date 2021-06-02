@@ -1,9 +1,8 @@
-<%--中括号复选框组件--%>
 <@
 for(item in items){
 @>
 <div  class="custom-control custom-checkbox  custom-control-inline ">
-    <input class="custom-control-input" name="${path!}" id="${path}${itemLP.index}" type="checkbox"
+    <input class="custom-control-input" name="${name!}" id="${id}${itemLP.index}" type="checkbox"
            value="[${item[itemValue]}]"
     <@
     var all_value = ",";
@@ -22,7 +21,7 @@ for(item in items){
     checked
     <@ } @>
     />
-    <label class="custom-control-label" for="${path}${itemLP.index}">${item[itemLabel]}</label>
+    <label class="custom-control-label" for="${id}${itemLP.index}">${item[itemLabel]}</label>
 </div>
 
 <@ } @>

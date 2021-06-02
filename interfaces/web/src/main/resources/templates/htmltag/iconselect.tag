@@ -1,4 +1,3 @@
-<%--icon选择组件--%>
 <i id="${id}Icon" class="${isNotEmpty(value)?value:' hide'}"></i>&nbsp;<span id="${id}IconLabel">${isNotEmpty(value)?value:'无'}</span>&nbsp;
 <input id="${id}" name="${name}" type="hidden" value="${value!}"/><a id="${id}Button" href="javascript:" class="btn btn-primary btn-small">选择</a>&nbsp;&nbsp;
 <input id="${id}clear" class="btn btn-default btn-small" type="button" value="清除" onclick="clear()"/>
