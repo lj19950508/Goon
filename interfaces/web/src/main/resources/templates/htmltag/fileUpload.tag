@@ -1,4 +1,4 @@
-
+<%--未启用--%>
 <input type="hidden" name="${name!}"  value="${value!}"/>
 <span class="jp-input-search jp-input-search-enter-button jp-input-affix-wrapper">
 		<input id="${id!}" readonly="readonly"

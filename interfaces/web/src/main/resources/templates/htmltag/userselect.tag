@@ -1,3 +1,4 @@
+<%--未启用--%>
 	<input id="${id}Id" name="${name}"  type="hidden" value="${value!}" class="${class!}"/>
 	<span class="jp-input-search jp-input-search-enter-button jp-input-affix-wrapper">
 		<input class="jp-input ${class!}"  id="${id}Name" name="${labelName!}" ${allowInput!true==true?'':'readonly="readonly" style="cursor: pointer;"'}  type="text" value="${labelValue!}" data-msg-required="${dataMsgRequired!}" >

@@ -1,4 +1,4 @@
-
+<%--文本库那个组件--%>
 <textarea class="form-control" id="${id}"  name="${name}" rows="${rows!}" maxlength="${maxlength!}" onkeyup="checkMaxInput(this)">${value!}</textarea>
 <script>
     //多行文本输入框剩余字数计算

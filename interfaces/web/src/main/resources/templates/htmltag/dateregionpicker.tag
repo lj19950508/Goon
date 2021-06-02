@@ -1,3 +1,4 @@
+<%--日期期间组件--%>
 <input readonly class="form-control laydate-input"  id="${path}Datepicker"  />
 <input type="hidden" name="start${strutil.upperFirst(path)}" id="start${strutil.upperFirst(path)}" />
 <input type="hidden" name="end${strutil.upperFirst(path)}" id="end${strutil.upperFirst(path)}" />

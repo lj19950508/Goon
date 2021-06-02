@@ -1,3 +1,4 @@
+<%--树形组件--%>
 <input id="${id}Id" name="${name}" value="${value!}"  type="hidden"    />
 <div class="input-group ">
 

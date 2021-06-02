@@ -1,3 +1,4 @@
+<%--下拉框组件--%>
 <select  id="${path}" name="${path}" readonly="${readonly!false}" class="selectpicker" data-style="btn-default" data-live-search="true">
     <@ if(notAllowNull!false == false){ @>
     <option value="" label=""></option>
