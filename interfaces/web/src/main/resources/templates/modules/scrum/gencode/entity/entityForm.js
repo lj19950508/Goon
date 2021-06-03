@@ -1,6 +1,6 @@
 <script>
 var pageFormObject={
-
+    tableRef: null,
     startAllLisener:function(){
 
         $form.submit("#entityForm",function(data){
@@ -15,17 +15,21 @@ var pageFormObject={
     },
     initFieldTable:function(){
         let option = {
+            pagination: false,
+            sidePagination: "client",
             columns: [
-                {checkbox: true},
                 {
                     //输入
                     field: 'itemName',
-                    title: '字段英文名',
+                    title: '字段名',
+                    formatter:function(value, row, index){
+
+                    }
                 }
                 , {
                     //输入
                     field: 'itemDesc',
-                    title: '字段中文名',
+                    title: '字段描述',
                 },
                 {
                     //下拉
@@ -82,14 +86,38 @@ var pageFormObject={
                     field: 'dictId',
                     title: '关联字典',
                 },
+                {
+                    field: 'operate',
+                    title: '操作',
+                    align: 'center',
+                    events: {
+                        'click .del': (e, value, row, index) => {
+                            this.del(row,index);
+                        },
+                    },
+                    formatter: function operateFormatter(value, row, index) {
+                        var buttons = [];
+                        buttons.push('<button class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>');
+                        buttons = buttons.join("")
+                        return buttons;
+                    }
+                }
             ],
         }
+
         $.extend(true, option,defaultTableOption,option)
         this.tableRef = $('#entityItemTable').bootstrapTable(option);
     },
     init:function () {
         this.initFieldTable()
         this.startAllLisener();
+        this.getData();
+    },
+    getData:function(){
+        this.tableRef.bootstrapTable('append', [{itemName:'测试'}]);
+    }
+    del:function(row,index){
+
     }
 };
 

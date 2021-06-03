@@ -97,34 +97,29 @@
                             <tr>
                                 <td class="table-title-td" colspan="6">
                                     <h5 class="table-title-info">字段信息
-                                        <button type="button" id="add"
-                                                class="btn btn-primary waves-effect w-xs waves-light">
-                                            <i class="fa fa-plus"></i> 添加字段
-                                        </button>
+
                                     </h5>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td colspan="12">
-                                    <table id="entityItemTable" class="table-bordered table-striped" ></table>
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <td colspan="12">
-                                    <div class="row">
-
-
-
-
-                                        <div class="col-1">
-                                            <button class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i>
-                                            </button>
+                                    <div class="fixed-table-toolbar">
+                                        <div class="bs-bars float-left">
+                                            <div id="toolbar">
+                                                <button type="button" id="add"
+                                                        class="btn btn-primary waves-effect w-xs waves-light">
+                                                    <i class="fa fa-plus"></i> 添加字段
+                                                </button>
+                                            </div>
                                         </div>
+
                                     </div>
+                                    <table id="entityItemTable" class="table-bordered table-striped" data-toolbar="#toolbar"></table>
                                 </td>
                             </tr>
+
                             </tbody>
                         </table>
                     </div>
