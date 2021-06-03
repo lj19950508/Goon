@@ -31,8 +31,8 @@ public class GencodeEntityItem {
     private String sqlType="varchar(255)";
 
     //0不显示 1文本 2长文本 3富文本 4下拉 5单选 6多选 7 日期 8数字输入框
-    @NotEmpty(message = "表单类不能为空",groups = SaveGroup.class)
-    @Column(nullable = false,columnDefinition = " char(2) default '' comment '模板类型'")
+    @NotEmpty(message = "表单类型不能为空",groups = SaveGroup.class)
+    @Column(nullable = false,columnDefinition = " char(2) default '' comment '表单类型'")
     private Integer formType;
 
     @Column(nullable = true,columnDefinition = " varchar(32) default '' comment '对应字典编码'")

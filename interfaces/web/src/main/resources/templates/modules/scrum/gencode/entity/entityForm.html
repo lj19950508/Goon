@@ -107,66 +107,17 @@
 
                             <tr>
                                 <td colspan="12">
+                                    <table id="entityItemTable" class="table-bordered table-striped" ></table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="12">
                                     <div class="row">
-                                        <div class="col-2">
-                                            <input type="text" class="form-control" name="moduleName" placeholder="字段名"
-                                                   required="required">
-                                        </div>
-                                        <div class="col-2">
-                                            <input type="text" class="form-control" name="moduleName" placeholder="字段描述"
-                                                   required="required">
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="选择表单组件" value="${gencodeEntity.templateType!}"
-                                            id="n1" name="n1" items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
 
-                                        <div class="col-2">
-                                            <#select placeholder="选择Java类型" value="${gencodeEntity.templateType!}"
-                                            id="k1" name="k1" items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="选择Mysql类型" value="${gencodeEntity.templateType!}"
-                                            id="k2" name="k2" items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
 
-                                        <div class="col-2">
-                                            <#select placeholder="查询组件" value="${gencodeEntity.templateType!}" id="n2" name="n2"
-                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="查询表达式" value="${gencodeEntity.templateType!}"
-                                            id="n3" name="n3" items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-1">
-                                            <input type="text" class="form-control" name="moduleName" placeholder="列长"
-                                                   required="required">
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="必填" value="${gencodeEntity.templateType!}" id="b1" name="b1"
-                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="唯一" value="${gencodeEntity.templateType!}" id="b2" name="b2"
-                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="可排序" value="${gencodeEntity.templateType!}" id="b3" name="b3"
-                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
-                                        <div class="col-2">
-                                            <#select placeholder="关联字典" value="${gencodeEntity.templateType!}" id="n4" name="n4"
-                                            items="${dict.get('gencode_template_type')}" itemLabel="name"
-                                            itemValue="value" />
-                                        </div>
+
+
                                         <div class="col-1">
                                             <button class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i>
                                             </button>
