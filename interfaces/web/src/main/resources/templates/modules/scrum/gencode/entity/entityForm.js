@@ -23,13 +23,16 @@ var pageFormObject={
                     field: 'itemName',
                     title: '字段名',
                     formatter:function(value, row, index){
-
+                        return '<input type="text"  value='+value+' class="form-control" name="itemName" placeholder="输入字段名">'
                     }
                 }
                 , {
                     //输入
                     field: 'itemDesc',
                     title: '字段描述',
+                  formatter:function(value, row, index){
+                    return '<input type="text"  value='+value+' class="form-control" name="itemDesc" placeholder="字段描述">'
+                }
                 },
                 {
                     //下拉
@@ -115,7 +118,7 @@ var pageFormObject={
     },
     getData:function(){
         this.tableRef.bootstrapTable('append', [{itemName:'测试'}]);
-    }
+    },
     del:function(row,index){
 
     }
