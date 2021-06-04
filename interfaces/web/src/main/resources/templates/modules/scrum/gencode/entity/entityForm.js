@@ -22,28 +22,26 @@ var pageFormObject={
                     //输入
                     field: 'itemName',
                     title: '字段名',
+                    width:150,
                     formatter:function(value, row, index){
-                        return '<input type="text"  value='+value+' class="form-control" name="itemName" placeholder="输入字段名">'
+                        return '<input type="text"  value="'+value+'" class="form-control" name="itemName" placeholder="字段名">'
                     }
                 }
                 , {
                     //输入
                     field: 'itemDesc',
                     title: '字段描述',
-                  formatter:function(value, row, index){
-                    return '<input type="text"  value='+value+' class="form-control" name="itemDesc" placeholder="字段描述">'
-                }
+                    width:150,
+                    formatter:function(value, row, index){
+                        return '<input type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="字段描述">'
+                    }
                 },
                 {
                     //下拉
                     field: 'formType',
                     title: '表单组件',
                 },
-                {
-                    //下拉
-                    field: 'formType',
-                    title: '表单组件',
-                },
+
                 {
                     //下拉
                     field: 'itemType',
@@ -55,6 +53,15 @@ var pageFormObject={
                     title: 'sql类型',
                 },
                 {
+                    //输入
+                    field: 'sqlLength',
+                    title: 'sql长度',
+                    width:100,
+                    formatter: function (value, row, index) {
+                        return '<input type="text"  value="' + value + '" class="form-control" name="itemDesc" placeholder="字段长度">'
+                    }
+                },
+                {
                     //下拉
                     field: 'queryType',
                     title: '查询组件类型',
@@ -63,26 +70,49 @@ var pageFormObject={
                     //下拉
                     field: 'queryExp',
                     title: '查询表达式',
+
                 },
                 {
                     //输入
                     field: 'listLength',
-                    title: '列长',
+                    title: '列宽',
+                    width:100,
+                    formatter:function(value, row, index){
+                        return '<input type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="列宽">'
+                    }
                 },
                 {
                     //toggle
                     field: 'isMust',
                     title: '必填',
+                    formatter:function(value, row, index){
+                        return '<div class="custom-control custom-switch">' +
+                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <label class="custom-control-label" for="customSwitch1">label</label>' +
+                            '   </div>'
+                    }
                 },
                 {
                     //toggle
                     field: 'isUnique',
                     title: '唯一',
+                    formatter:function(value, row, index){
+                        return '<div class="custom-control custom-switch">' +
+                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <label class="custom-control-label" for="customSwitch1">label</label>' +
+                            '   </div>'
+                    }
                 },
                 {
                     //toggle
                     field: 'isSort',
                     title: '排序',
+                    formatter:function(value, row, index){
+                        return '<div class="custom-control custom-switch">' +
+                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <label class="custom-control-label" for="customSwitch1">label</label>' +
+                            '   </div>'
+                    }
                 },
                 {
                     //下拉
@@ -117,7 +147,7 @@ var pageFormObject={
         this.getData();
     },
     getData:function(){
-        this.tableRef.bootstrapTable('append', [{itemName:'测试'}]);
+        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
     },
     del:function(row,index){
 
