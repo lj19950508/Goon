@@ -130,7 +130,7 @@ var pageFormObject={
                     },
                     formatter: function operateFormatter(value, row, index) {
                         var buttons = [];
-                        buttons.push('<button class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>');
+                        buttons.push('<button type="button" class="del btn btn-danger btn-sm"><i class="fa fa-remove"></i></button>');
                         buttons = buttons.join("")
                         return buttons;
                     }
@@ -147,10 +147,23 @@ var pageFormObject={
         this.getData();
     },
     getData:function(){
+        if(true){
+            this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
+        }else{
+
+        }
+        //
+    },
+    appendNewData(){
         this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
     },
     del:function(row,index){
-
+        let totals = this.tableRef.bootstrapTable('getData').length;
+        if(totals>1){
+            this.tableRef.bootstrapTable('remove', {field: '$index', values: [index]})
+        }else{
+            layer.error("至少保留一项数据");
+        }
     }
 };
 
