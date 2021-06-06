@@ -42,10 +42,10 @@ var pageFormObject={
                     field: 'formType',
                     title: '表单组件',
                     formatter:function(value, row, index){
-                        return '<select  data-width="auto" name="name" class="form-control" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">下拉框</option>'+
-                                    '<option value="2" label="2">文件选择器</option>'+
-                               '</select>'
+                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        '<option value="1" label="1">文件选择</option>'+
+                        '<option value="2" label="2">2</option>'+
+                        '</select>'
                     }
                 },
                 {
@@ -54,11 +54,10 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型',
                     formatter:function(value, row, index){
-                        return '<select  data-width="auto"   name="name" class="form-control" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">String</option>'+
-                                    '<option value="2" label="2">Integer</option>'+
-                                    '<option value="2" label="2">Area</option>'+
-                               '</select>'
+                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        '<option value="1" label="1">String</option>'+
+                        '<option value="2" label="2">2</option>'+
+                        '</select>'
                     }
                 },
                 {
@@ -67,11 +66,10 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型',
                     formatter:function(value, row, index){
-                        return '<select  data-width="auto"   name="name" class="form-control" data-style="btn-default" data-live-search="true">'+
-                            '<option value="1" label="1">varchar</option>'+
-                            '<option value="2" label="2">char</option>'+
-                            '<option value="2" label="2">bigInt</option>'+
-                            '</select>'
+                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        '<option value="1" label="1">varchar</option>'+
+                        '<option value="2" label="2">2</option>'+
+                        '</select>'
                     }
                 },
                 {
@@ -89,10 +87,10 @@ var pageFormObject={
                     field: 'queryType',
                     title: '查询组件',
                     formatter:function(value, row, index){
-                        return '<select  data-width="auto"   name="name" class="form-control" data-style="btn-default" data-live-search="true">'+
-                            '<option value="1" label="1">下拉框</option>'+
-                            '<option value="2" label="2">文件选择器</option>'+
-                            '</select>'
+                    return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                    '<option value="1" label="1">单选框</option>'+
+                    '<option value="2" label="2">2</option>'+
+                    '</select>'
                     }
                 },
                 {
@@ -101,10 +99,10 @@ var pageFormObject={
                     field: 'queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
-                        return  '<select   data-width="auto"  name="name" class="form-control" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">不相等</option>'+
-                                    '<option value="2" label="2">相等</option>'+
-                                '</select>'
+                    return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        '<option value="1" label="1">相似</option>'+
+                        '<option value="2" label="2">2</option>'+
+                    '</select>'
                     }
 
                 },
@@ -147,7 +145,7 @@ var pageFormObject={
                     field: 'isSort',
                     title: '排序',
                     formatter:function(value, row, index){
-                        return '<div class="custom-control custom-switch">' +
+                        return '<div  class="custom-control custom-switch">' +
                             '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
                             '       <label class="custom-control-label" for="customSwitch1"></label>' +
                             '   </div>'
@@ -160,7 +158,7 @@ var pageFormObject={
                     title: '关联字典',
                     formatter:function(value, row, index){
 
-                        return '<select  data-width="auto"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        return '<select  data-width="150"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                             '<option value="1" label="1">非常厉害的字段</option>'+
                             '<option value="2" label="2">2</option>'+
                             '</select>'
@@ -203,7 +201,6 @@ var pageFormObject={
     },
     appendNewData(){
         //保存已有数据
-        this.
         this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
         // this.tableRef.bootstrapTable('insertRow',{index:1,row:{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}} );
         //bug1.刷新后值丢失
@@ -218,6 +215,7 @@ var pageFormObject={
         let totals = this.tableRef.bootstrapTable('getData').length;
         if(totals>1){
             this.tableRef.bootstrapTable('remove', {field: '$index', values: [index]})
+            $(".item-select").selectpicker('show')
         }else{
             layer.error("至少保留一项数据");
         }
