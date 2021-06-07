@@ -42,18 +42,16 @@ var pageFormObject={
                     field: 'formType',
                     title: '表单组件',
                     formatter:function(value, row, index){
-                        //文本框1
-                        //文本域框2
-                        //富文本3
-                        //下拉4
-                        //单选5
-                        //复选6
-                        //日期选择7
-                        //数字框8
-                        //滑块
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">文件选择</option>'+
-                                    '<option value="2" label="2">2</option>'+
+                                    '<option value="1" label="文本框">文本框</option>'+
+                                    '<option value="2" label="文本域">文本域</option>'+
+                                    '<option value="3" label="富文本">富文本</option>'+
+                                    '<option value="4" label="下拉">下拉</option>'+
+                                    '<option value="5" label="单选">单选</option>'+
+                                    '<option value="6" label="复选">复选</option>'+
+                                    '<option value="7" label="日期">日期</option>'+
+                                    '<option value="8" label="数字">数字</option>'+
+                                    '<option value="9" label="滑块">滑块</option>'+
                                '</select>'
                     }
                 },
@@ -63,20 +61,17 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型',
                     formatter:function(value, row, index){
-                        //String
-                        //Integer
-                        //BigDecimal
-                        //Boolean
-                        //Long
-                        //Date
-                        //Double
-                        //Float
-                        //LocalDate
-                        //LocalDateTime
-
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">String</option>'+
-                                    '<option value="2" label="2">2</option>'+
+                                    '<option value="String" label="String">String</option>'+
+                                    '<option value="Integer" label="Integer">Integer</option>'+
+                                    '<option value="BigDecimal" label="BigDecimal">BigDecimal</option>'+
+                                    '<option value="boolean" label="boolean">boolean</option>'+
+                                    '<option value="Long" label="Long">Long</option>'+
+                                    '<option value="Date" label="Date">Date</option>'+
+                                    '<option value="Double" label="Double">Double</option>'+
+                                    '<option value="Float" label="Float">Float</option>'+
+                                    '<option value="LocalDate" label="LocalDate">LocalDate</option>'+
+                                    '<option value="LocalDateTime" label="LocalDateTime">LocalDateTime</option>'+
                                '</select>'
                     }
                 },
@@ -85,34 +80,30 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型',
                     formatter:function(value, row, index){
-                        //varchar
-                        //int
-                        //tinyint
-                        //bit
-                        //bigint
-                        //double
-                        //float
-                        //decimal
-                        //numeric
-                        //char
-                        //datetime
-                        //tinyblob
-                        //blob
-                        //longblob
-                        //tinytext
-                        //text
-                        //longtext
-
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                  '<option value="1" label="1">varchar</option>'+
-                                  '<option value="2" label="2">2</option>'+
+                                  '<option value="varchar" label="varchar">varchar</option>'+
+                                  '<option value="int" label="int">int</option>'+
+                                  '<option value="tinyint" label="tinyint">tinyint</option>'+
+                                  '<option value="bit" label="bit">bit</option>'+
+                                  '<option value="bigint" label="bigint">bigint</option>'+
+                                  '<option value="double" label="double">double</option>'+
+                                  '<option value="float" label="float">float</option>'+
+                                  '<option value="decimal" label="decimal">decimal</option>'+
+                                  '<option value="char" label="char">char</option>'+
+                                  '<option value="datetime" label="datetime">datetime</option>'+
+                                  '<option value="tinyblob" label="tinyblob">tinyblob</option>'+
+                                  '<option value="blob" label="blob">blob</option>'+
+                                  '<option value="longblob" label="longblob">longblob</option>'+
+                                  '<option value="tinytext" label="tinytext">tinytext</option>'+
+                                  '<option value="text" label="text">text</option>'+
+                                  '<option value="longtext" label="longtext">longtext</option>'+
                                '</select>'
                     }
                 },
                 {
                     //输入
                     field: 'sqlLength',
-                    title: 'sql长度',
+                    title: 'sql长度(0不显示)',
                     width:150,
                     formatter: function (value, row, index) {
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
@@ -132,20 +123,32 @@ var pageFormObject={
                     title: '查询组件',
                     formatter:function(value, row, index){
                     return '<select onblur="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                              '<option value="1" label="1">单选框</option>'+
-                              '<option value="2" label="2">2</option>'+
+                              '<option value="0" label="不查询">不查询</option>'+
+                              '<option value="1" label="文本框">文本框</option>'+
+                              '<option value="2" label="下拉框">下拉框</option>'+
+                              '<option value="3" label="单选框">单选框</option>'+
+                              '<option value="4" label="复选框">复选框</option>'+
+                              '<option value="5" label="日期">日期</option>'+
+                              '<option value="6" label="数字">数字</option>'+
+                              '<option value="7" label="数字范围">数字范围</option>'+
                            '</select>'
                     }
                 },
                 {
-                    ////0 eq 1like 2llike 3rlike 4 gt 5 lt 6 ge 7 le 8bettwen
                     width:100,
                     field: 'queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
                     return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                 '<option value="1" label="1">相似</option>'+
-                                 '<option value="2" label="2">2</option>'+
+                                 '<option value="0" label="相等">相等</option>'+
+                                 '<option value="1" label="相似">相似</option>'+
+                                 '<option value="2" label="左相似">左相似</option>'+
+                                 '<option value="3" label="右相似">右相似</option>'+
+                                 '<option value="4" label="大于">大于</option>'+
+                                 '<option value="5" label="小于">小于</option>'+
+                                 '<option value="6" label="大于等于">大于等于</option>'+
+                                 '<option value="7" label="小于等于">小于等于</option>'+
+                                 '<option value="8" label="之间">之间</option>'+
                            '</select>'
                     }
 
@@ -244,12 +247,11 @@ var pageFormObject={
         //
     },
     appendNewData(){
-        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
+        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:0,sqlType:0,sqlLength:'',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictId:''}]);
         $(".item-select").selectpicker('show')
     },
     //保存临时数据
     changeData(index,obj){
-        console.log('cahgne')
         var value = $(obj).val();
         var name = $(obj).attr('name');
         var row = this.tableRef.bootstrapTable('getData')[index];
