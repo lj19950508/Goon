@@ -1,7 +1,7 @@
 ### 记录近期工作
 0.生成代码页面,以及生成限制 不可重复生成  ，以及回退生成(删除菜单以及代码)
 formType                    formType             无
-1          2        3             4        5              6        7            8        9         10                                                                                 
+1          2    __    3             4        5              6        7            8        9         10                                                                                 
 formType* itemType formType(*) sqlType* queryType(*)  queryExp* dictcode(*) itemName* itemDesc*  listShow listLength(*) isSort(*) isUnique(*) isMust(*)  
 不显示      
 文本 String  input       输入框             varchar(128)  like                                         1     40              0            0          0                                                                     
@@ -20,7 +20,6 @@ formType* itemType formType(*) sqlType* queryType(*)  queryExp* dictcode(*) item
 /是否可查(查表达式)/是否展列(列长)/必/排/唯/典[拉单复选]/合[数]（可查询的下拉选字典）
 
 
-Bootstrap-select
 
 
 3.文件選擇跟上（）文件系统

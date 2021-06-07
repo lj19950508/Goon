@@ -1,11 +1,73 @@
 <script>
 var pageFormObject={
     tableRef: null,
-    formTypes:[],
-    itemTypes:[],
-    itemTypes:[],
-    queryTypes:[],
-    queryExps:[],
+    formTypes:[
+        {value:1,label:"文本框"},
+        {value:2,label:"文本域"},
+        {value:3,label:"富文本"},
+        {value:4,label:"下拉"},
+        {value:5,label:"单选"},
+        {value:6,label:"复选"},
+        {value:7,label:"日期"},
+        {value:8,label:"数字"},
+        {/*{value:9,label:"开关"}*/}
+    ],
+    //取决于form
+    itemTypes:[
+        {value:'String',label:"String"},
+        {value:'Integer',label:"Integer"},
+        {value:'BigDecimal',label:"BigDecimal"},
+        {value:'boolean',label:"boolean"},
+        {value:'Long',label:"Long"},
+        {value:'Date',label:"Date"},
+        {value:'Double',label:"Double"},
+        {value:'Float',label:"Float"},
+        {value:'LocalDate',label:"LocalDate"},
+        {value:'LocalDateTime',label:"LocalDateTime"},
+    ],
+    //取决于itemTypes
+    sqlTypes:[
+        {value:'varchar',label:"varchar"},
+        {value:'int',label:"int"},
+        {value:'tinyint',label:"tinyint"},
+        {value:'bit',label:"bit"},
+        {value:'bigint',label:"bigint"},
+        {value:'double',label:"double"},
+        {value:'float',label:"float"},
+        {value:'decimal',label:"decimal"},
+        {value:'char',label:"char"},
+        {value:'datetime',label:"datetime"},
+        {value:'tinyblob',label:"tinyblob"},
+        {value:'blob',label:"blob"},
+        {value:'longblob',label:"longblob"},
+        {value:'tinytext',label:"tinytext"},
+        {value:'text',label:"text"},
+        {value:'longtext',label:"longtext"},
+    ],
+
+    queryTypes:[
+        {value:'0',label:"不查询"},
+        {value:'1',label:"文本框"},
+        {value:'2',label:"下拉框"},
+        {value:'3',label:"单选框"},
+        {value:'4',label:"复选框"},
+        {value:'5',label:"日期"},
+        {value:'6',label:"数字"},
+        {value:'7',label:"数字范围"},
+    ],
+    //
+    queryExps:[
+        {value:'0',label:"相等"},
+        {value:'1',label:"相似"},
+        {value:'2',label:"左相似"},
+        {value:'3',label:"右相似"},
+        {value:'4',label:"大于"},
+        {value:'5',label:"小于"},
+        {value:'6',label:"大于等于"},
+        {value:'7',label:"小于等于"},
+        {value:'8',label:"之间"},
+
+    ],
     startAllLisener:function(){
         $form.submit("#entityForm",function(data){
             if (data.success) {
@@ -46,16 +108,16 @@ var pageFormObject={
                     field: 'formType',
                     title: '表单组件',
                     formatter:function(value, row, index){
-                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="文本框">文本框</option>'+
-                                    '<option value="2" label="文本域">文本域</option>'+
-                                    '<option value="3" label="富文本">富文本</option>'+
-                                    '<option value="4" label="下拉">下拉</option>'+
-                                    '<option value="5" label="单选">单选</option>'+
-                                    '<option value="6" label="复选">复选</option>'+
-                                    '<option value="7" label="日期">日期</option>'+
-                                    '<option value="8" label="数字">数字</option>'+
-                                    '<option value="9" label="滑块">滑块</option>'+
+                        let options ='';
+                        pageFormObject.formTypes.forEach(item=>{
+                            if(item.value==value){
+                                options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                            }else{
+                                options +='<option  value="'+item.value+'">'+item.label+'</option>'
+                            }
+                        })
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                    options+
                                '</select>'
                     }
                 },
@@ -65,17 +127,16 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型',
                     formatter:function(value, row, index){
-                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="String" label="String">String</option>'+
-                                    '<option value="Integer" label="Integer">Integer</option>'+
-                                    '<option value="BigDecimal" label="BigDecimal">BigDecimal</option>'+
-                                    '<option value="boolean" label="boolean">boolean</option>'+
-                                    '<option value="Long" label="Long">Long</option>'+
-                                    '<option value="Date" label="Date">Date</option>'+
-                                    '<option value="Double" label="Double">Double</option>'+
-                                    '<option value="Float" label="Float">Float</option>'+
-                                    '<option value="LocalDate" label="LocalDate">LocalDate</option>'+
-                                    '<option value="LocalDateTime" label="LocalDateTime">LocalDateTime</option>'+
+                        let options ='';
+                        pageFormObject.itemTypes.forEach(item=>{
+                            if(item.value==value){
+                                options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                            }else{
+                                options +='<option  value="'+item.value+'">'+item.label+'</option>'
+                            }
+                        })
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                    options+
                                '</select>'
                     }
                 },
@@ -84,30 +145,23 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型',
                     formatter:function(value, row, index){
-                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                  '<option value="varchar" label="varchar">varchar</option>'+
-                                  '<option value="int" label="int">int</option>'+
-                                  '<option value="tinyint" label="tinyint">tinyint</option>'+
-                                  '<option value="bit" label="bit">bit</option>'+
-                                  '<option value="bigint" label="bigint">bigint</option>'+
-                                  '<option value="double" label="double">double</option>'+
-                                  '<option value="float" label="float">float</option>'+
-                                  '<option value="decimal" label="decimal">decimal</option>'+
-                                  '<option value="char" label="char">char</option>'+
-                                  '<option value="datetime" label="datetime">datetime</option>'+
-                                  '<option value="tinyblob" label="tinyblob">tinyblob</option>'+
-                                  '<option value="blob" label="blob">blob</option>'+
-                                  '<option value="longblob" label="longblob">longblob</option>'+
-                                  '<option value="tinytext" label="tinytext">tinytext</option>'+
-                                  '<option value="text" label="text">text</option>'+
-                                  '<option value="longtext" label="longtext">longtext</option>'+
+                        let options ='';
+                        pageFormObject.sqlTypes.forEach(item=>{
+                            if(item.value==value){
+                                options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                            }else{
+                                options +='<option  value="'+item.value+'">'+item.label+'</option>'
+                               }
+                            })
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                  options+
                                '</select>'
                     }
                 },
                 {
                     //输入
                     field: 'sqlLength',
-                    title: 'sql长度(0不显示)',
+                    title: 'sql字段长度',
                     width:150,
                     formatter: function (value, row, index) {
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
@@ -126,15 +180,16 @@ var pageFormObject={
                     field: 'queryType',
                     title: '查询组件',
                     formatter:function(value, row, index){
-                    return '<select onblur="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                              '<option value="0" label="不查询">不查询</option>'+
-                              '<option value="1" label="文本框">文本框</option>'+
-                              '<option value="2" label="下拉框">下拉框</option>'+
-                              '<option value="3" label="单选框">单选框</option>'+
-                              '<option value="4" label="复选框">复选框</option>'+
-                              '<option value="5" label="日期">日期</option>'+
-                              '<option value="6" label="数字">数字</option>'+
-                              '<option value="7" label="数字范围">数字范围</option>'+
+                        let options ='';
+                        pageFormObject.queryTypes.forEach(item=>{
+                             if(item.value==value){
+                                  options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                             }else{
+                                options +='<option  value="'+item.value+'">'+item.label+'</option>'
+                             }
+                        })
+                       return '<select onchange="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                              options+
                            '</select>'
                     }
                 },
@@ -143,16 +198,16 @@ var pageFormObject={
                     field: 'queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
-                    return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                 '<option value="0" label="相等">相等</option>'+
-                                 '<option value="1" label="相似">相似</option>'+
-                                 '<option value="2" label="左相似">左相似</option>'+
-                                 '<option value="3" label="右相似">右相似</option>'+
-                                 '<option value="4" label="大于">大于</option>'+
-                                 '<option value="5" label="小于">小于</option>'+
-                                 '<option value="6" label="大于等于">大于等于</option>'+
-                                 '<option value="7" label="小于等于">小于等于</option>'+
-                                 '<option value="8" label="之间">之间</option>'+
+                        let options ='';
+                        pageFormObject.queryExps.forEach(item=>{
+                            if(item.value==value){
+                                  options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                            }else{
+                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
+                            }
+                        })
+                    return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                 options+
                            '</select>'
                     }
 
@@ -172,9 +227,13 @@ var pageFormObject={
                     field: 'isMust',
                     title: '必填',
                     formatter:function(value, row, index){
+                        let checked='';
+                        if(value==1){
+                            checked='checked'
+                        }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isMust" >' +
-                            '       <label class="custom-control-label" for="customSwitch1"></label>' +
+                            '       <input '+checked+' id="isMust'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isMust" >' +
+                            '       <label class="custom-control-label" for="isMust'+index+'"></label>' +
                             '   </div>'
                     }
                 },
@@ -184,9 +243,13 @@ var pageFormObject={
                     field: 'isUnique',
                     title: '唯一',
                     formatter:function(value, row, index){
+                        let checked='';
+                        if(value==1){
+                          checked='checked'
+                         }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isUnique" >' +
-                            '       <label class="custom-control-label" for="customSwitch1"></label>' +
+                            '       <input '+checked+' id="isUnique'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isUnique" >' +
+                            '       <label class="custom-control-label" for="isUnique'+index+'"></label>' +
                             '   </div>'
                     }
                 },
@@ -196,9 +259,13 @@ var pageFormObject={
                     field: 'isSort',
                     title: '排序',
                     formatter:function(value, row, index){
+                        let checked='';
+                        if(value==1){
+                             checked='checked'
+                          }
                         return '<div  class="custom-control custom-switch">' +
-                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isSort" >' +
-                            '       <label class="custom-control-label" for="customSwitch1"></label>' +
+                            '        <input '+checked+' id="isSort'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isSort" >' +
+                            '       <label class="custom-control-label" for="isSort'+index+'"></label>' +
                             '   </div>'
                     }
                 },
@@ -263,6 +330,14 @@ var pageFormObject={
         this.tableRef.bootstrapTable('updateRow',{index: index, row: row});
         $(".item-select").selectpicker('show')
 
+    },
+    changeSwitchData(index,obj){
+        if($(obj).is(':checked')){
+            $(obj).val(1)
+        }else{
+            $(obj).val(0)
+        }
+        this.changeData(index,obj);
     },
     del:function(row,index){
         let totals = this.tableRef.bootstrapTable('getData').length;
