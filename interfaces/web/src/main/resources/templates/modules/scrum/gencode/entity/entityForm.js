@@ -42,6 +42,15 @@ var pageFormObject={
                     field: 'formType',
                     title: '表单组件',
                     formatter:function(value, row, index){
+                        //文本框1
+                        //文本域框2
+                        //富文本3
+                        //下拉4
+                        //单选5
+                        //复选6
+                        //日期选择7
+                        //数字框8
+                        //滑块
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                     '<option value="1" label="1">文件选择</option>'+
                                     '<option value="2" label="2">2</option>'+
@@ -54,6 +63,17 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型',
                     formatter:function(value, row, index){
+                        //String
+                        //Integer
+                        //BigDecimal
+                        //Boolean
+                        //Long
+                        //Date
+                        //Double
+                        //Float
+                        //LocalDate
+                        //LocalDateTime
+
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                     '<option value="1" label="1">String</option>'+
                                     '<option value="2" label="2">2</option>'+
@@ -61,11 +81,28 @@ var pageFormObject={
                     }
                 },
                 {
-                    //下拉
                     width:100,
                     field: 'sqlType',
                     title: 'sql类型',
                     formatter:function(value, row, index){
+                        //varchar
+                        //int
+                        //tinyint
+                        //bit
+                        //bigint
+                        //double
+                        //float
+                        //decimal
+                        //numeric
+                        //char
+                        //datetime
+                        //tinyblob
+                        //blob
+                        //longblob
+                        //tinytext
+                        //text
+                        //longtext
+
                         return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                   '<option value="1" label="1">varchar</option>'+
                                   '<option value="2" label="2">2</option>'+
@@ -82,7 +119,14 @@ var pageFormObject={
                     }
                 },
                 {
-                    //下拉
+                    //不查询 0
+                    //文本框 1
+                    //下拉框2
+                    //单选框3
+                    //复选框4
+                    //日期5
+                    //数字框
+                    //数字范围框
                     width:100,
                     field: 'queryType',
                     title: '查询组件',
@@ -94,7 +138,7 @@ var pageFormObject={
                     }
                 },
                 {
-                    //下拉
+                    ////0 eq 1like 2llike 3rlike 4 gt 5 lt 6 ge 7 le 8bettwen
                     width:100,
                     field: 'queryExp',
                     title: '查询表达式',
@@ -107,7 +151,7 @@ var pageFormObject={
 
                 },
                 {
-                    //输入
+                    //输入 0为不显示
                     field: 'listLength',
                     title: '列宽',
                     width:100,

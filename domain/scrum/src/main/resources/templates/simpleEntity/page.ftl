@@ -55,7 +55,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                         ${r'<#'}checkbox path="${item["itemName"]}s"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
                                     </#if>
                                     <#if item.formType==6>
-                                        ${r'<#'}simpleCheckbox path="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
+                                        ${r'<#'}bracketCheckbox path="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
                                     </#if>
                                     </div>
                                 </div>

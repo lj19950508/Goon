@@ -43,7 +43,7 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                         ${r'<#'}radio path="${item["itemName"]}" <#if item.must==true>required="required"</#if>  items="${r'${'}dict.get('${item["dictCode"]}')}" value="${r'${'}${entityName}.${item["itemName"]}!}"/>
                                         </#if>
                                         <#if item.formType ==6>
-                                        ${r'<#'}simpleCheckbox path="${item["itemName"]}" <#if item.must==true>required="required"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"  values="${r'${'}${entityName}.${item["itemName"]}!}"   />
+                                        ${r'<#'}bracketCheckbox path="${item["itemName"]}" <#if item.must==true>required="required"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"  values="${r'${'}${entityName}.${item["itemName"]}!}"   />
                                         </#if>
                                         <#if item.formType ==7>
                                         ${r'<#'}datepicker path="${item["itemName"]}" <#if item.must==true>required="required"</#if> value="${r'${'}${entityName}.${item["itemName"]}!}"   />
