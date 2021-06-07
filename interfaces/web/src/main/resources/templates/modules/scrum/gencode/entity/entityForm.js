@@ -1,8 +1,12 @@
 <script>
 var pageFormObject={
     tableRef: null,
+    formTypes:[],
+    itemTypes:[],
+    itemTypes:[],
+    queryTypes:[],
+    queryExps:[],
     startAllLisener:function(){
-
         $form.submit("#entityForm",function(data){
             if (data.success) {
                 go_into("${ctx}/gencode/entity");
