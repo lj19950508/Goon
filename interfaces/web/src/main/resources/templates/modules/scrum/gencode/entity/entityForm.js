@@ -24,7 +24,7 @@ var pageFormObject={
                     title: '字段名',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input type="text"  value="'+value+'" class="form-control" name="itemName" placeholder="字段名">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemName" placeholder="字段名">'
                     }
                 }
                 , {
@@ -33,7 +33,7 @@ var pageFormObject={
                     title: '字段描述',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="字段描述">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="字段描述">'
                     }
                 },
                 {
@@ -42,10 +42,10 @@ var pageFormObject={
                     field: 'formType',
                     title: '表单组件',
                     formatter:function(value, row, index){
-                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                        '<option value="1" label="1">文件选择</option>'+
-                        '<option value="2" label="2">2</option>'+
-                        '</select>'
+                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                    '<option value="1" label="1">文件选择</option>'+
+                                    '<option value="2" label="2">2</option>'+
+                               '</select>'
                     }
                 },
                 {
@@ -54,10 +54,10 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型',
                     formatter:function(value, row, index){
-                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                        '<option value="1" label="1">String</option>'+
-                        '<option value="2" label="2">2</option>'+
-                        '</select>'
+                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                    '<option value="1" label="1">String</option>'+
+                                    '<option value="2" label="2">2</option>'+
+                               '</select>'
                     }
                 },
                 {
@@ -66,10 +66,10 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型',
                     formatter:function(value, row, index){
-                        return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                        '<option value="1" label="1">varchar</option>'+
-                        '<option value="2" label="2">2</option>'+
-                        '</select>'
+                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                  '<option value="1" label="1">varchar</option>'+
+                                  '<option value="2" label="2">2</option>'+
+                               '</select>'
                     }
                 },
                 {
@@ -78,7 +78,7 @@ var pageFormObject={
                     title: 'sql长度',
                     width:150,
                     formatter: function (value, row, index) {
-                        return '<input type="text"  value="' + value + '" class="form-control" name="itemDesc" placeholder="字段长度">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
                     }
                 },
                 {
@@ -87,10 +87,10 @@ var pageFormObject={
                     field: 'queryType',
                     title: '查询组件',
                     formatter:function(value, row, index){
-                    return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                    '<option value="1" label="1">单选框</option>'+
-                    '<option value="2" label="2">2</option>'+
-                    '</select>'
+                    return '<select onblur="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                              '<option value="1" label="1">单选框</option>'+
+                              '<option value="2" label="2">2</option>'+
+                           '</select>'
                     }
                 },
                 {
@@ -99,10 +99,10 @@ var pageFormObject={
                     field: 'queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
-                    return '<select  data-width="100"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                        '<option value="1" label="1">相似</option>'+
-                        '<option value="2" label="2">2</option>'+
-                    '</select>'
+                    return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                 '<option value="1" label="1">相似</option>'+
+                                 '<option value="2" label="2">2</option>'+
+                           '</select>'
                     }
 
                 },
@@ -112,7 +112,7 @@ var pageFormObject={
                     title: '列宽',
                     width:100,
                     formatter:function(value, row, index){
-                        return '<input type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="列宽">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="listLength" placeholder="列宽">'
                     }
                 },
                 {
@@ -122,7 +122,7 @@ var pageFormObject={
                     title: '必填',
                     formatter:function(value, row, index){
                         return '<div class="custom-control custom-switch">' +
-                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isMust" >' +
                             '       <label class="custom-control-label" for="customSwitch1"></label>' +
                             '   </div>'
                     }
@@ -134,7 +134,7 @@ var pageFormObject={
                     title: '唯一',
                     formatter:function(value, row, index){
                         return '<div class="custom-control custom-switch">' +
-                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isUnique" >' +
                             '       <label class="custom-control-label" for="customSwitch1"></label>' +
                             '   </div>'
                     }
@@ -146,7 +146,7 @@ var pageFormObject={
                     title: '排序',
                     formatter:function(value, row, index){
                         return '<div  class="custom-control custom-switch">' +
-                            '       <input type="checkbox" class="custom-control-input" id="customSwitch1">' +
+                            '       <input onblur="pageFormObject.changeData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isSort" >' +
                             '       <label class="custom-control-label" for="customSwitch1"></label>' +
                             '   </div>'
                     }
@@ -158,10 +158,10 @@ var pageFormObject={
                     title: '关联字典',
                     formatter:function(value, row, index){
 
-                        return '<select  data-width="150"   name="name" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                            '<option value="1" label="1">非常厉害的字段</option>'+
-                            '<option value="2" label="2">2</option>'+
-                            '</select>'
+                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictId" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                    '<option value="1" label="1">非常厉害的字段</option>'+
+                                    '<option value="2" label="2">2</option>'+
+                               '</select>'
                     }
                 },
                 {
@@ -200,15 +200,18 @@ var pageFormObject={
         //
     },
     appendNewData(){
-        //保存已有数据
         this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}]);
-        // this.tableRef.bootstrapTable('insertRow',{index:1,row:{itemName:'',itemDesc:'',formType:'',itemType:'',sqlType:'',sqlLength:'',queryType:'',queryExp:'',listLength:'',isMust:0,isUnique:0,isSort:0,dictId:''}} );
-        //bug1.刷新后值丢失
-        //bug2.table列宽没有适应
         $(".item-select").selectpicker('show')
     },
     //保存临时数据
-    tableTempSave(){
+    changeData(index,obj){
+        console.log('cahgne')
+        var value = $(obj).val();
+        var name = $(obj).attr('name');
+        var row = this.tableRef.bootstrapTable('getData')[index];
+        row[name] = value;
+        this.tableRef.bootstrapTable('updateRow',{index: index, row: row});
+        $(".item-select").selectpicker('show')
 
     },
     del:function(row,index){
