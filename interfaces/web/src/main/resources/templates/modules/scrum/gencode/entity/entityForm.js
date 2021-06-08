@@ -2,6 +2,7 @@
 var pageFormObject={
     tableRef: null,
     formTypes:[
+        {value:0,label:"不显示",filterItemType:['String','Integer','BigDecimal','boolean','Long','Date','Double','Float'],filterQueryType:[0,1],dictable:false},
         {value:1,label:"文本框",filterItemType:['String'],filterQueryType:[0,1],dictable:false},
         {value:2,label:"文本域",filterItemType:['String'],filterQueryType:[0,1],dictable:false},
         {value:3,label:"富文本",filterItemType:['String'],filterQueryType:[0],dictable:false},
@@ -10,7 +11,7 @@ var pageFormObject={
         {value:6,label:"复选",filterItemType:['String','Integer'],filterQueryType:[0,1,2,3,4],dictable:true},
         {value:7,label:"日期",filterItemType:['Date'],filterQueryType:[0,5],dictable:false},
         {value:8,label:"数字",filterItemType:['Double','Float','Long'],filterQueryType:[0,6,7],dictable:false},
-        {/*{value:9,label:"开关"}*/}
+        // {/*{value:9,label:"开关"}*/}
     ],
     //取决于form
     itemTypes:[
@@ -33,7 +34,7 @@ var pageFormObject={
         {value:'double',label:"double",defaultLength: '10,2'},
         {value:'float',label:"float",defaultLength: '10,2'},
         {value:'decimal',label:"decimal",defaultLength: '10,2'},
-        {value:'char',label:"char",'1'},
+        {value:'char',label:"char",defaultLength:'1'},
         {value:'datetime',label:"datetime",defaultLength: '0'},
         {value:'tinytext',label:"tinytext",defaultLength: '0'},
         {value:'text',label:"text",defaultLength: '0'},
@@ -122,8 +123,13 @@ var pageFormObject={
                     field: 'itemType',
                     title: 'java类型*',
                     formatter:function(value, row, index){
-                        let options ='';
-                        pageFormObject.itemTypes.forEach(item=>{
+                        let options='';
+                        var formTypeFilter = pageFormObject.formTypes.filter(item=>{
+                            return row.formType == item.value;
+                        })
+                        pageFormObject.itemTypes.filter(item=>{
+                            return ( formTypeFilter[0].filterItemType.indexOf(item.value) != -1)
+                        }).forEach(item=>{
                             if(item.value==value){
                                 options +='<option selected value="'+item.value+'">'+item.label+'</option>'
                             }else{
@@ -140,8 +146,13 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型*',
                     formatter:function(value, row, index){
+                        var itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
+                            return row.itemType == item.value;
+                        })
                         let options ='';
-                        pageFormObject.sqlTypes.forEach(item=>{
+                        pageFormObject.sqlTypes.filter(item=>{
+                            return (itemTypeFilter[0].filterSqlType.indexOf(item.value) != -1)
+                        }).forEach(item=>{
                             if(item.value==value){
                                 options +='<option selected value="'+item.value+'">'+item.label+'</option>'
                             }else{
@@ -167,8 +178,14 @@ var pageFormObject={
                     field: 'queryType',
                     title: '查询组件*',
                     formatter:function(value, row, index){
-                        let options ='';
-                        pageFormObject.queryTypes.forEach(item=>{
+
+                        let options='';
+                        var formTypeFilter = pageFormObject.formTypes.filter(item=>{
+                            return row.formType == item.value;
+                        })
+                        pageFormObject.queryTypes.filter(item=>{
+                            return ( formTypeFilter[0].filterQueryType.indexOf(item.value) != -1)
+                        }).forEach(item=>{
                              if(item.value==value){
                                 options +='<option selected value="'+item.value+'">'+item.label+'</option>'
                              }else{
@@ -187,7 +204,12 @@ var pageFormObject={
                     formatter:function(value, row, index){
                         //显隐取决于type
                         let options ='';
-                        pageFormObject.queryExps.forEach(item=>{
+                        var queryTypeFilter = pageFormObject.queryTypes.filter(item=>{
+                            return row.queryType == item.value;
+                        })
+                        pageFormObject.queryExps.filter(item=>{
+                            return ( queryTypeFilter[0].filterQueryExp.indexOf(item.value) != -1)
+                        }).forEach(item=>{
                             if(item.value==value){
                                   options +='<option selected value="'+item.value+'">'+item.label+'</option>'
                             }else{
@@ -203,7 +225,7 @@ var pageFormObject={
                 {
                     //输入 0为不显示
                     field: 'listLength',
-                    title: '列宽*',
+                    title: '列宽*(0为隐藏)',
                     width:100,
                     formatter:function(value, row, index){
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="listLength" placeholder="列宽">'
@@ -306,7 +328,7 @@ var pageFormObject={
         //
     },
     appendNewData(){
-        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:0,sqlType:0,sqlLength:'',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictId:''}]);
+        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:'String',sqlType:'varchar',sqlLength:'',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictId:''}]);
         $(".item-select").selectpicker('show')
     },
     //保存临时数据
