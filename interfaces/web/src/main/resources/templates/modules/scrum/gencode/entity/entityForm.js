@@ -1,6 +1,7 @@
 <script>
 var pageFormObject={
     tableRef: null,
+    dictList:[],
     formTypes:[
         {value:0,label:"不显示",filterItemType:['String','Integer','BigDecimal','boolean','Long','Date','Double','Float'],filterQueryType:[0,1],dictable:false},
         {value:1,label:"文本框",filterItemType:['String'],filterQueryType:[0,1],dictable:false},
@@ -285,11 +286,17 @@ var pageFormObject={
                     field: 'dictId',
                     title: '关联字典',
                     formatter:function(value, row, index){
-
-                        return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictId" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                                    '<option value="1" label="1">非常厉害的字段</option>'+
-                                    '<option value="2" label="2">2</option>'+
-                               '</select>'
+                        var formTypeFilter = pageFormObject.formTypes.filter(item=>{
+                            return row.formType == item.value;
+                        })
+                        if(formTypeFilter[0].dictable){
+                            return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictId" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                            '<option value="1" label="1">非常厉害的字段</option>'+
+                            '<option value="2" label="2">2</option>'+
+                            '</select>'
+                        }else{
+                            return '';
+                        }
                     }
                 },
                 {

@@ -3,6 +3,7 @@ package pers.gon.web.scrum;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -18,6 +19,7 @@ import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.domain.scrum.service.IGencodeEntityService;
 import pers.gon.domain.scrum.vo.GencodeEntityItem;
 import pers.gon.domain.sys.entity.SysDict;
+import pers.gon.domain.sys.service.ISysDictService;
 import pers.gon.domain.upms.service.IUpmsMenuService;
 import pers.gon.infrastructure.common.controller.BaseController;
 import pers.gon.infrastructure.common.entity.CommonResult;
@@ -37,6 +39,9 @@ public class GencodeEntityController extends BaseController {
 
     @Autowired
     IUpmsMenuService upmsMenuService;
+
+    @Autowired
+    ISysDictService sysDictService;
 
     @RequiresPermissions("SCRUM:GENCODE:LIST")
     @RequestMapping("")
