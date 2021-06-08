@@ -44,7 +44,7 @@ var pageFormObject={
         {value:'text',label:"text"},
         {value:'longtext',label:"longtext"},
     ],
-
+    //取决于form
     queryTypes:[
         {value:'0',label:"不查询"},
         {value:'1',label:"文本框"},
@@ -55,7 +55,7 @@ var pageFormObject={
         {value:'6',label:"数字"},
         {value:'7',label:"数字范围"},
     ],
-    //
+    //取决于queryTypes
     queryExps:[
         {value:'0',label:"相等"},
         {value:'1',label:"相似"},
@@ -87,7 +87,7 @@ var pageFormObject={
                 {
                     //输入
                     field: 'itemName',
-                    title: '字段名',
+                    title: '字段名*',
                     width:150,
                     formatter:function(value, row, index){
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemName" placeholder="字段名">'
@@ -96,7 +96,7 @@ var pageFormObject={
                 , {
                     //输入
                     field: 'itemDesc',
-                    title: '字段描述',
+                    title: '字段描述*',
                     width:150,
                     formatter:function(value, row, index){
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="字段描述">'
@@ -106,7 +106,7 @@ var pageFormObject={
                     //下拉
                     width:100,
                     field: 'formType',
-                    title: '表单组件',
+                    title: '表单组件*',
                     formatter:function(value, row, index){
                         let options ='';
                         pageFormObject.formTypes.forEach(item=>{
@@ -125,7 +125,7 @@ var pageFormObject={
                     //下拉
                     width:100,
                     field: 'itemType',
-                    title: 'java类型',
+                    title: 'java类型*',
                     formatter:function(value, row, index){
                         let options ='';
                         pageFormObject.itemTypes.forEach(item=>{
@@ -143,7 +143,7 @@ var pageFormObject={
                 {
                     width:100,
                     field: 'sqlType',
-                    title: 'sql类型',
+                    title: 'sql类型*',
                     formatter:function(value, row, index){
                         let options ='';
                         pageFormObject.sqlTypes.forEach(item=>{
@@ -159,7 +159,7 @@ var pageFormObject={
                     }
                 },
                 {
-                    //输入
+                    //取决于type
                     field: 'sqlLength',
                     title: 'sql字段长度',
                     width:150,
@@ -168,29 +168,21 @@ var pageFormObject={
                     }
                 },
                 {
-                    //不查询 0
-                    //文本框 1
-                    //下拉框2
-                    //单选框3
-                    //复选框4
-                    //日期5
-                    //数字框
-                    //数字范围框
                     width:100,
                     field: 'queryType',
-                    title: '查询组件',
+                    title: '查询组件*',
                     formatter:function(value, row, index){
                         let options ='';
                         pageFormObject.queryTypes.forEach(item=>{
                              if(item.value==value){
-                                  options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                                options +='<option selected value="'+item.value+'">'+item.label+'</option>'
                              }else{
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                              }
                         })
                        return '<select onchange="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                              options+
-                           '</select>'
+                                  options+
+                              '</select>'
                     }
                 },
                 {
@@ -198,6 +190,7 @@ var pageFormObject={
                     field: 'queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
+                        //显隐取决于type
                         let options ='';
                         pageFormObject.queryExps.forEach(item=>{
                             if(item.value==value){
@@ -215,7 +208,7 @@ var pageFormObject={
                 {
                     //输入 0为不显示
                     field: 'listLength',
-                    title: '列宽',
+                    title: '列宽*',
                     width:100,
                     formatter:function(value, row, index){
                         return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="listLength" placeholder="列宽">'
@@ -270,7 +263,7 @@ var pageFormObject={
                     }
                 },
                 {
-                    //下拉
+                    //取决于form
                     width:150,
                     field: 'dictId',
                     title: '关联字典',
