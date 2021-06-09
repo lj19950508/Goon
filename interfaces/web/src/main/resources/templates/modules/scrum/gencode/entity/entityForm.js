@@ -1,7 +1,15 @@
 <script>
-var pageFormObject={
+var pageFormObject= {
     tableRef: null,
-    dictList:[],
+    dictList:[
+    <@ for(dictItem in dictList){ @>
+    {
+    name:'${dictItem.name}',
+    code:'${dictItem.code}'
+    },
+    <@ } @>
+
+    ],
     formTypes:[
         {value:0,label:"不显示",filterItemType:['String','Integer','BigDecimal','boolean','Long','Date','Double','Float'],filterQueryType:[0,1],dictable:false},
         {value:1,label:"文本框",filterItemType:['String'],filterQueryType:[0,1],dictable:false},
@@ -66,14 +74,14 @@ var pageFormObject={
 
     ],
     startAllLisener:function(){
-        $form.submit("#entityForm",function(data){
+        $form.submit("#gencodeForm",function(data){
             if (data.success) {
                 go_into("${ctx}/gencode/entity");
             }
         },null,{error:true})
         <@ if(mode=='view'){ @>
-        $('#gencodeForm').find('input,textarea,select').prop('disabled',true);
-        $('#submit').prop('disabled',true);
+            $('#gencodeForm').find('input,textarea,select').prop('disabled',true);
+            $('#submit').prop('disabled',true);
         <@ } @>
     },
     initFieldTable:function(){
@@ -147,7 +155,7 @@ var pageFormObject={
                     field: 'sqlType',
                     title: 'sql类型*',
                     formatter:function(value, row, index){
-                        var itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
+                        let itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
                             return row.itemType == item.value;
                         })
                         let options ='';
@@ -155,7 +163,7 @@ var pageFormObject={
                             return (itemTypeFilter[0].filterSqlType.indexOf(item.value) != -1)
                         }).forEach(item=>{
                             if(item.value==value){
-                                options +='<option selected value="'+item.value+'">'+item.label+'</option>'
+                                options +='<option  selected value="'+item.value+'">'+item.label+'</option>'
                             }else{
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                                }
@@ -171,7 +179,12 @@ var pageFormObject={
                     title: 'sql字段长度',
                     width:150,
                     formatter: function (value, row, index) {
-                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
+                        // let sqlType =  row.sqlType
+                        // let sqlTypeFilter = pageFormObject.sqlTypes.filter(item=>{
+                        //     return row.sqlType == item.value;
+                        // })
+                        return '<input onchange="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
+                        //如果 length与 当前sqltype default相等 则不变
                     }
                 },
                 {
@@ -179,7 +192,6 @@ var pageFormObject={
                     field: 'queryType',
                     title: '查询组件*',
                     formatter:function(value, row, index){
-
                         let options='';
                         var formTypeFilter = pageFormObject.formTypes.filter(item=>{
                             return row.formType == item.value;
@@ -283,19 +295,23 @@ var pageFormObject={
                 {
                     //取决于form
                     width:150,
-                    field: 'dictId',
+                    field: 'dictCode',
                     title: '关联字典',
                     formatter:function(value, row, index){
                         var formTypeFilter = pageFormObject.formTypes.filter(item=>{
                             return row.formType == item.value;
                         })
+                        let options = '';
+                        pageFormObject.dictList.forEach(item=>{
+                            options+="<option value="+item.code+" label="+item.name+">"+item.name+"</option> "
+                        })
                         if(formTypeFilter[0].dictable){
-                            return '<select onblur="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictId" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
-                            '<option value="1" label="1">非常厉害的字段</option>'+
-                            '<option value="2" label="2">2</option>'+
+                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                                options+
                             '</select>'
                         }else{
-                            return '';
+                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                            '</select>'
                         }
                     }
                 },
@@ -335,18 +351,55 @@ var pageFormObject={
         //
     },
     appendNewData(){
-        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:'String',sqlType:'varchar',sqlLength:'',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictId:''}]);
+        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:'String',sqlType:'varchar',sqlLength:'255',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictCode:''}]);
         $(".item-select").selectpicker('show')
     },
     //保存临时数据
     changeData(index,obj){
         var value = $(obj).val();
         var name = $(obj).attr('name');
+        //收集row
         var row = this.tableRef.bootstrapTable('getData')[index];
         row[name] = value;
-        this.tableRef.bootstrapTable('updateRow',{index: index, row: row});
-        $(".item-select").selectpicker('show')
 
+        //这里由于formatter实时更新有问题
+        //为什么这里要两遍，第一遍是由于bootstrapTable会在updateRow时更新formatter 所以这里第一次是取UI改变后的值
+        this.cascadeChange(name,row);
+        this.tableRef.bootstrapTable('updateRow',{index: index, row: row});
+        //在UI改变后根据dom取最新元素是最准确的
+        $(".item-select").selectpicker('show')
+    },
+    //级联改变其他值
+    cascadeChange(name,row){
+        if(name=='formType'){
+            let formTypeFilter = pageFormObject.formTypes.filter(item=>{
+                return row.formType == item.value;
+            })
+            row.itemType = formTypeFilter[0].filterItemType[0]
+            row.queryType = formTypeFilter[0].filterQueryType[0]
+            if(formTypeFilter[0].dictable){
+                row.dictCode=this.dictList[0].code;
+            }
+            this.cascadeChange('itemType',row);
+            this.cascadeChange('queryType',row);
+
+        }else if(name=='itemType'){
+            let itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
+                return row.itemType == item.value;
+            })
+            row.sqlType= itemTypeFilter[0].filterSqlType[0]
+            this.cascadeChange('sqlType',row);
+        }else if(name=='sqlType'){
+            let sqlTypeFilter = pageFormObject.sqlTypes.filter(item=>{
+                return row.sqlType == item.value;
+            })
+            row.sqlLength= sqlTypeFilter[0].defaultLength;
+        }else if(name=='queryType'){
+            let queryTypeFilter = pageFormObject.queryTypes.filter(item=>{
+               return row.queryType == item.value;
+            })
+            row.queryExp = queryTypeFilter[0].filterQueryExp[0]
+        }
     },
     changeSwitchData(index,obj){
         if($(obj).is(':checked')){

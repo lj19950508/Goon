@@ -56,7 +56,10 @@ public class GencodeEntityController extends BaseController {
             GencodeEntity gencodeEntity = gencodeEntityService.findById(id);
             model.addAttribute("gencodeEntity",gencodeEntity);
         }
+        List<SysDict> sysDicts = sysDictService.findAll();
+
         model.addAttribute("mode",mode);
+        model.addAttribute("dictList",sysDicts);
         return "modules/scrum/gencode/entity/entityForm.html";
     }
 

@@ -1,4 +1,4 @@
-<select  id="${id}" name="${name}" readonly="${readonly!false}" class="selectpicker" data-style="btn-default" data-live-search="true">
+<select  id="${id}" name="${name}" readonly="${readonly!false}" class="selectpicker" data-width="100%" data-style="btn-default" data-live-search="true">
     <@ if(notAllowNull!false == false){ @>
     <option value="" label=""></option>
     <@ } @>
