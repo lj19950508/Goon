@@ -36,6 +36,7 @@
         <shiro-ehcache.version>1.6.0</shiro-ehcache.version>
         <arthas.version>3.4.1</arthas.version>
         <easyexcel.version>2.2.7</easyexcel.version>
+        <rocketmq.version>2.2.0</rocketmq.version>
     </properties>
 
     <!--  声明依赖  -->
@@ -78,7 +79,7 @@
             </dependency>
             <dependency>
                 <groupId>pers.gon</groupId>
-                <artifactId>web</artifactId>
+                <artifactId>manage</artifactId>
                 <version>${gon.version}</version>
             </dependency>
 
@@ -197,8 +198,25 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
 
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
         </dependencies>
 
 
@@ -216,33 +234,14 @@
 
 
     <!--        <dependency>-->
-    <!--            <groupId>org.springframework.boot</groupId>-->
-    <!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-    <!--        </dependency>-->
-
-
-    <!--        <dependency>-->
     <!--            <groupId>org.springframework.session</groupId>-->
     <!--            <artifactId>spring-session-data-redis</artifactId>-->
-    <!--        </dependency>-->
-
-    <!--        <dependency>-->
-    <!--            <groupId>org.springframework.amqp</groupId>-->
-    <!--            <artifactId>spring-rabbit-test</artifactId>-->
-    <!--            <scope>test</scope>-->
     <!--        </dependency>-->
     <!--        <dependency>-->
     <!--            <groupId>org.springframework.boot</groupId>-->
     <!--            <artifactId>spring-boot-starter-mail</artifactId>-->
     <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.springframework.boot</groupId>-->
-    <!--            <artifactId>spring-boot-starter-amqp</artifactId>-->
-    <!--        </dependency>-->
-    <!--        <dependency>-->
-    <!--            <groupId>org.springframework.boot</groupId>-->
-    <!--            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
-    <!--        </dependency>-->
+
 
 
 </project>

@@ -9,19 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>start</artifactId>
-    <name>启动层</name>
+    <name>WEB后台管理系统</name>
+    <artifactId>manage</artifactId>
+
     <dependencies>
         <dependency>
-            <groupId>pers.gon</groupId>
-            <artifactId>manage</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
         <dependency>
-            <groupId>pers.gon</groupId>
-            <artifactId>api</artifactId>
+            <groupId>com.ibeetl</groupId>
+            <artifactId>beetl-framework-starter</artifactId>
         </dependency>
-
-
+<!--        <dependency>-->
+<!--            <groupId>com.taobao.arthas</groupId>-->
+<!--            <artifactId>arthas-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -59,4 +62,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

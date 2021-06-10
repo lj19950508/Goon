@@ -12,7 +12,7 @@
 
     <modules>
         <module>api</module>
-        <module>web</module>
+        <module>manage</module>
         <module>start</module>
     </modules>
     <!--   包含 Assembler DTO与实体互转 -->
