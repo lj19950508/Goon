@@ -1,4 +1,4 @@
-package pers.gon.web.${moduleName}.excel;
+package pers.gon.manage.${moduleName}.excel;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;

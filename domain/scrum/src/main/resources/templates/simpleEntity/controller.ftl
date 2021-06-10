@@ -1,4 +1,4 @@
-package pers.gon.web.${moduleName};
+package pers.gon.manage.${moduleName};
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
