@@ -3,7 +3,7 @@
 
 <div class="row ">
     <div class="col-sm-24 ">
-        <form id="gencodeForm" action="${ctx}/scrum/gencode/entity/save" method="post" novalidate>
+        <form id="entityForm" action="${ctx}/scrum/gencode/entity/save" method="post" novalidate>
             <div class="card">
                 <div class="card-body">
                     <div class="col-24  pl-0 ">
@@ -61,9 +61,10 @@
                                             <span class="text-danger">*</span>是否逻辑删除：
                                         </span>
                                 </td>
+
                                 <td>
                                     <#radio id="isLogicDelete" name="isLogicDelete" required="required" items="${dict.get('yes_no')}"
-                                    value="${gencodeEntity.isLogicDelete!}"/>
+                                    value="${gencodeEntity.isLogicDelete!1}"/>
                                     <div class="invalid-feedback">请选择!</div>
                                 </td>
                             </tr>

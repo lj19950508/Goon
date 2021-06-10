@@ -12,6 +12,7 @@ import pers.gon.infrastructure.common.valid.SaveGroup;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -28,10 +29,10 @@ public class GencodeEntity extends DataEntity {
     @Column(nullable = false,columnDefinition = " varchar(255) default '' comment '实体描述'")
     private String entityDesc;
 
-    @NotEmpty(message = "模板类型不能为空",groups = SaveGroup.class)
+    @NotNull(message = "模板类型不能为空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " char(2) default '' comment '模板类型'")
     private Integer templateType;
-    @NotEmpty(message = "是否逻辑删除不能为空",groups = SaveGroup.class)
+    @NotNull(message = "是否逻辑删除不能为空",groups = SaveGroup.class)
     @Column(columnDefinition = "char(1) comment '是否逻辑删除'")
     private Boolean isLogicDelete;
 

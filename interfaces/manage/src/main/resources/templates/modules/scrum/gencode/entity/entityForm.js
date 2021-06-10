@@ -74,11 +74,14 @@ var pageFormObject= {
 
     ],
     startAllLisener:function(){
-        $form.submit("#gencodeForm",function(data){
+        $form.submit("#entityForm",function(data){
             if (data.success) {
-                go_into("${ctx}/gencode/entity");
+                go_into("${ctx}/scrum/gencode/entity");
             }
-        },null,{error:true})
+        },function(data){
+            //todo 处理数据
+            console.log(data);
+        },{error:true})
         <@ if(mode=='view'){ @>
             $('#gencodeForm').find('input,textarea,select').prop('disabled',true);
             $('#submit').prop('disabled',true);
@@ -91,26 +94,26 @@ var pageFormObject= {
             columns: [
                 {
                     //输入
-                    field: 'itemName',
+                    field: 'items.itemName',
                     title: '字段名*',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemName" placeholder="字段名">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items.itemName" placeholder="字段名">'
                     }
                 }
                 , {
                     //输入
-                    field: 'itemDesc',
+                    field: 'items.itemDesc',
                     title: '字段描述*',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="itemDesc" placeholder="字段描述">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items.itemDesc" placeholder="字段描述">'
                     }
                 },
                 {
                     //下拉
                     width:100,
-                    field: 'formType',
+                    field: 'items.formType',
                     title: '表单组件*',
                     formatter:function(value, row, index){
                         let options ='';
@@ -121,7 +124,7 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                             }
                         })
-                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items.formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                     options+
                                '</select>'
                     }
@@ -129,12 +132,12 @@ var pageFormObject= {
                 {
                     //下拉
                     width:100,
-                    field: 'itemType',
+                    field: 'items.itemType',
                     title: 'java类型*',
                     formatter:function(value, row, index){
                         let options='';
                         var formTypeFilter = pageFormObject.formTypes.filter(item=>{
-                            return row.formType == item.value;
+                            return row["items.formType"] == item.value;
                         })
                         pageFormObject.itemTypes.filter(item=>{
                             return ( formTypeFilter[0].filterItemType.indexOf(item.value) != -1)
@@ -145,18 +148,18 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                             }
                         })
-                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items.itemType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                     options+
                                '</select>'
                     }
                 },
                 {
                     width:100,
-                    field: 'sqlType',
+                    field: 'items.sqlType',
                     title: 'sql类型*',
                     formatter:function(value, row, index){
                         let itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
-                            return row.itemType == item.value;
+                            return row["items.itemType"] == item.value;
                         })
                         let options ='';
                         pageFormObject.sqlTypes.filter(item=>{
@@ -168,33 +171,30 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                                }
                             })
-                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items.sqlType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                   options+
                                '</select>'
                     }
                 },
                 {
                     //取决于type
-                    field: 'sqlLength',
+                    field: 'items.sqlLength',
                     title: 'sql字段长度',
                     width:150,
                     formatter: function (value, row, index) {
-                        // let sqlType =  row.sqlType
-                        // let sqlTypeFilter = pageFormObject.sqlTypes.filter(item=>{
-                        //     return row.sqlType == item.value;
-                        // })
-                        return '<input onchange="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="sqlLength" placeholder="字段长度">'
+
+                        return '<input onchange="pageFormObject.changeData('+ index +', this);"  type="text"  value="' + value + '" class="form-control" name="items.sqlLength" placeholder="字段长度">'
                         //如果 length与 当前sqltype default相等 则不变
                     }
                 },
                 {
                     width:100,
-                    field: 'queryType',
+                    field: 'items.queryType',
                     title: '查询组件*',
                     formatter:function(value, row, index){
                         let options='';
                         var formTypeFilter = pageFormObject.formTypes.filter(item=>{
-                            return row.formType == item.value;
+                            return row["items.formType"] == item.value;
                         })
                         pageFormObject.queryTypes.filter(item=>{
                             return ( formTypeFilter[0].filterQueryType.indexOf(item.value) != -1)
@@ -205,20 +205,20 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                              }
                         })
-                       return '<select onchange="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                       return '<select onchange="pageFormObject.changeData('+ index +', this);"    data-width="100"   name="items.queryType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                   options+
                               '</select>'
                     }
                 },
                 {
                     width:100,
-                    field: 'queryExp',
+                    field: 'items.queryExp',
                     title: '查询表达式',
                     formatter:function(value, row, index){
                         //显隐取决于type
                         let options ='';
                         var queryTypeFilter = pageFormObject.queryTypes.filter(item=>{
-                            return row.queryType == item.value;
+                            return row["items.queryType"] == item.value;
                         })
                         pageFormObject.queryExps.filter(item=>{
                             return ( queryTypeFilter[0].filterQueryExp.indexOf(item.value) != -1)
@@ -229,7 +229,7 @@ var pageFormObject= {
                                  options +='<option  value="'+item.value+'">'+item.label+'</option>'
                             }
                         })
-                    return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                    return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items.queryExp" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                  options+
                            '</select>'
                     }
@@ -237,17 +237,17 @@ var pageFormObject= {
                 },
                 {
                     //输入 0为不显示
-                    field: 'listLength',
+                    field: 'items.listLength',
                     title: '列宽*(0为隐藏)',
                     width:100,
                     formatter:function(value, row, index){
-                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="listLength" placeholder="列宽">'
+                        return '<input onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items.listLength" placeholder="列宽">'
                     }
                 },
                 {
                     //toggle
                     width:100,
-                    field: 'isMust',
+                    field: 'items.isMust',
                     title: '必填',
                     formatter:function(value, row, index){
                         let checked='';
@@ -255,7 +255,7 @@ var pageFormObject= {
                             checked='checked'
                         }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input '+checked+' id="isMust'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isMust" >' +
+                            '       <input '+checked+' id="isMust'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items.isMust" >' +
                             '       <label class="custom-control-label" for="isMust'+index+'"></label>' +
                             '   </div>'
                     }
@@ -263,7 +263,7 @@ var pageFormObject= {
                 {
                     //toggle
                     width:100,
-                    field: 'isUnique',
+                    field: 'items.isUnique',
                     title: '唯一',
                     formatter:function(value, row, index){
                         let checked='';
@@ -271,7 +271,7 @@ var pageFormObject= {
                           checked='checked'
                          }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input '+checked+' id="isUnique'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isUnique" >' +
+                            '       <input '+checked+' id="isUnique'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items.isUnique" >' +
                             '       <label class="custom-control-label" for="isUnique'+index+'"></label>' +
                             '   </div>'
                     }
@@ -279,7 +279,7 @@ var pageFormObject= {
                 {
                     //toggle
                     width:100,
-                    field: 'isSort',
+                    field: 'items.isSort',
                     title: '排序',
                     formatter:function(value, row, index){
                         let checked='';
@@ -287,7 +287,7 @@ var pageFormObject= {
                              checked='checked'
                           }
                         return '<div  class="custom-control custom-switch">' +
-                            '        <input '+checked+' id="isSort'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="isSort" >' +
+                            '        <input '+checked+' id="isSort'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items.isSort" >' +
                             '       <label class="custom-control-label" for="isSort'+index+'"></label>' +
                             '   </div>'
                     }
@@ -295,22 +295,22 @@ var pageFormObject= {
                 {
                     //取决于form
                     width:150,
-                    field: 'dictCode',
+                    field: 'items.dictCode',
                     title: '关联字典',
                     formatter:function(value, row, index){
                         var formTypeFilter = pageFormObject.formTypes.filter(item=>{
-                            return row.formType == item.value;
+                            return row["items.formType"] == item.value;
                         })
                         let options = '';
                         pageFormObject.dictList.forEach(item=>{
                             options+="<option value="+item.code+" label="+item.name+">"+item.name+"</option> "
                         })
                         if(formTypeFilter[0].dictable){
-                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="items.dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                 options+
                             '</select>'
                         }else{
-                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                            return '<select onchange="pageFormObject.changeData('+ index +', this);"   data-width="150"   name="items.dictCode" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                             '</select>'
                         }
                     }
@@ -351,7 +351,7 @@ var pageFormObject= {
         //
     },
     appendNewData(){
-        this.tableRef.bootstrapTable('append', [{itemName:'',itemDesc:'',formType:0,itemType:'String',sqlType:'varchar',sqlLength:'255',queryType:0,queryExp:0,listLength:0,isMust:0,isUnique:0,isSort:0,dictCode:''}]);
+        this.tableRef.bootstrapTable('append', [{'items.itemName':'','items.itemDesc':'','items.formType':0,'items.itemType':'String','items.sqlType':'varchar','items.sqlLength':'255','items.queryType':0,'items.queryExp':0,'items.listLength':0,'items.isMust':0,'items.isUnique':0,'items.isSort':0,'items.dictCode':''}]);
         $(".item-select").selectpicker('show')
     },
     //保存临时数据
@@ -371,34 +371,34 @@ var pageFormObject= {
     },
     //级联改变其他值
     cascadeChange(name,row){
-        if(name=='formType'){
+        if(name=='items.formType'){
             let formTypeFilter = pageFormObject.formTypes.filter(item=>{
-                return row.formType == item.value;
+                return row["items.formType"] == item.value;
             })
-            row.itemType = formTypeFilter[0].filterItemType[0]
-            row.queryType = formTypeFilter[0].filterQueryType[0]
+            row["items.itemType"] = formTypeFilter[0].filterItemType[0]
+            row["items.queryType"] = formTypeFilter[0].filterQueryType[0]
             if(formTypeFilter[0].dictable){
-                row.dictCode=this.dictList[0].code;
+                row["items.dictCode"]=this.dictList[0].code;
             }
-            this.cascadeChange('itemType',row);
-            this.cascadeChange('queryType',row);
+            this.cascadeChange('items.itemType',row);
+            this.cascadeChange('items.queryType',row);
 
-        }else if(name=='itemType'){
+        }else if(name=='items.itemType'){
             let itemTypeFilter = pageFormObject.itemTypes.filter(item=>{
-                return row.itemType == item.value;
+                return row["items.itemType"] == item.value;
             })
-            row.sqlType= itemTypeFilter[0].filterSqlType[0]
-            this.cascadeChange('sqlType',row);
-        }else if(name=='sqlType'){
+            row["items.sqlType"]= itemTypeFilter[0].filterSqlType[0]
+            this.cascadeChange('items.sqlType',row);
+        }else if(name=='items.sqlType'){
             let sqlTypeFilter = pageFormObject.sqlTypes.filter(item=>{
-                return row.sqlType == item.value;
+                return row["items.sqlType"] == item.value;
             })
-            row.sqlLength= sqlTypeFilter[0].defaultLength;
-        }else if(name=='queryType'){
+            row["items.sqlLength"]= sqlTypeFilter[0].defaultLength;
+        }else if(name=='items.queryType'){
             let queryTypeFilter = pageFormObject.queryTypes.filter(item=>{
-               return row.queryType == item.value;
+               return row["items.queryType"] == item.value;
             })
-            row.queryExp = queryTypeFilter[0].filterQueryExp[0]
+            row["items.queryExp"] = queryTypeFilter[0].filterQueryExp[0]
         }
     },
     changeSwitchData(index,obj){
