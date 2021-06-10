@@ -50,7 +50,6 @@ public class UpmsAdminExcelListener extends AnalysisEventListener<UpmsAdminExcel
             upmsAdmin.setAccount(item.getAccount());
             upmsAdmins.add(upmsAdmin);
         });
-
-        upmsAdminService.saveAll(upmsAdmins);
+        upmsAdminService.insertInBatch(upmsAdmins,BATCH_COUNT);
     }
 }
