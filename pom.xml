@@ -78,7 +78,7 @@
             </dependency>
             <dependency>
                 <groupId>pers.gon</groupId>
-                <artifactId>web</artifactId>
+                <artifactId>manage</artifactId>
                 <version>${gon.version}</version>
             </dependency>
 

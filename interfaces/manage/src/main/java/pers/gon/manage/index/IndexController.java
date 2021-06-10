@@ -13,8 +13,6 @@ import pers.gon.infrastructure.common.controller.BaseController;
 public class IndexController extends BaseController {
 
 
-
-
     @RequestMapping("")
     public String loginPage(Model model){
         return "include/_index.html";
