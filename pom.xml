@@ -37,6 +37,7 @@
         <arthas.version>3.4.1</arthas.version>
         <easyexcel.version>2.2.7</easyexcel.version>
         <rocketmq.version>2.2.0</rocketmq.version>
+        <elasticsearch.version>2.5.0</elasticsearch.version>
     </properties>
 
     <!--  声明依赖  -->
@@ -205,6 +206,16 @@
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq.version}</version>
 
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
 
         </dependencies>
