@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import pers.gon.application.utils.DataScopeUtils;
 import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.domain.scrum.service.IGencodeEntityService;
-import pers.gon.domain.scrum.vo.GencodeEntityItem;
 import pers.gon.domain.sys.entity.SysDict;
 import pers.gon.domain.sys.service.ISysDictService;
 import pers.gon.domain.upms.service.IUpmsMenuService;
@@ -85,7 +84,7 @@ public class GencodeEntityController extends BaseController {
             }
         };
         specification = specification.and(DataScopeUtils.dataScope(request));
-        Page<SysDict> pageData =  gencodeEntityService.findPage(specification,pageable);
+        Page<GencodeEntity> pageData =  gencodeEntityService.findPage(specification,pageable);
         return CommonResult.ok(pageData);
     }
 

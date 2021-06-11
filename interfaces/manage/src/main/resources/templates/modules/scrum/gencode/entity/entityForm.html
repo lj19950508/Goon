@@ -64,14 +64,14 @@
 
                                 <td>
                                     <#radio id="isLogicDelete" name="isLogicDelete" required="required" items="${dict.get('yes_no')}"
-                                    value="${gencodeEntity.isLogicDelete!1}"/>
+                                    value="${gencodeEntity.isLogicDelete!true?1:0}"/>
                                     <div class="invalid-feedback">请选择!</div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="active width-15 ">
                                         <span class="pull-right col-form-label">
-                                            <span class="text-danger">*</span>所属菜单：
+                                           所属菜单：
                                         </span>
                                 </td>
                                 <td>

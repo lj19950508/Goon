@@ -96,7 +96,7 @@ var pageFormObject= {
                     title: '字段名*',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input col-name="itemName" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].itemName" placeholder="字段名">'
+                        return '<input  required="required" col-name="itemName" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].itemName" placeholder="字段名">'
                     }
                 }
                 , {
@@ -105,7 +105,7 @@ var pageFormObject= {
                     title: '字段描述*',
                     width:150,
                     formatter:function(value, row, index){
-                        return '<input col-name="itemDesc" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].itemDesc" placeholder="字段描述">'
+                        return '<input  required="required" col-name="itemDesc" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].itemDesc" placeholder="字段描述">'
                     }
                 },
                 {
@@ -122,7 +122,7 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                             }
                         })
-                        return '<select col-name="formType" onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items['+index+'].formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
+                        return '<select col-name="formType" onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items['+index+'].formType" class="form-control" data-style="btn-default" data-live-search="true">'+
                                     options+
                                '</select>'
                     }
@@ -239,7 +239,7 @@ var pageFormObject= {
                     title: '列宽*(0为隐藏)',
                     width:100,
                     formatter:function(value, row, index){
-                        return '<input col-name="listLength" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].listLength" placeholder="列宽">'
+                        return '<input  required="required" col-name="listLength" onblur="pageFormObject.changeData('+ index +', this);"  type="text"  value="'+value+'" class="form-control" name="items['+index+'].listLength" placeholder="列宽">'
                     }
                 },
                 {
@@ -253,7 +253,8 @@ var pageFormObject= {
                             checked='checked'
                         }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input value='+value+' col-name="must"  '+checked+' id="must'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items['+index+'].must" >' +
+                            '       <input value="'+value+'"  type="hidden" name="items['+index+'].must" >' +
+                            '       <input '+checked+' col-name="must"   id="must'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" >' +
                             '       <label class="custom-control-label" for="must'+index+'"></label>' +
                             '   </div>'
                     }
@@ -269,7 +270,8 @@ var pageFormObject= {
                           checked='checked'
                         }
                         return '<div class="custom-control custom-switch">' +
-                            '       <input value='+value+' col-name="unrepeat" '+checked+' id="unrepeat'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items['+index+'].unrepeat" >' +
+                            '       <input value="'+value+'"  type="hidden" name="items['+index+'].unrepeat" >' +
+                            '       <input '+checked+' col-name="unrepeat"  id="unrepeat'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" >' +
                             '       <label class="custom-control-label" for="unrepeat'+index+'"></label>' +
                             '   </div>'
                     }
@@ -285,7 +287,8 @@ var pageFormObject= {
                             checked = 'checked'
                         }
                         return '<div  class="custom-control custom-switch">' +
-                            '        <input  col-name="sort" '+checked+' id="sort'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" name="items['+index+'].sort" >' +
+                            '       <input value="'+value+'"  type="hidden" name="items['+index+'].sort" >' +
+                            '        <input  col-name="sort" '+checked+' id="sort'+index+'" onclick="pageFormObject.changeSwitchData('+ index +', this);"  type="checkbox" class="custom-control-input" >' +
                             '       <label class="custom-control-label" for="sort'+index+'"></label>' +
                             '   </div>'
                     }
@@ -341,16 +344,37 @@ var pageFormObject= {
         this.getData();
     },
     getData:function(){
-        if(true){
+        <@ if(mode=='add'){ @>
             this.appendNewData()
-        }else{
-
-        }
-        //
+        <@ }else{ @>
+            var items= [];
+            <@ for(gencodeItem in gencodeEntity.items){ @>
+            items.push({
+                'itemName':'${gencodeItem.itemName}',
+                'itemDesc':'${gencodeItem.itemDesc}',
+                'formType':${gencodeItem.formType},
+                'itemType':'${gencodeItem.itemType}',
+                'sqlType':'${gencodeItem.sqlType}',
+                'sqlLength':'${gencodeItem.sqlLength}',
+                'queryType':${gencodeItem.queryType},
+                'queryExp':${gencodeItem.queryExp},
+                'listLength':${gencodeItem.listLength},
+                'must':${gencodeItem.must==true?1:0},
+                'unrepeat':${gencodeItem.unrepeat==true?1:0},
+                'sort':${gencodeItem.sort==true?1:0},
+                'dictCode':'${gencodeItem.dictCode}',
+            })
+            <@ } @>
+            this.appendData(items)
+        <@ } @>
+    },
+    appendData(newData){
+        this.tableRef.bootstrapTable('append', newData);
+        $(".item-select").selectpicker('show')
     },
     appendNewData(){
-        this.tableRef.bootstrapTable('append', [{'itemName':'','itemDesc':'','formType':0,'itemType':'String','sqlType':'varchar','sqlLength':'255','queryType':0,'queryExp':0,'listLength':0,'must':0,'unrepeat':0,'sort':0,'dictCode':''}]);
-        $(".item-select").selectpicker('show')
+        var newData = [{'itemName':'','itemDesc':'','formType':0,'itemType':'String','sqlType':'varchar','sqlLength':'255','queryType':0,'queryExp':0,'listLength':0,'must':0,'unrepeat':0,'sort':0,'dictCode':''}];
+        this.appendData(newData);
     },
     //保存临时数据
     changeData(index,obj){
