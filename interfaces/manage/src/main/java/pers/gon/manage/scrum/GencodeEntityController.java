@@ -133,10 +133,9 @@ public class GencodeEntityController extends BaseController {
         item1.setItemType("String");
         item1.setSqlType("varchar(255)");
         item1.setListLength(100);
-        item1.setListShow(true);
         item1.setSort(true);
         item1.setMust(true);
-        item1.setUnique(true);
+        item1.setUnrepeat(true);
         item1.setQueryType(8);
         item1.setDictCode("common_gender");
         item1.setQueryExp(0);
@@ -150,10 +149,9 @@ public class GencodeEntityController extends BaseController {
         item2.setItemType("Integer");
         item2.setSqlType("char(2)");
         item2.setListLength(50);
-        item2.setListShow(true);
         item2.setSort(true);
         item2.setMust(true);
-        item2.setUnique(false);
+        item2.setUnrepeat(false);
         item2.setQueryType(2);
         item2.setDictCode("common_gender");
         item2.setQueryExp(0);
@@ -166,10 +164,9 @@ public class GencodeEntityController extends BaseController {
         item3.setItemType("String");
         item3.setSqlType("varchar(255)");
         item3.setListLength(50);
-        item3.setListShow(true);
         item3.setSort(true);
         item3.setMust(true);
-        item3.setUnique(false);
+        item3.setUnrepeat(false);
         item3.setQueryType(4);
         item3.setDictCode("common_gender");
         item3.setQueryExp(0);

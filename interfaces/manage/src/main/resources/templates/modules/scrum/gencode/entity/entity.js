@@ -85,7 +85,7 @@ var pageObject = {
         var index = layer.confirm('确定删除记录？', {
             btn: ['确定', '取消'] //按钮
         }, function () {
-            $req.post("${ctx}/gencode/entity/delete", {id: idarr}, function (res) {
+            $req.post("${ctx}/scrum/gencode/entity/delete", {id: idarr}, function (res) {
                 pageObject.refresh();
                 layer.close(index)
             })

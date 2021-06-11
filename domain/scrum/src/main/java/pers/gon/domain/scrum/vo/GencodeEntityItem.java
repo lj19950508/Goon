@@ -28,7 +28,11 @@ public class GencodeEntityItem {
 
     @NotEmpty(message = "SQL类型不能为空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment 'SQL类型'")
-    private String sqlType="varchar(255)";
+    private String sqlType;
+
+    @NotEmpty(message = "SQL长度不能为空",groups = SaveGroup.class)
+    @Column(nullable = false,columnDefinition = " varchar(32) default '' comment 'SQL长度'")
+    private String sqlLength;
 
     //0不显示 1文本 2长文本 3富文本 4下拉 5单选 6多选 7 日期 8数字输入框
     @NotEmpty(message = "表单类型不能为空",groups = SaveGroup.class)
@@ -43,22 +47,19 @@ public class GencodeEntityItem {
     @Column(nullable = false,columnDefinition = " char(2) default '' comment '查询类型'")
     private Integer queryType;
     //0 eq 1like 2llike 3rlike 4 gt 5 lt 6 ge 7 le 8bettwen
-    @Column(nullable = false,columnDefinition = " char(2) default '' comment '查询条件'")
+    @Column(nullable = true,columnDefinition = " char(2) default '' comment '查询条件'")
     private Integer queryExp;
 
     @NotEmpty(message = "列表长度不能为空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " char(4) default '' comment '列表长度'")
     private Integer listLength;
 
-    @NotEmpty(message = "是否列表展示不能为空",groups = SaveGroup.class)
-    @Column(nullable = false,columnDefinition = " char(1) default '' comment '是否列表展示'")
-    private boolean isListShow;
     @Column(nullable = false,columnDefinition = " char(1) default '' comment '是否必填'")
-    private boolean isMust;
+    private Boolean must;
     @Column(nullable = false,columnDefinition = " char(1) default '' comment '是否可排序'")
-    private boolean isSort;
+    private Boolean sort;
     @Column(nullable = false,columnDefinition = " char(1) default '' comment '是否唯一'")
-    private boolean isUnique;
+    private Boolean unrepeat;
 
 
 }
