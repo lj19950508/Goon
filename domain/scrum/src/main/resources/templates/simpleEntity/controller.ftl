@@ -62,19 +62,23 @@ public class ${upEntityName}Controller extends BaseController {
             List<Predicate> predicates = new ArrayList<>();//查询条件集
             <#list items as item>
             <#if item.queryType!=0>
-            <#if item.queryExp!=8>
-                <#if item.itemType!='String'>
-            if (null != ${entityName}.get${item["itemName"]?cap_first}()) {
-                </#if>
-                <#if item.itemType=='String'>
-                    <#if item.formType!=6 && item.queryType ==4>
+                <#if item.queryExp!=8>
+                    <#if  item.queryType ==4>
+                        <#if item.itemType!='String'>
+            if (null != ${item["itemName"]}s) {
+                        </#if>
+                        <#if item.itemType=='String'>
             if (StrUtil.isNotEmpty(${item["itemName"]}s)) {
+                        </#if>
                     <#else>
+                        <#if item.itemType!='String'>
+            if (null != ${entityName}.get${item["itemName"]?cap_first}()) {
+                        </#if>
+                        <#if item.itemType=='String'>
             if (StrUtil.isNotEmpty(${entityName}.get${item["itemName"]?cap_first}())) {
+                        </#if>
                     </#if>
-
-                </#if>
-            </#if>
+                 </#if>
             <#if item.queryExp==8>
                 <#if item.itemType!='String'>
             if (null != start${item["itemName"]?cap_first}) || null != end${item["itemName"]?cap_first}) {

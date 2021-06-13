@@ -35,17 +35,16 @@ public class ${upEntityName} extends DataEntity {
 
 <#list items as item>
     //${item["itemDesc"]}
-    //
     <#if item.must==true>
-    <#if item.itemType!='String'>
+        <#if item.itemType!='String'>
     ${r'@'}NotNull(message = "${item["itemDesc"]}不能未空",groups = SaveGroup.class)
-    </#if>
-    <#if item.itemType=='String'>
+        </#if>
+        <#if item.itemType=='String'>
     ${r'@'}NotEmpty(message = "${item["itemDesc"]}不能未空",groups = SaveGroup.class)
+        </#if>
     </#if>
-    ${r'@'}Column(<#if item.must==true>nullable = false,</#if>columnDefinition = " ${item["sqlType"]}  comment '${item["itemDesc"]}'")
-    </#if>
-    <#if item.unique==true>
+    ${r'@'}Column(<#if item.must==true>nullable = false,</#if>columnDefinition = " ${item["sqlType"]}<#if item.sqlLength!=''>(${item["sqlLength"]})</#if>  comment '${item["itemDesc"]}'")
+    <#if item.unrepeat==true>
     ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}",groups = InsertGroup.class,message = "${item["itemDesc"]}已存在")
     </#if>
     private ${item["itemType"]} ${item["itemName"]};

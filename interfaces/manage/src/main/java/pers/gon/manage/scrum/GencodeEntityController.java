@@ -108,7 +108,7 @@ public class GencodeEntityController extends BaseController {
 
     @RequiresPermissions(value = {"SCRUM:GENCODE:ADD", "SCRUM:GENCODE:EDIT"}, logical = Logical.OR)
     @ResponseBody
-    @GetMapping("/generate")
+    @PostMapping("/generate")
     public CommonResult generate(String id,boolean genMenu) {
         //1.生成代码到指定模块下 String gencodeEntityId
         //2.生成菜单

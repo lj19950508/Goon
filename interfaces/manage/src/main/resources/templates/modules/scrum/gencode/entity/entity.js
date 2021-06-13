@@ -17,6 +17,15 @@ var pageObject = {
                 {
                     field: 'templateType',
                     title: '模板类型',
+                    formatter: function(value,row,index){
+                        let dict = ${dict.getJSON('gencode_template_type')}
+                        for(let item in dict){
+                            if(dict[item].value===parseInt(value)){
+                                return dict[item].name
+                            }
+                        }
+                    return '';
+                    }
                 },
                 {
                     field: 'operate',
@@ -32,6 +41,9 @@ var pageObject = {
                         'click .del': (e, value, row, index) => {
                             this.del(row.id);
                         },
+                        'click .gen': (e, value, row, index) => {
+                            this.del(row.id);
+                          },
                     },
                     formatter: function operateFormatter(value, row, index) {
                         var buttons = [];
@@ -75,6 +87,16 @@ var pageObject = {
     edit: function (id) {
         go_into("${ctx}/scrum/gencode/entity/form/edit?id=" + id);
     },
+    gencode: function (id) {
+         var index = layer.confirm('是否生成代码？', {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $req.post("${ctx}/scrum/gencode/entity/generate", {id: id[0],genMenu:true}, function (res) {
+                pageObject.refresh();
+                layer.close(index)
+            })
+        });
+    },
     del: function (id) {
         let idarr = [];
         if (Array.isArray(id)) {
@@ -112,8 +134,11 @@ var pageObject = {
             $('#remove').prop('disabled', !selectLength);
             if (selectLength == 1) {
                 $('#edit').prop('disabled', false);
+                $('#gencode').prop('disabled', false);
             } else {
                 $('#edit').prop('disabled', true);
+                $('#gencode').prop('disabled', true);
+
             }
         });
     }

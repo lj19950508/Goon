@@ -30,7 +30,6 @@ public class GencodeEntityItem {
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment 'SQL类型'")
     private String sqlType;
 
-    @NotEmpty(message = "SQL长度不能为空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment 'SQL长度'")
     private String sqlLength;
 

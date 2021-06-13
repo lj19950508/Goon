@@ -7,8 +7,8 @@
                 columns: [
                     {checkbox: true,}
                     <#list items as item>
+                    <#if item.listLength!=0>
                     ,
-                    <#if item.listShow==true>
                     {
                         <#if item.sort==true>
                         sortable:true,

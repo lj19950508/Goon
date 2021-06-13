@@ -44,10 +44,10 @@ var pageFormObject= {
         {value:'float',label:"float",defaultLength: '10,2'},
         {value:'decimal',label:"decimal",defaultLength: '10,2'},
         {value:'char',label:"char",defaultLength:'1'},
-        {value:'datetime',label:"datetime",defaultLength: '0'},
-        {value:'tinytext',label:"tinytext",defaultLength: '0'},
-        {value:'text',label:"text",defaultLength: '0'},
-        {value:'longtext',label:"longtext",defaultLength: '0'},
+        {value:'datetime',label:"datetime",defaultLength: ''},
+        {value:'tinytext',label:"tinytext",defaultLength: ''},
+        {value:'text',label:"text",defaultLength: ''},
+        {value:'longtext',label:"longtext",defaultLength: ''},
     ],
     //取决于form
     queryTypes:[
@@ -122,7 +122,7 @@ var pageFormObject= {
                                 options +='<option  value="'+item.value+'">'+item.label+'</option>'
                             }
                         })
-                        return '<select col-name="formType" onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items['+index+'].formType" class="form-control" data-style="btn-default" data-live-search="true">'+
+                        return '<select col-name="formType" onchange="pageFormObject.changeData('+ index +', this);"   data-width="100"   name="items['+index+'].formType" class="selectpicker item-select" data-style="btn-default" data-live-search="true">'+
                                     options+
                                '</select>'
                     }

@@ -59,6 +59,13 @@
                                 <i class="fa fa-remove"></i> 删除
                             </button>
                             <@ } @>
+                            <@ if(shiro.hasPermission("SCRUM:GENCODE:ADD") ){ @>
+                            <button id="gencode" class="btn btn-default waves-effect w-xs waves-light" disabled=""
+                                    onclick="pageObject.gencode(pageObject.getIdSelections())">
+                                <i class="fa fa-coffee"></i> 生成代码
+                            </button>
+                            <@ } @>
+
                         </div>
                     </div>
                     <div class="columns columns-right btn-group float-right">

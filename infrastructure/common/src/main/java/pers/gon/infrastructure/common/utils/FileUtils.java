@@ -21,7 +21,7 @@ public class FileUtils {
     }
 
     public static String getWebPath(){
-        return getRootPath()+"/interfaces/web/src/main/java/pers/gon/web/";
+        return getRootPath()+"/interfaces/manage/src/main/java/pers/gon/manage/";
     }
 
     public static String getDomainPath(String moduleName){
@@ -29,11 +29,11 @@ public class FileUtils {
     }
 
     public static String getPagePath(){
-        return getRootPath()+"/interfaces/web/src/main/resources/templates/modules/";
+        return getRootPath()+"/interfaces/manage/src/main/resources/templates/modules/";
     }
 
     public static String getTemplatePath(){
-        return getRootPath()+"/domain/gencode/src/main/resources/templates";
+        return getRootPath()+"/domain/scrum/src/main/resources/templates";
     }
 
     @SneakyThrows

@@ -23,7 +23,7 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                 <tr>
                                     <td class="active width-15 ">
                                         <span class="pull-right col-form-label">
-                                            <#if item.must==true><span class="text-danger">*</#if></span>${item["itemName"]}：
+                                            <#if item.must==true><span class="text-danger">*</#if></span>${item["itemDesc"]}：
                                         </span>
                                     </td>
                                     <td>
@@ -37,19 +37,19 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                         ${r'<#'}editor name="${item["itemName"]}" id="${item["itemName"]}" value="${r'${'}${entityName}.${item["itemName"]}!}"/>
                                         </#if>
                                         <#if item.formType ==4>
-                                        ${r'<#'}select path="${item["itemName"]}"  <#if item.must==true> notAllowNull="false"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}"  value="${r'${'}${entityName}.${item["itemName"]}!}"  itemLabel="name" itemValue="value"/>
+                                        ${r'<#'}select id="${item["itemName"]}" name="${item["itemName"]}  <#if item.must==true> notAllowNull="false"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}"  value="${r'${'}${entityName}.${item["itemName"]}!}"  itemLabel="name" itemValue="value"/>
                                         </#if>
                                         <#if item.formType ==5>
-                                        ${r'<#'}radio path="${item["itemName"]}" <#if item.must==true>required="required"</#if>  items="${r'${'}dict.get('${item["dictCode"]}')}" value="${r'${'}${entityName}.${item["itemName"]}!}"/>
+                                        ${r'<#'}radio id="${item["itemName"]}" name="${item["itemName"]}"  <#if item.must==true>required="required"</#if>  items="${r'${'}dict.get('${item["dictCode"]}')}" value="${r'${'}${entityName}.${item["itemName"]}!}"/>
                                         </#if>
                                         <#if item.formType ==6>
-                                        ${r'<#'}bracketCheckbox path="${item["itemName"]}" <#if item.must==true>required="required"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"  values="${r'${'}${entityName}.${item["itemName"]}!}"   />
+                                        ${r'<#'}bracketCheckbox id="${item["itemName"]}" name="${item["itemName"]}" <#if item.must==true>required="required"</#if> items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"  values="${r'${'}${entityName}.${item["itemName"]}!}"   />
                                         </#if>
                                         <#if item.formType ==7>
-                                        ${r'<#'}datepicker path="${item["itemName"]}" <#if item.must==true>required="required"</#if> value="${r'${'}${entityName}.${item["itemName"]}!}"   />
+                                        ${r'<#'}datepicker id="${item["itemName"]}" name="${item["itemName"]}" <#if item.must==true>required="required"</#if> value="${r'${'}${entityName}.${item["itemName"]}!}"   />
                                         </#if>
                                         <#if item.formType ==8>
-                                        <input type="number" class="form-control" value="${r'${'}${entityName}.${item["itemName"]}!}" name="${item["itemName"]}" placeholder="输入${item["itemDesc"]}" <#if item.must==true>required="required"</#if>>
+                                        <input type="number" class="form-control" value="${r'${'}${entityName}.${item["itemName"]}!}" name="${item["itemName"]}" id="${item["itemName"]} placeholder="输入${item["itemDesc"]}" <#if item.must==true>required="required"</#if>>
                                         </#if>
                                         <#if item.must==true><div class="invalid-feedback">输入${item["itemDesc"]}!</div></#if>
                                     </td>

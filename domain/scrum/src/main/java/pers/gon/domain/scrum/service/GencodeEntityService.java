@@ -59,7 +59,7 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
         genItem("simpleEntity/entity.ftl",
                 FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/entity/",
                 genCodeMap.get("upEntityName")+".java",genCodeMap);
-        log.debug("生成了：{},位于:{}","I"+genCodeMap.get("upEntityName")+"Service.java",FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/service/");
+        log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+".java",FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/entity/");
 
         genItem("simpleEntity/iservice.ftl",
                 FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/service/",
@@ -146,25 +146,25 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
 
         Set<UpmsMenu> btns = new HashSet<>();
         UpmsMenu add = new UpmsMenu();
-        add.setCode(gencodeEntity.getModuleName()+":"+gencodeEntity.getEntityName()+":ADD");
+        add.setCode(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":ADD");
         add.setPermission(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":ADD");
         add.setName(gencodeEntity.getEntityDesc()+"-新增");
         add.setSort(0);
         add.setType(2);
         UpmsMenu edit = new UpmsMenu();
-        edit.setCode(gencodeEntity.getModuleName()+":"+gencodeEntity.getEntityName()+":EDIT");
+        edit.setCode(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName()+":EDIT");
         edit.setPermission(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":EDIT");
         edit.setName(gencodeEntity.getEntityDesc()+"-修改");
         edit.setSort(1);
         edit.setType(2);
         UpmsMenu del = new UpmsMenu();
-        del.setCode(gencodeEntity.getModuleName()+":"+gencodeEntity.getEntityName()+":DEL");
+        del.setCode(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":DEL");
         del.setPermission(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":DEL");
         del.setName(gencodeEntity.getEntityDesc()+"-删除");
         del.setSort(2);
         del.setType(2);
         UpmsMenu view = new UpmsMenu();
-        view.setCode(gencodeEntity.getModuleName()+":"+gencodeEntity.getEntityName()+":VIEW");
+        view.setCode(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":VIEW");
         view.setPermission(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":VIEW");
         view.setName(gencodeEntity.getEntityDesc()+"-查询");
         view.setSort(3);

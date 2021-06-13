@@ -27,7 +27,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">${item["itemDesc"]}</div>
                                     </div>
-                                    ${r'<#'}select path="${item["itemName"]}" items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value" />
+                                    ${r'<#'}select id="${item["itemName"]}" name="${item["itemName"]}" items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value" />
                                 </div>
                             </div>
 
@@ -39,7 +39,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                         <div class="input-group-text">${item["itemDesc"]}</div>
                                     </div>
                                     <div class="query-container">
-                                    ${r'<#'}radio path="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" />
+                                    ${r'<#'}radio id="${item["itemName"]}" name="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" />
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +52,10 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                     </div>
                                     <div class="query-container">
                                     <#if item.formType!=6>
-                                        ${r'<#'}checkbox path="${item["itemName"]}s"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
+                                        ${r'<#'}checkbox id="${item["itemName"]}s" name="${item["itemName"]}s"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
                                     </#if>
                                     <#if item.formType==6>
-                                        ${r'<#'}bracketCheckbox path="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
+                                        ${r'<#'}bracketCheckbox id="${item["itemName"]}" name="${item["itemName"]}"  items="${r'${'}dict.get('${item["dictCode"]}')}" itemLabel="name" itemValue="value"    />
                                     </#if>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">${item["itemDesc"]}</div>
                                     </div>
-                                    ${r'<#'}dateregionpicker path="${item["itemName"]}"  />
+                                    ${r'<#'}dateregionpicker id="${item["itemName"]}" name="${item["itemName"]}"  />
                                 </div>
                             </div>
                         </#if>
