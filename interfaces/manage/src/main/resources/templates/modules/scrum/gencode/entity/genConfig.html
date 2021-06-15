@@ -1,0 +1,108 @@
+<@ layout("/include/_container.html", {title:"实体表单", parent:"生成代码"}){ @>
+
+
+<div class="row ">
+    <div class="col-sm-24 ">
+        <form id="genForm" action="${ctx}/scrum/gencode/entity/gencode" method="post" novalidate>
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-24  pl-0 ">
+                        <button type="button" onclick="javascript:location=document.referrer;" class="btn btn-default">
+                            <i class="fa fa-arrow-left"></i> 返回
+                        </button>
+                        <button id="submit" type="button" class="btn btn-primary" data-loading-text="正在提交..."
+                                onclick="$('#entityForm').trigger('submit')">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                    <div class="col-24 mt-2 pl-0">
+                        <input type="hidden" name="id" value="${gencodeEntity.id!}"/>
+                        <table class="table table-bordered">
+                            <tbody>
+
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>对象名：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.entityName!}"
+                                           name="entityName" placeholder="输入对象名（如:entityName）" required="required">
+                                    <div class="invalid-feedback">请输入对象名!</div>
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>对象描述：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.entityDesc!}"
+                                           name="entityDesc" placeholder="输入对象描述(如:实体名称)" required="required">
+                                    <div class="invalid-feedback">请输入对象描述!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>代码模板：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#select value="${gencodeEntity.templateType!}" id="templateType" name="templateType"
+                                    items="${dict.get('gencode_template_type')}" itemLabel="name" itemValue="value"
+                                    notAllowNull="false"/>
+                                    <div class="invalid-feedback">请选择模板!</div>
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>是否逻辑删除：
+                                        </span>
+                                </td>
+
+                                <td>
+                                    <#radio id="isLogicDelete" name="isLogicDelete" required="required" items="${dict.get('yes_no')}"
+                                    value="${gencodeEntity.isLogicDelete!true?1:0}"/>
+                                    <div class="invalid-feedback">请选择!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                           所属菜单：
+                                        </span>
+                                </td>
+                                <td>
+                                    <#treeselect id="parentId" name="parent.id"
+                                    value="${gencodeEntity.parentMenu.id!}"
+                                    labelValue="${gencodeEntity.parentMenu.name!}"
+                                    labelName="parent.name"
+                                    placeholder="选择上级菜单"
+                                    title="上级菜单" url="/upms/menu/list"
+                                    checked="false"
+                                    allowClear="true" allowInput="false"
+                                    allowSearch="true" />
+                                </td>
+                                <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>所属模块：
+                                        </span>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="${gencodeEntity.moduleName!}"
+                                           name="moduleName" placeholder="输入所属模块（如:upms）" required="required">
+                                    <div class="invalid-feedback">请输入对象描述!</div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<@ } @>
+
+<@ include("entityForm.js"){} @>

@@ -38,9 +38,7 @@ public class GencodeEntity extends DataEntity {
 
 
     //one to one
-    @OneToOne
-    @JoinColumn(name = "parent_menu_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
-    private UpmsMenu parentMenu;
+
 
     @NotEmpty(message = "模块名称不能为空",groups = SaveGroup.class)
     @Column(columnDefinition = "varchar(32) comment '模块名称'")
