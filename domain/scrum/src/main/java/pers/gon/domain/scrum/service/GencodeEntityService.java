@@ -144,7 +144,7 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
     }
 
     @Override
-    public void genmenu(GencodeEntity gencodeEntity) {
+    public void genmenu(GencodeEntity gencodeEntity,String parentMenuId) {
         UpmsMenu upmsMenu = new UpmsMenu();
         upmsMenu.setCode(gencodeEntity.getModuleName().toUpperCase()+":"+gencodeEntity.getEntityName().toUpperCase()+":LIST");
         upmsMenu.setName(gencodeEntity.getEntityDesc());
@@ -152,6 +152,10 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
         upmsMenu.setUrl("/"+gencodeEntity.getModuleName()+"/"+gencodeEntity.getEntityName());
         upmsMenu.setType(1);
         upmsMenu.setSort(0);
+
+        UpmsMenu parent = new UpmsMenu();
+        parent.setId(parentMenuId);;
+        upmsMenu.setParent(parent);
 
         Set<UpmsMenu> btns = new HashSet<>();
         UpmsMenu add = new UpmsMenu();

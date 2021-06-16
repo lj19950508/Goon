@@ -25,5 +25,5 @@ public interface IGencodeEntityService extends IBaseService<GencodeEntity,String
 
     Configuration getFreemarkerConfig();
 
-    void genmenu(GencodeEntity gencodeEntity);
+    void genmenu(GencodeEntity gencodeEntity,String parentMenuId);
 }

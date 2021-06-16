@@ -121,7 +121,7 @@ public class GencodeEntityController extends BaseController {
 
         gencodeEntityService.gencode(gencodeEntity,config);
         if(StringUtils.isNotEmpty(config.getMenuId())){
-            gencodeEntityService.genmenu(gencodeEntity);
+            gencodeEntityService.genmenu(gencodeEntity,config.getMenuId());
         }
 
         //生成菜单的增删改查
