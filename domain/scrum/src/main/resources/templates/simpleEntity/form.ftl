@@ -23,7 +23,7 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                 <tr>
                                     <td class="active width-15 ">
                                         <span class="pull-right col-form-label">
-                                            <#if item.must==true><span class="text-danger">*</#if></span>${item["itemDesc"]}：
+                                            <#if item.must==true><span class="text-danger">*</span></#if>${item["itemDesc"]}：
                                         </span>
                                     </td>
                                     <td>
@@ -50,6 +50,9 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                         </#if>
                                         <#if item.formType ==8>
                                         <input type="number" class="form-control" value="${r'${'}${entityName}.${item["itemName"]}!}" name="${item["itemName"]}" id="${item["itemName"]} placeholder="输入${item["itemDesc"]}" <#if item.must==true>required="required"</#if>>
+                                        </#if>
+                                        <#if item.formType ==9>
+                                        ${r'<#'}treeselect id="${item["itemName"]}" name="${item["itemName"]}.id" value="${r'${'}${entityName}.${item["itemName"]}.id!}" labelValue="${r'${'}${entityName}.${item["itemName"]}.name!}" labelName="${item["itemName"]}.name" placeholder="选择单位" title="所属单位" url="/upms/dept/list"   <#if item.must==true>required="required"</#if> checked="false" allowClear="true" allowSearch="true" />
                                         </#if>
                                         <#if item.must==true><div class="invalid-feedback">输入${item["itemDesc"]}!</div></#if>
                                     </td>

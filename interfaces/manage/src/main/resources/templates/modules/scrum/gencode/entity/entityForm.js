@@ -20,6 +20,7 @@ var pageFormObject= {
         {value:6,label:"复选",filterItemType:['String','Integer'],filterQueryType:[0,1,2,3,4],dictable:true},
         {value:7,label:"日期",filterItemType:['Date'],filterQueryType:[0,5],dictable:false},
         {value:8,label:"数字",filterItemType:['Double','Float','Long'],filterQueryType:[0,6,7],dictable:false},
+        {value:9,label:"部门选择器",filterItemType:['UpmsDept'],filterQueryType:[0],dictable:false},
         // {/*{value:9,label:"开关"}*/}
     ],
     //取决于form
@@ -32,6 +33,7 @@ var pageFormObject= {
         {value:'Date',label:"Date",filterSqlType: ['datetime']},
         {value:'Double',label:"Double",filterSqlType: ['double']},
         {value:'Float',label:"Float",filterSqlType: ['float']},
+        {value:'UpmsDept',label:"UpmsDept",filterSqlType: ['自定义']},
     ],
     //取决于itemTypes
     sqlTypes:[
@@ -48,6 +50,7 @@ var pageFormObject= {
         {value:'tinytext',label:"tinytext",defaultLength: ''},
         {value:'text',label:"text",defaultLength: ''},
         {value:'longtext',label:"longtext",defaultLength: ''},
+        {value:'自定义',label:"自定义",defaultLength: ''},
     ],
     //取决于form
     queryTypes:[

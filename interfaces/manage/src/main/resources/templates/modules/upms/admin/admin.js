@@ -184,7 +184,6 @@ var pageObject = {
         $("#excelFile").trigger("click");
     },
     template:function(){
-
         $.download('${ctx}/upms/admin/excel/template');
     },
     startAllLisener: function () {

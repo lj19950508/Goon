@@ -112,11 +112,7 @@ public class GencodeEntityController extends BaseController {
     @ResponseBody
     @PostMapping("/generate")
     public CommonResult generate(String id, GencodeConfig config) {
-        //1.生成代码到指定模块下 String gencodeEntityId
-        //2.生成菜单
-        //3.默认为admin生成菜单
-        // https://blog.csdn.net/weixin_43424932/article/details/104253977
-        //生成并在某个菜单下
+
         GencodeEntity gencodeEntity =gencodeEntityService.findById(id);
 
         gencodeEntityService.gencode(gencodeEntity,config);

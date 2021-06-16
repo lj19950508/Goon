@@ -34,8 +34,11 @@ id     path filename               url                          source          
 删除图片  url->file_url    是否删除
 
 
-5.rocketmq
-4.redis     
+5.rocketmq 如生成代码
+
+4.redis
+6.websocket
+
 
 
 

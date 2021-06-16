@@ -128,6 +128,29 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                                 <i class="fa fa-remove"></i> 删除
                             </button>
                             ${r'<@ } @>'}
+                            <#if excel==true>
+                            ${r'<@'} if(shiro.orPermission("${moduleName?upper_case}:${entityName?upper_case}:VIEW", "${moduleName?upper_case}:${entityName?upper_case}:ADD", "${moduleName?upper_case}:${entityName?upper_case}:EDIT")){ ${r'@>'}
+                            <div  class="dropdown inline-block">
+                                <button type="button" class="btn btn-default waves-effect w-xs waves-light dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-file-excel-o"></i>  Excel
+                                </button>
+                                <div class="dropdown-menu">
+                                    ${r'<@'} if(shiro.orPermission("${moduleName?upper_case}:${entityName?upper_case}:VIEW", "${moduleName?upper_case}:${entityName?upper_case}:ADD", "${moduleName?upper_case}:${entityName?upper_case}:EDIT")){ ${r'@>'}
+                                    <a class="dropdown-item" onclick="pageObject.export(pageObject.getIdSelections())" >导出</a>
+                                    ${r'<@'} } ${r'@>'}
+                                    ${r'<@'} if(shiro.hasPermission("${moduleName?upper_case}:${entityName?upper_case}:ADD") ){ ${r'@>'}
+                                        <a class="dropdown-item" onclick="pageObject.selectFile()">导入</a>
+                                    ${r'<@'} } ${r'@>'}
+                                    ${r'<@'} if(shiro.orPermission("${moduleName?upper_case}:${entityName?upper_case}:VIEW", "${moduleName?upper_case}:${entityName?upper_case}:ADD", "${moduleName?upper_case}:${entityName?upper_case}:EDIT")){ ${r'@>'}
+                                        <a class="dropdown-item" onclick="pageObject.template()">模板</a>
+                                    ${r'<@'} } ${r'@>'}
+                                    <div class="d-none"><input  type="file" id="excelFile" onchange="pageObject.import()"></div>
+                                </div>
+                            </div>
+                            ${r'<@ } @>'}
+                            </#if>
+
+
                         </div>
                     </div>
                     <div class="columns columns-right btn-group float-right">

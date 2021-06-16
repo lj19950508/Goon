@@ -15,9 +15,12 @@ import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.domain.scrum.repository.GencodeEntityRepositroy;
 import pers.gon.domain.upms.entity.UpmsMenu;
 import pers.gon.domain.upms.service.IUpmsMenuService;
+import pers.gon.infrastructure.common.entity.CommonResult;
 import pers.gon.infrastructure.common.service.BaseService;
 import pers.gon.infrastructure.common.utils.FileUtils;
+import pers.gon.infrastructure.common.valid.SaveGroup;
 
+import javax.validation.Validator;
 import java.io.File;
 import java.io.Writer;
 import java.util.HashSet;
@@ -40,6 +43,9 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
     @Autowired
     ObjectMapper objectMapper;
 
+    @Autowired
+    protected Validator validator;
+
     @Override
     public void gencode(GencodeEntity gencodeEntity, GencodeConfig config) {
         if(gencodeEntity.getTemplateType()==0){
@@ -56,6 +62,7 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
         genCodeMap.put("lowEntityName",StrUtil.lowerFirst(gencodeEntity.getEntityName()));
         genCodeMap.put("camelEntityName",StrUtil.toCamelCase(gencodeEntity.getEntityName()));
         genCodeMap.put("underEntityName",StrUtil.toUnderlineCase(gencodeEntity.getEntityName()));
+        genCodeMap.put("excel",config.getExcel());
 
         if(config.getEntity()==true){
             genItem("simpleEntity/entity.ftl",
@@ -186,13 +193,17 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
         btns.add(edit);
         btns.add(del);
         btns.add(view);
-        upmsMenuService.save(add);
-        upmsMenuService.save(edit);
-        upmsMenuService.save(del);
-        upmsMenuService.save(view);
 
-        upmsMenu.setChildren(btns);
-        upmsMenuService.save(upmsMenu);
+
+        Set set = validator.validate(upmsMenu, SaveGroup.class);
+        if(set.size()==0){
+            upmsMenuService.save(add);
+            upmsMenuService.save(edit);
+            upmsMenuService.save(del);
+            upmsMenuService.save(view);
+            upmsMenu.setChildren(btns);
+            upmsMenuService.save(upmsMenu);
+        }
     }
 
 

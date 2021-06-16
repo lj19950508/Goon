@@ -187,5 +187,40 @@ public class ${upEntityName}Controller extends BaseController {
         return CommonResult.ok();
     }
 
+    <#if excel==true>
+    @RequiresPermissions(value = {"${moduleName?upper_case}:${entityName?upper_case}:ADD", "${moduleName?upper_case}:${entityName?upper_case}:EDIT"}, logical = Logical.OR)
+    @ResponseBody
+    @RequestMapping("/excel/export")
+    public void excelExport(@RequestParam(value = "id[]",required = false)  String id) {
+        List<${upEntityName}> list;
+        if(id !=null){
+            String[] idarr = id.split(",");
+            list = ${entityName}Service.findAllById(Arrays.asList(idarr));
+        }else{
+            list = ${entityName}Service.findAll();
+        }
+        EasyExcel.write(getExcelStream("${entityDesc}"),${upEntityName}Excel.class)
+            .sheet()
+           .doWrite(${upEntityName}Excel.transform(list));
+        }
 
+    @RequiresPermissions(value = {"${moduleName?upper_case}:${entityName?upper_case}:ADD", "${moduleName?upper_case}:${entityName?upper_case}:EDIT"}, logical = Logical.OR)
+    @ResponseBody
+    @RequestMapping("/excel/template")
+    public void excelTemplate() {
+         EasyExcel.write(getExcelStream("${entityDesc}"),${upEntityName}Excel.class)
+         .sheet()
+         .doWrite(new ArrayList());
+    }
+
+    @RequiresPermissions("${moduleName?upper_case}:${entityName?upper_case}:ADD")
+    @ResponseBody
+    @PostMapping("/excel/import")
+    @SneakyThrows
+    public void excelImport(@RequestParam(name ="file" ) MultipartFile file) {
+        EasyExcel.read(file.getInputStream(),
+        ${upEntityName}Excel.class,
+        new ${upEntityName}ExcelListener()).doReadAll();
+    }
+    </#if>
 }

@@ -1,5 +1,3 @@
 ### 记录发生的BUG
-生成菜单功能需要CODE 排重和其他
-子模块如何选择或者
-
- 
+excel 如果没勾则不生成
+excel 生成引入包 controller

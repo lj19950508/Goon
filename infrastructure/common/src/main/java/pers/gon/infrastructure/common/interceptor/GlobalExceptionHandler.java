@@ -43,7 +43,6 @@ public class GlobalExceptionHandler extends AbstractErrorController {
     public String handleError(HttpServletRequest request, HttpServletResponse response, Exception e, Model model) throws Exception {
         if(e!=null){
             e.printStackTrace();
-
         }
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
         if(!isJsonRequest(request)){
@@ -66,7 +65,7 @@ public class GlobalExceptionHandler extends AbstractErrorController {
             }
         }else{
             String msg  = "";
-            if(statusCode == 404){
+            if(statusCode!=null && statusCode == 404){
                 msg = "404地址错误";
             }else{
                 msg = e.getMessage();

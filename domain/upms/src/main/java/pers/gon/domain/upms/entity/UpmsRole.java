@@ -48,7 +48,6 @@ public class UpmsRole extends DataEntity {
     Set<UpmsMenu> menus;
 
 
-    //弄反了 mappedBy
     @JsonIgnore
     @OneToMany(fetch=FetchType.LAZY)
     @JoinColumn(name = "role_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))

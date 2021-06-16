@@ -29,7 +29,6 @@
                             }
                             return valInfo.join(',');
                         </#if>
-
                         <#if item.formType!=6>
                             let dict = ${r'${'}dict.getJSON('${item['dictCode']}')}
                             for(let item in dict){
@@ -42,7 +41,7 @@
 
                         },
                         </#if>
-                        field: '${item["itemName"]}',
+                        field: '${item["itemName"]}<#if item.formType==9>.name</#if>',
                         title: '${item["itemDesc"]}',
                         width:${item["listLength"]}
                     }
@@ -120,9 +119,27 @@
                     layer.close(index)
                 })
             });
-
-
         },
+        <#if excel==true>
+        export:function(id){
+            let idarr = [];
+            if (Array.isArray(id)) {
+                idarr = id;
+            } else {
+                idarr.push(id)
+            }
+            $.download('${r'${ctx}'}/${moduleName}/${entityName}/excel/export',{id:idarr});
+        },
+        import:function(){
+            $req.upload('${r'${ctx}'}/${moduleName}/${entityName}/excel/import',$("#excelFile")[0]);
+        },
+        selectFile:function(){
+            $("#excelFile").trigger("click");
+        },
+        template:function(){
+            $.download('${r'${ctx}'}/${moduleName}/${entityName}/excel/template');
+        },
+        </#if>
         startAllLisener:function(){
             $("#search").click("click", function() {// 绑定查询按扭
                 pageObject.refresh();
