@@ -88,14 +88,7 @@ var pageObject = {
         go_into("${ctx}/scrum/gencode/entity/form/edit?id=" + id);
     },
     gencode: function (id) {
-         var index = layer.confirm('是否生成代码？', {
-            btn: ['确定', '取消'] //按钮
-        }, function () {
-            $req.post("${ctx}/scrum/gencode/entity/generate", {id: id[0],genMenu:true}, function (res) {
-                pageObject.refresh();
-                layer.close(index)
-            })
-        });
+        go_into("${ctx}/scrum/gencode/entity/genConfigForm?id=" + id);
     },
     del: function (id) {
         let idarr = [];

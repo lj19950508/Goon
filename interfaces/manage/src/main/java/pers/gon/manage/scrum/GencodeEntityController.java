@@ -145,4 +145,14 @@ public class GencodeEntityController extends BaseController {
         gencodeEntityService.deleteAllById(Arrays.asList(id));
         return CommonResult.ok();
     }
+
+
+    @RequiresPermissions(value = { "SCRUM:GENCODE:ADD", "SCRUM:GENCODE:EDIT"}, logical = Logical.OR)
+    @RequestMapping("/genConfigForm")
+    public String genConfigForm(String id, Model model) {
+        GencodeEntity gencodeEntity = gencodeEntityService.findById(id);
+        model.addAttribute("gencodeEntity",gencodeEntity);
+
+        return "modules/scrum/gencode/entity/genConfig.html";
+    }
 }
