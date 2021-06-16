@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pers.gon.application.utils.DataScopeUtils;
+import pers.gon.domain.scrum.dto.GencodeConfig;
 import pers.gon.domain.scrum.entity.GencodeEntity;
 import pers.gon.domain.scrum.service.IGencodeEntityService;
 import pers.gon.domain.sys.entity.SysDict;
@@ -109,70 +111,18 @@ public class GencodeEntityController extends BaseController {
     @RequiresPermissions(value = {"SCRUM:GENCODE:ADD", "SCRUM:GENCODE:EDIT"}, logical = Logical.OR)
     @ResponseBody
     @PostMapping("/generate")
-    public CommonResult generate(String id) {
+    public CommonResult generate(String id, GencodeConfig config) {
         //1.生成代码到指定模块下 String gencodeEntityId
         //2.生成菜单
         //3.默认为admin生成菜单
         // https://blog.csdn.net/weixin_43424932/article/details/104253977
         //生成并在某个菜单下
         GencodeEntity gencodeEntity =gencodeEntityService.findById(id);
-//        GencodeEntity gencodeEntity = new GencodeEntity();
-//        gencodeEntity.setDelFlag(false);
-//        gencodeEntity.setEntityDesc("测试模块");
-//        gencodeEntity.setModuleName("upms");
-////        gencodeEntity.setParentMenu("1304090865509208064");
-//        gencodeEntity.setEntityName("test");
-//        gencodeEntity.setIsLogicDelete(true);
-//        gencodeEntity.setTemplateType(0);
-//        List<GencodeEntityItem> list = new ArrayList<>();
-//        GencodeEntityItem item1 = new GencodeEntityItem();
-//        item1.setFormType(7);
-//        item1.setItemDesc("测试字段name");
-//        item1.setItemName("testname");
-//        item1.setItemType("String");
-//        item1.setSqlType("varchar(255)");
-//        item1.setListLength(100);
-//        item1.setSort(true);
-//        item1.setMust(true);
-//        item1.setUnrepeat(true);
-//        item1.setQueryType(8);
-//        item1.setDictCode("common_gender");
-//        item1.setQueryExp(0);
-//        list.add(item1);
-//
-//
-//        GencodeEntityItem item2 = new GencodeEntityItem();
-//        item2.setFormType(4);
-//        item2.setItemDesc("测试字段one");
-//        item2.setItemName("testone");
-//        item2.setItemType("Integer");
-//        item2.setSqlType("char(2)");
-//        item2.setListLength(50);
-//        item2.setSort(true);
-//        item2.setMust(true);
-//        item2.setUnrepeat(false);
-//        item2.setQueryType(2);
-//        item2.setDictCode("common_gender");
-//        item2.setQueryExp(0);
-//        list.add(item2);
-//
-//        GencodeEntityItem item3 = new GencodeEntityItem();
-//        item3.setFormType(5);
-//        item3.setItemDesc("测试字段two");
-//        item3.setItemName("testtwo");
-//        item3.setItemType("String");
-//        item3.setSqlType("varchar(255)");
-//        item3.setListLength(50);
-//        item3.setSort(true);
-//        item3.setMust(true);
-//        item3.setUnrepeat(false);
-//        item3.setQueryType(4);
-//        item3.setDictCode("common_gender");
-//        item3.setQueryExp(0);
-//        list.add(item3);
-//        gencodeEntity.setItems(list);
-        gencodeEntityService.gencode(gencodeEntity);
-//        gencodeEntityService.genmenu(gencodeEntity);
+
+        gencodeEntityService.gencode(gencodeEntity,config);
+        if(StringUtils.isNotEmpty(config.getMenuId())){
+            gencodeEntityService.genmenu(gencodeEntity);
+        }
 
         //生成菜单的增删改查
 

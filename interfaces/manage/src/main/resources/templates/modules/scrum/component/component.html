@@ -47,10 +47,12 @@
                 </span>
             </td>
             <td colspan="1">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">label</label>
-                </div>
+                <#switch id="switch" name="switch" value="true" />
+<!--            <td colspan="1">-->
+<!--                <div class="custom-control custom-switch">-->
+<!--                    <input type="checkbox" class="custom-control-input" id="customSwitch1">-->
+<!--                    <label class="custom-control-label" for="customSwitch1">label</label>-->
+<!--                </div>-->
             </td>
         </tr>
         <tr>
@@ -63,6 +65,7 @@
                 <#radio id="a" name="a" required="required" items="${dict.get('yes_no')}" />
             </td>
         </tr>
+
         <tr>
             <td class="active width-15">
                 <span class="pull-right col-form-label">
