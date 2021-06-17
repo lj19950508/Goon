@@ -1,10 +1,11 @@
 package pers.gon.manage.${moduleName}.excel;
-
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import lombok.extern.slf4j.Slf4j;
 import pers.gon.domain.${moduleName}.entity.${upEntityName};
 import pers.gon.domain.${moduleName}.service.I${upEntityName}Service;
+import pers.gon.domain.${moduleName}.service.${upEntityName}Service;
 import java.math.*;
 import java.util.*;
 
@@ -16,7 +17,7 @@ public class ${upEntityName}ExcelListener extends AnalysisEventListener<${upEnti
     */
     private static final int BATCH_COUNT = 100;
     List<${upEntityName}Excel> list = new ArrayList<${upEntityName}Excel>();
-    private I${upEntityName}Service ${entityName}Service;
+    private I${upEntityName}Service ${entityName}Service =    SpringUtil.getBean(${upEntityName}Service.class);
 
     public ${upEntityName}ExcelListener(){
     }

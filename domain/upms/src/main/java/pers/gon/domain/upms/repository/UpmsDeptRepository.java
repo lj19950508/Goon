@@ -10,4 +10,5 @@ import pers.gon.infrastructure.common.repository.BaseRepository;
  **/
 public interface UpmsDeptRepository extends BaseRepository<UpmsDept,String> {
     UpmsDept findByCode(String code);
+    UpmsDept findByName(String name);
 }

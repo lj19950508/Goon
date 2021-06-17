@@ -20,6 +20,8 @@ import pers.gon.domain.upms.entity.UpmsDept;
 import pers.gon.domain.upms.repository.UpmsDeptRepository;
 import pers.gon.infrastructure.common.valid.Exist;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
     </#if>
 </#list>
 
@@ -52,6 +54,7 @@ public class ${upEntityName} extends DataEntity {
     @JsonIgnoreProperties(value = {"updateBy","createBy","parent","children"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+    @NotFound(action= NotFoundAction.IGNORE)
         <#if item.unrepeat==true>
     ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}.code",groups = InsertGroup.class,message = "${item["itemDesc"]}已存在")
         </#if>

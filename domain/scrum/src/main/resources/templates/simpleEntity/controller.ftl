@@ -23,7 +23,13 @@ import pers.gon.infrastructure.common.entity.CommonResult;
 import javax.persistence.criteria.Predicate;
 import java.math.*;
 import java.util.*;
-
+<#if excel==true>
+import com.alibaba.excel.EasyExcel;
+import pers.gon.manage.${moduleName}.excel.${upEntityName}Excel;
+import lombok.SneakyThrows;
+import org.springframework.web.multipart.MultipartFile;
+import pers.gon.manage.${moduleName}.excel.${upEntityName}ExcelListener;
+</#if>
 
 
 @Slf4j

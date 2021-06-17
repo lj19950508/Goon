@@ -1,10 +1,12 @@
 package pers.gon.manage.upms.excel;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import lombok.extern.slf4j.Slf4j;
 import pers.gon.domain.upms.entity.UpmsAdmin;
 import pers.gon.domain.upms.service.IUpmsAdminService;
+import pers.gon.domain.upms.service.UpmsAdminService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class UpmsAdminExcelListener extends AnalysisEventListener<UpmsAdminExcel
      */
     private static final int BATCH_COUNT = 100;
     List<UpmsAdminExcel> list = new ArrayList<UpmsAdminExcel>();
-    private IUpmsAdminService upmsAdminService;
+    private IUpmsAdminService upmsAdminService =  SpringUtil.getBean(UpmsAdminService.class);
 
     public UpmsAdminExcelListener(){
     }
