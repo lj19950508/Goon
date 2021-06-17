@@ -1,5 +1,6 @@
 package pers.gon.infrastructure.common.valid;
 
+import pers.gon.infrastructure.common.entity.BaseEntity;
 import pers.gon.infrastructure.common.repository.BaseRepository;
 
 import javax.validation.Constraint;

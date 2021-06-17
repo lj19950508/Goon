@@ -2,6 +2,7 @@ package pers.gon.infrastructure.common.valid;
 
 import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.data.jpa.domain.Specification;
+import pers.gon.infrastructure.common.entity.BaseEntity;
 import pers.gon.infrastructure.common.repository.BaseRepository;
 
 import javax.persistence.criteria.Path;
@@ -22,7 +23,6 @@ public class UniqueConstraintValidator implements ConstraintValidator<Unique, St
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-
 	    //获取到注解的fieldName
 		long count = baseRepository.count((Specification) (root, cq, cb) -> {
 			String[] paths = fieldName.split("\\.");
