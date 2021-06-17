@@ -7,13 +7,10 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.sys.repository.SysParamRepository;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.SaveGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * @Author: Gon
@@ -31,7 +28,7 @@ public class SysParam extends DataEntity {
     private String name;
 
     @NotEmpty(message = "参数编码不能未空",groups = SaveGroup.class)
-    @Unique(repository = SysParamRepository.class,fieldName = "code",groups = InsertGroup.class,message = "参数编码已存在")
+    @Unique(repository = SysParamRepository.class,fieldName = "code",groups = SaveGroup.class,message = "参数编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '参数编码'")
     private String code;
 

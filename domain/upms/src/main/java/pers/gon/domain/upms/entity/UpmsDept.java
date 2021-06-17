@@ -7,9 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.*;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.upms.repository.UpmsDeptRepository;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.SaveGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -33,9 +31,10 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "upms_dept",comment = "部门机构表")
 public class UpmsDept extends DataEntity {
     @NotEmpty(message = "部门编码不能未空",groups = SaveGroup.class)
-    @Unique(repository = UpmsDeptRepository.class,fieldName = "code",groups = InsertGroup.class,message = "部门编码已存在")
+    @Unique(repository = UpmsDeptRepository.class,fieldName = "code",groups = SaveGroup.class,message = "部门编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '部门编码'")
     private String code;
+    @Unique(repository = UpmsDeptRepository.class,fieldName = "name",groups = SaveGroup.class,message = "部门名称已存在")
     @NotEmpty(message = "部门名称不能未空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '部门名称'")
     private String name;

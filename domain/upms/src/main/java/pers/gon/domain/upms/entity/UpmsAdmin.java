@@ -9,10 +9,7 @@ import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.upms.repository.UpmsAdminRepository;
 import pers.gon.domain.upms.repository.UpmsDeptRepository;
-import pers.gon.infrastructure.common.valid.Exist;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.SaveGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -33,7 +30,7 @@ import java.util.Set;
 public class UpmsAdmin extends DataEntity {
 
     //只在SaveGroup时候生效
-    @Unique(repository = UpmsAdminRepository.class,fieldName = "account",groups = InsertGroup.class,message = "账户已存在")
+    @Unique(repository = UpmsAdminRepository.class,fieldName = "account",groups = SaveGroup.class,message = "账户已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '账户'")
     private String account;
 

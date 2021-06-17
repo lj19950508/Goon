@@ -96,7 +96,11 @@ var pageObject = {
         });
     },
     add:function(parentId){
-        go_into("${ctx}/upms/dept/form/add?parentId="+parentId);
+        if(parentId!=null){
+            go_into("${ctx}/upms/dept/form/add?parentId="+parentId);
+        }else{
+            go_into("${ctx}/upms/dept/form/add");
+        }
     },
     view:function(id){
         console.log(id)

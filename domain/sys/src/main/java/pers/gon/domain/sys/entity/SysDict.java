@@ -8,14 +8,11 @@ import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.sys.repository.SysDictRepository;
 import pers.gon.domain.sys.vo.SysDictItem;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.SaveGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @Author: Gon
@@ -33,7 +30,7 @@ public class SysDict extends DataEntity {
     private String name;
 
     @NotEmpty(message = "字典编码不能未空",groups = SaveGroup.class)
-    @Unique(repository = SysDictRepository.class,fieldName = "code",groups = InsertGroup.class,message = "字典编码已存在")
+    @Unique(repository = SysDictRepository.class,fieldName = "code",groups = SaveGroup.class,message = "字典编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '字典编码'")
     private String code;
 

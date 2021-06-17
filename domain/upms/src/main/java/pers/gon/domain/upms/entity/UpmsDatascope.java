@@ -7,9 +7,6 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
-import pers.gon.domain.upms.repository.UpmsMenuRepository;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.Unique;
 
 import javax.persistence.*;
 

@@ -9,6 +9,7 @@ import pers.gon.domain.${moduleName}.repository.${upEntityName}Repository;
 import pers.gon.infrastructure.common.valid.InsertGroup;
 import pers.gon.infrastructure.common.valid.SaveGroup;
 import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.UpdateUnique;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -56,12 +57,12 @@ public class ${upEntityName} extends DataEntity {
     @JoinColumn(name = "dept_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
     @NotFound(action= NotFoundAction.IGNORE)
         <#if item.unrepeat==true>
-    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}.code",groups = InsertGroup.class,message = "${item["itemDesc"]}已存在")
+    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}.code",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
         </#if>
     <#else>
     ${r'@'}Column(<#if item.must==true>nullable = false,</#if>columnDefinition = " ${item["sqlType"]}<#if item.sqlLength!=''>(${item["sqlLength"]})</#if>  comment '${item["itemDesc"]}'")
             <#if item.unrepeat==true>
-    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}",groups = InsertGroup.class,message = "${item["itemDesc"]}已存在")
+    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
             </#if>
     </#if>
     private ${item["itemType"]} ${item["itemName"]};

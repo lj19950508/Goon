@@ -22,6 +22,7 @@ public class UniqueConstraintValidator implements ConstraintValidator<Unique, St
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
+
 	    //获取到注解的fieldName
 		long count = baseRepository.count((Specification) (root, cq, cb) -> {
 			String[] paths = fieldName.split("\\.");
@@ -35,8 +36,19 @@ public class UniqueConstraintValidator implements ConstraintValidator<Unique, St
 			}
 			cq.where(cb.equal(path, value));
 		  	return null;
-		});
 
-		return count==0;
+		  	//当没有id时候 size为0
+			//当有id时 id -> name 如果是相等且没有另外的name相等则通过
+			////id
+		});
+		if(count==0){
+			return true;
+		}else if(count==1){
+			//id->name  .equals(value) return ture; else return false;
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 }

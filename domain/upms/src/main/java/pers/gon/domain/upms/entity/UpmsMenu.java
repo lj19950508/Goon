@@ -7,8 +7,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.upms.repository.UpmsMenuRepository;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -27,7 +26,7 @@ import java.util.Set;
 @Where(clause = "del_flag = 0")
 @org.hibernate.annotations.Table(appliesTo = "upms_menu",comment = "菜单资源表")
 public class UpmsMenu extends DataEntity {
-    @Unique(repository = UpmsMenuRepository.class,fieldName = "code",groups = InsertGroup.class,message = "菜单编码已存在")
+    @Unique(repository = UpmsMenuRepository.class,fieldName = "code",groups = SaveGroup.class,message = "菜单编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '菜单编码'")
     private String code;
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '菜单名称'")

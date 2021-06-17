@@ -8,8 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
 import pers.gon.domain.upms.repository.UpmsRoleRepository;
-import pers.gon.infrastructure.common.valid.InsertGroup;
-import pers.gon.infrastructure.common.valid.Unique;
+import pers.gon.infrastructure.common.valid.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -29,7 +28,7 @@ import java.util.Set;
 @org.hibernate.annotations.Table(appliesTo = "upms_role",comment = "后台角色表")
 public class UpmsRole extends DataEntity {
 
-    @Unique(repository = UpmsRoleRepository.class,fieldName = "code",groups = InsertGroup.class,message = "角色编码已存在")
+    @Unique(repository = UpmsRoleRepository.class,fieldName = "code",groups = SaveGroup.class,message = "角色编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '角色编码'")
     private String code;
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '角色名称'")
