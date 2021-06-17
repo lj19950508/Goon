@@ -27,10 +27,10 @@ import java.util.Set;
 @SQLDelete(sql = "update upms_admin set del_flag = 1 where id = ?")
 @Where(clause = "del_flag = 0")
 @org.hibernate.annotations.Table(appliesTo = "upms_admin",comment = "后台用户表")
+@Unique(repository = UpmsAdminRepository.class,fieldName = "account",groups = SaveGroup.class,message = "账户已存在")
 public class UpmsAdmin extends DataEntity {
 
     //只在SaveGroup时候生效
-    @Unique(repository = UpmsAdminRepository.class,fieldName = "account",groups = SaveGroup.class,message = "账户已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '账户'")
     private String account;
 

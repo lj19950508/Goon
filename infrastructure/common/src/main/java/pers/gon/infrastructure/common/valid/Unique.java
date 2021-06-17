@@ -5,12 +5,11 @@ import pers.gon.infrastructure.common.repository.BaseRepository;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.validation.constraints.Null;
+import java.lang.annotation.*;
 
-@Target({ ElementType.FIELD})
+@Repeatable(Uniques.class)
+@Target({ ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueConstraintValidator.class)
 public @interface Unique {

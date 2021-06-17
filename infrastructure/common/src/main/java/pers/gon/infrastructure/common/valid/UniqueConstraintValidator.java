@@ -1,5 +1,7 @@
 package pers.gon.infrastructure.common.valid;
 
+import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.data.jpa.domain.Specification;
 import pers.gon.infrastructure.common.entity.BaseEntity;
@@ -8,9 +10,10 @@ import pers.gon.infrastructure.common.repository.BaseRepository;
 import javax.persistence.criteria.Path;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Optional;
 
 
-public class UniqueConstraintValidator implements ConstraintValidator<Unique, String> {
+public class UniqueConstraintValidator implements ConstraintValidator<Unique, BaseEntity> {
 	private BaseRepository baseRepository;
 	private String fieldName;
 
@@ -22,10 +25,15 @@ public class UniqueConstraintValidator implements ConstraintValidator<Unique, St
 	}
 
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
+	public boolean isValid(BaseEntity entity, ConstraintValidatorContext context) {
 	    //获取到注解的fieldName
+		String[] paths = fieldName.split("\\.");
+		Object submitField = entity;
+		for(int i = 0; i < paths.length; i++) {
+			submitField =  ReflectUtil.getFieldValue(submitField,paths[i]);
+		}
+		Object finalValue = submitField;
 		long count = baseRepository.count((Specification) (root, cq, cb) -> {
-			String[] paths = fieldName.split("\\.");
 			Path path = null;
 			for (int i = 0; i < paths.length; i++) {
 				if(i==0){
@@ -34,21 +42,27 @@ public class UniqueConstraintValidator implements ConstraintValidator<Unique, St
 					path=path.get(paths[i]);
 				}
 			}
-			cq.where(cb.equal(path, value));
+			cq.where(cb.equal(path, finalValue));
 		  	return null;
-
-		  	//当没有id时候 size为0
-			//当有id时 id -> name 如果是相等且没有另外的name相等则通过
-			////id
 		});
 		if(count==0){
+			//如果为0则肯定不重复
 			return true;
 		}else if(count==1){
-			//id->name  .equals(value) return ture; else return false;
-			return true;
-		}else{
-			return false;
+			//如果为1且ID为空肯定重复
+			if(StrUtil.isNotEmpty(entity.getId())){
+				//如果记录为原记录则不重复
+				Optional baseEntity = baseRepository.findById(entity.getId());
+				Object queryField = baseEntity.get();
+				for (String path : paths) {
+					queryField = ReflectUtil.getFieldValue(queryField, path);
+				}
+				return finalValue.equals(queryField);
+			}else{
+				return false;
+			}
 		}
+		return false;
 
 	}
 }

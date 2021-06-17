@@ -24,13 +24,13 @@ import java.util.List;
 @Table(name = "sys_dict")
 @SQLDelete(sql = "update sys_dict set del_flag = 1 where id = ?")
 @Where(clause = "del_flag = 0")
+@Unique(repository = SysDictRepository.class,fieldName = "code",groups = SaveGroup.class,message = "字典编码已存在")
 public class SysDict extends DataEntity {
     @NotEmpty(message = "字典名称不能未空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '字典名称'")
     private String name;
 
     @NotEmpty(message = "字典编码不能未空",groups = SaveGroup.class)
-    @Unique(repository = SysDictRepository.class,fieldName = "code",groups = SaveGroup.class,message = "字典编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '字典编码'")
     private String code;
 

@@ -25,8 +25,8 @@ import java.util.Set;
 @SQLDelete(sql = "update upms_menu set del_flag = 1 where id = ?")
 @Where(clause = "del_flag = 0")
 @org.hibernate.annotations.Table(appliesTo = "upms_menu",comment = "菜单资源表")
+@Unique(repository = UpmsMenuRepository.class,fieldName = "code",groups = SaveGroup.class,message = "菜单编码已存在")
 public class UpmsMenu extends DataEntity {
-    @Unique(repository = UpmsMenuRepository.class,fieldName = "code",groups = SaveGroup.class,message = "菜单编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '菜单编码'")
     private String code;
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '菜单名称'")

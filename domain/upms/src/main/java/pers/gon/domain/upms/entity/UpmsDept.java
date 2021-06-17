@@ -28,13 +28,13 @@ import java.util.Set;
 @Table(name = "upms_dept")
 @SQLDelete(sql = "update upms_dept set del_flag = 1 where id = ?")
 @Where(clause = "del_flag = 0")
+@Unique(repository = UpmsDeptRepository.class,fieldName = "code",groups = SaveGroup.class,message = "部门编码已存在")
+@Unique(repository = UpmsDeptRepository.class,fieldName = "name",groups = SaveGroup.class,message = "部门名称已存在")
 @org.hibernate.annotations.Table(appliesTo = "upms_dept",comment = "部门机构表")
 public class UpmsDept extends DataEntity {
     @NotEmpty(message = "部门编码不能未空",groups = SaveGroup.class)
-    @Unique(repository = UpmsDeptRepository.class,fieldName = "code",groups = SaveGroup.class,message = "部门编码已存在")
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '部门编码'")
     private String code;
-    @Unique(repository = UpmsDeptRepository.class,fieldName = "name",groups = SaveGroup.class,message = "部门名称已存在")
     @NotEmpty(message = "部门名称不能未空",groups = SaveGroup.class)
     @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '部门名称'")
     private String name;

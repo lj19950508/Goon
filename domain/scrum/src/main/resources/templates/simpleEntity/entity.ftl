@@ -9,7 +9,6 @@ import pers.gon.domain.${moduleName}.repository.${upEntityName}Repository;
 import pers.gon.infrastructure.common.valid.InsertGroup;
 import pers.gon.infrastructure.common.valid.SaveGroup;
 import pers.gon.infrastructure.common.valid.Unique;
-import pers.gon.infrastructure.common.valid.UpdateUnique;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -34,8 +33,18 @@ import org.hibernate.annotations.NotFoundAction;
 @SQLDelete(sql = "update ${moduleName}_${underEntityName} set del_flag = 1 where id = ?")
 @Where(clause = "del_flag = 0")
 @org.hibernate.annotations.Table(appliesTo = "${moduleName}_${underEntityName}",comment = "${entityDesc}")
-
 </#if>
+<#list items as item>
+    <#if item["itemType"]=="UpmsDept">
+        <#if item.unrepeat==true>
+${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}.id",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
+        </#if>
+    <#else>
+        <#if item.unrepeat==true>
+${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
+        </#if>
+    </#if>
+</#list>
 /**
  * ${entityDesc}
  */
@@ -56,14 +65,8 @@ public class ${upEntityName} extends DataEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "dept_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
     @NotFound(action= NotFoundAction.IGNORE)
-        <#if item.unrepeat==true>
-    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}.code",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
-        </#if>
     <#else>
     ${r'@'}Column(<#if item.must==true>nullable = false,</#if>columnDefinition = " ${item["sqlType"]}<#if item.sqlLength!=''>(${item["sqlLength"]})</#if>  comment '${item["itemDesc"]}'")
-            <#if item.unrepeat==true>
-    ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["itemName"]}",groups = SaveGroup.class,message = "${item["itemDesc"]}已存在")
-            </#if>
     </#if>
     private ${item["itemType"]} ${item["itemName"]};
 </#list>
