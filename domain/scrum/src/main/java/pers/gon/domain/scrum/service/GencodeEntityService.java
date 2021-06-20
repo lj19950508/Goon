@@ -50,6 +50,80 @@ public class GencodeEntityService extends BaseService<GencodeEntityRepositroy, G
     public void gencode(GencodeEntity gencodeEntity, GencodeConfig config) {
         if(gencodeEntity.getTemplateType()==0){
             gencodeForSimpleEntity(gencodeEntity,config);
+        }else if(gencodeEntity.getTemplateType()==1){
+            gencodeForTreeEntity(gencodeEntity,config);
+        }
+    }
+
+    private void gencodeForTreeEntity(GencodeEntity gencodeEntity, GencodeConfig config) {
+        Map<String,Object> genCodeMap = BeanUtil.beanToMap(gencodeEntity);
+        //添加额外参数
+
+        genCodeMap.put("upEntityName",StrUtil.upperFirst(gencodeEntity.getEntityName()));
+        genCodeMap.put("lowEntityName",StrUtil.lowerFirst(gencodeEntity.getEntityName()));
+        genCodeMap.put("camelEntityName",StrUtil.toCamelCase(gencodeEntity.getEntityName()));
+        genCodeMap.put("underEntityName",StrUtil.toUnderlineCase(gencodeEntity.getEntityName()));
+        genCodeMap.put("excel",config.getExcel());
+
+        if(config.getEntity()==true){
+            genItem("treeEntity/entity.ftl",
+                    FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/entity/",
+                    genCodeMap.get("upEntityName")+".java",genCodeMap);
+            log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+".java",FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/entity/");
+        }
+
+        if(config.getService()==true) {
+            genItem("treeEntity/iservice.ftl",
+                    FileUtils.getDomainPath(gencodeEntity.getModuleName()) + gencodeEntity.getModuleName() + "/service/",
+                    "I" + genCodeMap.get("upEntityName") + "Service.java", genCodeMap);
+            log.debug("生成了：{},位于:{}", "I" + genCodeMap.get("upEntityName") + "Service.java", FileUtils.getDomainPath(gencodeEntity.getModuleName()) + gencodeEntity.getModuleName() + "/service/");
+
+            genItem("treeEntity/service.ftl",
+                    FileUtils.getDomainPath(gencodeEntity.getModuleName()) + gencodeEntity.getModuleName() + "/service/",
+                    genCodeMap.get("upEntityName") + "Service.java", genCodeMap);
+            log.debug("生成了：{},位于:{}", genCodeMap.get("upEntityName") + "Service.java", FileUtils.getDomainPath(gencodeEntity.getModuleName()) + gencodeEntity.getModuleName() + "/service/");
+        }
+        if(config.getRepositroy()==true) {
+            genItem("treeEntity/repository.ftl",
+                    FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/repository/",
+                    genCodeMap.get("upEntityName")+"Repository.java",genCodeMap);
+            log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+"Repository.java",FileUtils.getDomainPath(gencodeEntity.getModuleName())+gencodeEntity.getModuleName()+"/repository/");
+        }
+        if(config.getController()==true) {
+            genItem("treeEntity/controller.ftl",
+                    FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/",
+                    genCodeMap.get("upEntityName")+"Controller.java",genCodeMap);
+            log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+"Controller.java",FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/");
+        }
+        if(config.getExcel()==true) {
+            genItem("treeEntity/excel.ftl",
+                    FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/excel/",
+                    genCodeMap.get("upEntityName")+"Excel.java",genCodeMap);
+            log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+"Excel.java",FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/excel/");
+
+            genItem("treeEntity/excellistener.ftl",
+                    FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/excel/",
+                    genCodeMap.get("upEntityName")+"ExcelListener.java",genCodeMap);
+            log.debug("生成了：{},位于:{}",genCodeMap.get("upEntityName")+"ExcelListener.java",FileUtils.getWebPath()+gencodeEntity.getModuleName()+"/excel/");
+        }
+        if(config.getPage()==true) {
+            genItem("treeEntity/form.ftl",
+                    FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"),
+                    genCodeMap.get("lowEntityName") + "Form.html", genCodeMap);
+            log.debug("生成了：{},位于:{}", genCodeMap.get("lowEntityName") + "Form.html", FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"));
+
+            genItem("treeEntity/formjs.ftl",
+                    FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"),
+                    genCodeMap.get("lowEntityName") + "Form.js", genCodeMap);
+            log.debug("生成了：{},位于:{}", genCodeMap.get("lowEntityName") + "Form.js", FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"));
+            genItem("treeEntity/page.ftl",
+                    FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"),
+                    genCodeMap.get("lowEntityName") + ".html", genCodeMap);
+            log.debug("生成了：{},位于:{}", genCodeMap.get("lowEntityName") + ".html", FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"));
+            genItem("treeEntity/pagejs.ftl",
+                    FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"),
+                    genCodeMap.get("lowEntityName") + ".js", genCodeMap);
+            log.debug("生成了：{},位于:{}", genCodeMap.get("lowEntityName") + ".js", FileUtils.getPagePath() + gencodeEntity.getModuleName() + "/" + genCodeMap.get("lowEntityName"));
         }
     }
 

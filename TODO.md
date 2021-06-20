@@ -5,17 +5,16 @@
 
 生成
 树形结构
-controller list多一个search参数来过滤
 entity hashcode  entityParent entityChild的属性
 excel 目前不变
 service 不变
 repository 不变
 
-form.html 自动添加一个选择上级的东西 entityParent url指向自己
-form.js不变
+form.html 自动添加一个选择上级的东西 entityParent url指向自己 OK
+form.js不变  
 
 page.html  只有新增功能 有变
-page.js  使用treegrid变
+page.js  使用treegrid变 
 ---------
 
 
