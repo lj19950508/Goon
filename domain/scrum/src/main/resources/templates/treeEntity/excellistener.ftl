@@ -42,6 +42,8 @@ public class ${upEntityName}ExcelListener extends AnalysisEventListener<${upEnti
         List<${upEntityName}> ${entityName}s = new ArrayList<>();
         list.forEach(item->{
             ${upEntityName} ${entityName} = new ${upEntityName}();
+            ${entityName}.setName(item.getName());
+            ${entityName}.setCode(item.getCode());
             <#list items as item>
             ${entityName}.set${item["itemName"]?cap_first}(item.get${item["itemName"]?cap_first}());
             </#list>

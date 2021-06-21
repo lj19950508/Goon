@@ -3,7 +3,7 @@
         tableRef:null,
         initTable:function(){
             var option = {
-                treeShowField: 'id',
+                treeShowField: 'name',
                 parentIdField: 'parent.id',
                 url: "${r'${ctx}'}/${moduleName}/${entityName}/list",
                 onPostBody: function() {
@@ -20,9 +20,14 @@
                 columns: [
                     {checkbox: true},
                     {
-                        field: 'id',
-                        title: 'id',
-                        width:'300'
+                        field: 'name',
+                        title: '${entityDesc}名称',
+                        width:'100'
+                    },
+                    {
+                        field: 'code',
+                        title: '${entityDesc}编码',
+                        width:'100'
                     }
                     <#list items as item>
                     <#if item.listLength!=0>
