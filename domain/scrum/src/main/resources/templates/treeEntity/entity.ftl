@@ -14,14 +14,14 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.*;
 import java.util.*;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 <#list items as item>
     <#if item["itemType"]=="UpmsDept">
 import pers.gon.domain.upms.entity.UpmsDept;
 import pers.gon.domain.upms.repository.UpmsDeptRepository;
 import pers.gon.infrastructure.common.valid.Exist;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
     </#if>
 </#list>
 
@@ -72,6 +72,7 @@ public class ${upEntityName} extends DataEntity {
 </#list>
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "parent_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+    @NotFound(action = NotFoundAction.IGNORE)
     private ${upEntityName} parent;
 
 
