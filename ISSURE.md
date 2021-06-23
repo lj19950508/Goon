@@ -1,2 +1,8 @@
 ### 记录发生的BUG
-默认生成数据库 应该是NULL值而不是 空
+controller
+entity
+form
+page
+pagejs
+
+需要分类名以及 分类的url
