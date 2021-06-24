@@ -18,6 +18,8 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                         <input type="hidden" name="id" value="${r'${'}${entityName}.id!}"/>
                         <table class="table table-bordered">
                             <tbody>
+                            ${r'<#'}treeselect id="${item["itemName"]}" name="${item["itemName"]}.id" value="${r'${'}${entityName}.${item["itemName"]}.id!}" labelValue="${r'${'}${entityName}.${item["itemName"]}.name!}" labelName="${item["itemName"]}.name" placeholder="选择单位" title="所属单位" url="/upms/dept/list"   <#if item.must==true>required="required"</#if> checked="false" allowClear="true" allowSearch="true" />
+<#--                            加入树形选择上级分类的字段 需要name desc url -->
                                 <#list items as item>
                                 <#if item.formType !=0>
                                 <tr>

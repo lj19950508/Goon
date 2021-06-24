@@ -156,6 +156,10 @@ public class ${upEntityName}Controller extends BaseController {
             </#if>
             </#if>
             </#list>
+            //-------------------要改的
+            if (upmsAdmin.getDept()!=null && StrUtil.isNotEmpty(upmsAdmin.getDept().getCode())) {
+            predicates.add(cb.like(root.get("dept").get("code"), "%" + upmsAdmin.getDept().getCode() + "%"));
+            }
             if(predicates.isEmpty()){
                 return cq.getRestriction();
             }else{

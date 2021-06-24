@@ -1,5 +1,26 @@
 ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${moduleName}"}){  ${r'@>'}
 <div class="row ">
+
+<#--    加入树形选择-->
+    <div class="col-sm-6 ">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">部门选择</h5>
+                <div class="white-box">
+                    <!-- 搜索 -->
+                    <div class="input-group pt-2 mb-3 pl-2 pr-2">
+                        <input id="search-q" type="text" class="form-control"   placeholder="查找..." >
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" ><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <ul id="deptTree" class="ztree"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="col-sm-24 mb-2 collapse" id="search-collapse">
         <div class="card">
 

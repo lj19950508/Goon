@@ -49,6 +49,13 @@ ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["
  * ${entityDesc}
  */
 public class ${upEntityName} extends DataEntity {
+    --------------------必填要改
+    @Exist(groups = SaveGroup.class,repository = UpmsDeptRepository.class,message = "部门不存在")
+    @JsonIgnoreProperties(value = {"updateBy","createBy","parent","children"})
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dept_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+    private UpmsDept dept;
+
 <#list items as item>
     //${item["itemDesc"]}
     <#if item.must==true>
