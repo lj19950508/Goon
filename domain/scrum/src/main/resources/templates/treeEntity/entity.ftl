@@ -48,7 +48,16 @@ ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["
 /**
  * ${entityDesc}
  */
+@Unique(repository = ${upEntityName}Repository.class,fieldName = "code",groups = SaveGroup.class,message = "${entityDesc}编码已存在")
+@Unique(repository = ${upEntityName}Repository.class,fieldName = "name",groups = SaveGroup.class,message = "${entityDesc}名称已存在")
 public class ${upEntityName} extends DataEntity {
+
+    @NotEmpty(message = "${entityDesc}编码不能未空",groups = SaveGroup.class)
+    @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '${entityDesc}编码'")
+    private String code;
+    @NotEmpty(message = "${entityDesc}名称不能未空",groups = SaveGroup.class)
+    @Column(nullable = false,columnDefinition = " varchar(32) default '' comment '${entityDesc}名称'")
+    private String name;
 <#list items as item>
     //${item["itemDesc"]}
     <#if item.must==true>
@@ -75,7 +84,6 @@ public class ${upEntityName} extends DataEntity {
     @NotFound(action = NotFoundAction.IGNORE)
     private ${upEntityName} parent;
 
-
     @JsonIgnore
     @OneToMany(fetch=FetchType.LAZY)
     @JoinColumn(name = "parent_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
@@ -85,7 +93,6 @@ public class ${upEntityName} extends DataEntity {
     @Column(columnDefinition = "char(1) comment '逻辑删除'")
     private boolean delFlag;
 </#if>
-
 
     @Override
     public boolean equals(Object o) {

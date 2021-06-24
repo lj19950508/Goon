@@ -15,6 +15,11 @@ import pers.gon.domain.upms.entity.UpmsDept;
 @Data
 public class ${upEntityName}Excel {
 
+    @ExcelProperty("${entityDesc}名称")
+    private String name;
+
+    @ExcelProperty("${entityDesc}编码")
+    private String code;
 <#list items as item>
     @ExcelProperty("${item["itemDesc"]}")
     private ${item["itemType"]} ${item["itemName"]};
@@ -24,6 +29,8 @@ public class ${upEntityName}Excel {
         List<${upEntityName}Excel> ${entityName}Excels = new ArrayList<>();
         ${entityName}s.forEach(item->{
             ${upEntityName}Excel ${entityName}Excel = new ${upEntityName}Excel();
+        ${entityName}Excel.setName(item.getName());
+        ${entityName}Excel.setCode(item.getCode());
         <#list items as item>
             ${entityName}Excel.set${item["itemName"]?cap_first}(item.get${item["itemName"]?cap_first}());
         </#list>

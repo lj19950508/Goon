@@ -19,7 +19,7 @@ var pageFormObject= {
         {value:5,label:"单选",filterItemType:['String','Integer'],filterQueryType:[0,1,2,3,4],dictable:true},
         {value:6,label:"复选",filterItemType:['String','Integer'],filterQueryType:[0,1,2,3,4],dictable:true},
         {value:7,label:"日期",filterItemType:['Date'],filterQueryType:[0,5],dictable:false},
-        {value:8,label:"数字",filterItemType:['Double','Float','Long'],filterQueryType:[0,6,7],dictable:false},
+        {value:8,label:"数字",filterItemType:['Integer','BigDecimal','Double','Float','Long'],filterQueryType:[0,6,7],dictable:false},
         {value:9,label:"部门选择器",filterItemType:['UpmsDept'],filterQueryType:[0],dictable:false},
         // {/*{value:9,label:"开关"}*/}
     ],

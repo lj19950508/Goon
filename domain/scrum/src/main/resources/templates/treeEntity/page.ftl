@@ -9,6 +9,22 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                 </a>
                 <form id="searchForm">
                     <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">${entityDesc}名称</div>
+                                </div>
+                                <input type="text" class="form-control" name="name" placeholder="输入${entityDesc}名称">
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">${entityDesc}编码</div>
+                                </div>
+                                <input type="text" class="form-control" name="code" placeholder="输入${entityDesc}编码">
+                            </div>
+                        </div>
                         <#list items as item>
                         <#if item.queryType!=0>
                         <#if item.queryType==1>

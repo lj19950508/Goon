@@ -71,6 +71,12 @@ public class ${upEntityName}Controller extends BaseController {
         }
         Specification specification = (root, cq, cb) -> {
             List<Predicate> predicates = new ArrayList<>();//查询条件集
+            if (StrUtil.isNotEmpty(${entityName}.getCode())) {
+                predicates.add(cb.like(root.get("code"), "%" + ${entityName}.getCode() + "%"));
+            }
+            if (StrUtil.isNotEmpty(${entityName}.getName())) {
+                predicates.add(cb.like(root.get("name"), "%" + ${entityName}.getName() + "%"));
+            }
             <#list items as item>
             <#if item.queryType!=0>
                 <#if item.queryExp!=8>
@@ -175,13 +181,23 @@ public class ${upEntityName}Controller extends BaseController {
     @RequiresPermissions("${moduleName?upper_case}:${entityName?upper_case}:LIST")
     @ResponseBody
     @GetMapping("/list")
-    public CommonResult list(${upEntityName} ${entityName} <#list items as item><#if item.queryExp==8>,String start${item["itemName"]?cap_first},String end${item["itemName"]?cap_first}</#if><#if item.formType!=6 && item.queryType ==4 >,String ${item["itemName"]}s</#if></#list>) {
+    public CommonResult list(String search,${upEntityName} ${entityName} <#list items as item><#if item.queryExp==8>,String start${item["itemName"]?cap_first},String end${item["itemName"]?cap_first}</#if><#if item.formType!=6 && item.queryType ==4 >,String ${item["itemName"]}s</#if></#list>) {
         String msg = queryValidate(${entityName});
         if (StrUtil.isNotEmpty(msg)) {
             return CommonResult.fail(msg);
         }
         Specification specification = (root, cq, cb) -> {
             List<Predicate> predicates = new ArrayList<>();//查询条件集
+            if (StrUtil.isNotEmpty(${entityName}.getCode())) {
+                predicates.add(cb.like(root.get("code"), "%" + ${entityName}.getCode() + "%"));
+            }
+            if (StrUtil.isNotEmpty(${entityName}.getName())) {
+                predicates.add(cb.like(root.get("name"), "%" + ${entityName}.getName() + "%"));
+            }
+            if (StrUtil.isNotEmpty(search)) {
+                predicates.add(cb.like(root.get("name"), "%" + search+ "%"));
+            }
+
             <#list items as item>
             <#if item.queryType!=0>
                 <#if item.queryExp!=8>

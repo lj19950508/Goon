@@ -18,6 +18,30 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                         <input type="hidden" name="id" value="${r'${'}${entityName}.id!}"/>
                         <table class="table table-bordered">
                             <tbody>
+                                <tr>
+                                    <td class="active width-15 ">
+                                        <span class="pull-right col-form-label">
+                                            <span class="text-danger">*</span>${entityDesc}名称：
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" value="${r'${'}${entityName}.name!}" name="name" placeholder="输入${entityDesc}名称" required="required">
+                                        <div class="invalid-feedback">输入${entityDesc}名称！</div>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class=" active width-15  ">
+                                        <span class="pull-right col-form-label ">
+                                            <span class="text-danger">*</span>${entityDesc}编码：
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <input type="text" value="${r'${'}${entityName}.code!}" class="form-control" name="code" placeholder="输入${entityDesc}编码" required="required">
+                                        <div class="invalid-feedback">输入${entityDesc}编码！</div>
+                                    </td>
+                                </tr>
+
                                 <#list items as item>
                                 <#if item.formType !=0>
                                 <tr>
