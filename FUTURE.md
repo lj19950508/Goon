@@ -1,7 +1,7 @@
 ### 记录想要添加的功能
 3.es
-4.日志收集分析
-5.文件管理系统
+4.日志收集分析 
+5.文件管理系统   https://plugins.krajee.com/file-basic-usage-demo
 6.缓存机制集成 ehcache/redis;
  
 7.开发信箱系统并继承websocket/socket.js

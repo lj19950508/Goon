@@ -3,39 +3,18 @@
 
 
 
-生成
-树形结构
-entity hashcode  entityParent entityChild的属性
-excel 目前不变
-service 不变
-repository 不变
-
-form.html 自动添加一个选择上级的东西 entityParent url指向自己 OK
-form.js不变  
-
-page.html  只有新增功能 有变
-page.js  使用treegrid变 
----------
-
-
 
 
  
 左树右表  左树模块名  表单有个 树形选择器指向左树
 
 
-
-
-
-
 5.生成log走 mq 到 es
-6.websocket
+6.websocket 做这个消息通知
 4.redis
 
-
-
 文件存,;|  url网络路径
-3.文件選擇跟上（）文件系统
+3.文件選擇跟上（）文件系统 https://plugins.krajee.com/file-basic-usage-demo
 有一张File表
 id     path filename               url                          source             公共字段
 生成    /a/b/c/   filename.file    http://qiniuyun/a/b/c/filename.file                qiniuyun           
