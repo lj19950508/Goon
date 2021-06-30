@@ -1,7 +1,7 @@
 <script>
     var pageObject = {
         tableRef:null,
-        //加入树形初始化------------------------
+        //加入树形初始化todo    ------------------------
         initTable:function(){
             var option = {
                 url: "${r'${ctx}'}/${moduleName}/${entityName}/page",

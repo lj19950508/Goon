@@ -156,7 +156,7 @@ public class ${upEntityName}Controller extends BaseController {
             </#if>
             </#if>
             </#list>
-            //-------------------要改的
+            //todo 改成相应的分类树的语句---------------------------------
             if (upmsAdmin.getDept()!=null && StrUtil.isNotEmpty(upmsAdmin.getDept().getCode())) {
             predicates.add(cb.like(root.get("dept").get("code"), "%" + upmsAdmin.getDept().getCode() + "%"));
             }

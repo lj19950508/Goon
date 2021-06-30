@@ -18,8 +18,8 @@ public class ${upEntityName}Excel {
 <#list items as item>
     @ExcelProperty("${item["itemDesc"]}")
     private ${item["itemType"]} ${item["itemName"]};
-    ---------------- 所有模板这里都忘记判断excel
-    -------------这里添加分类属性
+    //todo---------------- 所有模板这里都忘记判断excel
+    //todo -------------这里添加相应分类的树形---------------
 </#list>
 
     public static List<${upEntityName}Excel> transform(List<${upEntityName}> ${entityName}s){

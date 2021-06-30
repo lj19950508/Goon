@@ -49,7 +49,7 @@ ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["
  * ${entityDesc}
  */
 public class ${upEntityName} extends DataEntity {
-    --------------------必填要改
+    //TODO修改成相应分类的实体选项----------------------------------
     @Exist(groups = SaveGroup.class,repository = UpmsDeptRepository.class,message = "部门不存在")
     @JsonIgnoreProperties(value = {"updateBy","createBy","parent","children"})
     @ManyToOne(fetch = FetchType.EAGER)
