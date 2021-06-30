@@ -3,6 +3,8 @@ package pers.gon.domain.scrum.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
@@ -36,20 +38,14 @@ public class GencodeEntity extends DataEntity {
     @Column(columnDefinition = "char(1) comment '是否逻辑删除'")
     private Boolean isLogicDelete;
 
-
-    //one to one
-
-
     @NotEmpty(message = "模块名称不能为空",groups = SaveGroup.class)
     @Column(columnDefinition = "varchar(32) comment '模块名称'")
     private String moduleName;
 
-    //manytoone
     @ManyToOne(fetch = FetchType.EAGER)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "related_tree_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
     private GencodeEntity relatedTree;
-
-
 
     //字段列表
     @Embedded
