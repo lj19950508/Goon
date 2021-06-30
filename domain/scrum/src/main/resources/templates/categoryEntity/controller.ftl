@@ -156,9 +156,8 @@ public class ${upEntityName}Controller extends BaseController {
             </#if>
             </#if>
             </#list>
-            //todo 改成相应的分类树的语句---------------------------------
-            if (upmsAdmin.getDept()!=null && StrUtil.isNotEmpty(upmsAdmin.getDept().getCode())) {
-            predicates.add(cb.like(root.get("dept").get("code"), "%" + upmsAdmin.getDept().getCode() + "%"));
+            if (${entityName}.get${relatedTree.entityName?cap_first}()!=null && StrUtil.isNotEmpty(${entityName}.get${relatedTree.entityName?cap_first}.getCode())) {
+                predicates.add(cb.like(root.get("${relatedTree.entityName}").get("code"), "%" + ${entityName}.get${relatedTree.entityName?cap_first}.getCode() + "%"));
             }
             if(predicates.isEmpty()){
                 return cq.getRestriction();

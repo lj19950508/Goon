@@ -49,12 +49,12 @@ ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["
  * ${entityDesc}
  */
 public class ${upEntityName} extends DataEntity {
-    //TODO修改成相应分类的实体选项----------------------------------
-    @Exist(groups = SaveGroup.class,repository = UpmsDeptRepository.class,message = "部门不存在")
+
+    @Exist(groups = SaveGroup.class,repository = ${relatedTree.entityDesc?cap_first}Repository.class,message = "${relatedTree.entityDesc}不存在")
     @JsonIgnoreProperties(value = {"updateBy","createBy","parent","children"})
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "dept_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
-    private UpmsDept dept;
+    @JoinColumn(name = "${relatedTree.entityDesc}_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+    private ${relatedTree.entityName?cap_first} ${relatedTree.entityName};
 
 <#list items as item>
     //${item["itemDesc"]}

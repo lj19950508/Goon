@@ -1,11 +1,10 @@
 ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${moduleName}"}){  ${r'@>'}
 <div class="row ">
 
-<#--  todo----------------------  加入相应分类形选择-->
     <div class="col-sm-6 ">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">部门选择</h5>
+                <h5 class="card-title">${relatedTree.entityDesc}选择</h5>
                 <div class="white-box">
                     <!-- 搜索 -->
                     <div class="input-group pt-2 mb-3 pl-2 pr-2">
@@ -14,7 +13,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                             <button class="btn btn-primary" type="button" ><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                    <ul id="deptTree" class="ztree"></ul>
+                    <ul id="${relatedTree.entityName}Tree" class="ztree"></ul>
                 </div>
             </div>
         </div>
@@ -29,6 +28,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                     <i class="fa fa-close"></i>
                 </a>
                 <form id="searchForm">
+                    <input type="hidden" id="${relatedTree.entityDesc}Code" name="${relatedTree.entityDesc}.code">
                     <div class="form-row align-items-center">
                         <#list items as item>
                         <#if item.queryType!=0>

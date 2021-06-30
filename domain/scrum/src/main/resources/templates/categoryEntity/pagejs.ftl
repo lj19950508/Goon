@@ -2,6 +2,65 @@
     var pageObject = {
         tableRef:null,
         //加入树形初始化todo    ------------------------
+        ${relatedTree.entityName}TreeSearch: function (v) {
+            var treeObj = $.fn.zTree.getZTreeObj("${relatedTree.entityName}Tree");
+            treeObj.setting.async.otherParam = ['search', v];
+            $("#${relatedTree.entityName}Tree").text("正在查询");
+            treeObj.reAsyncChildNodes(null, "refresh", true, function () {
+            });
+        },
+        init${relatedTree.entityName}Tree: function () {
+            var setting = {
+                async: {
+                    enable: true,
+                    autoParam: ['id'],
+                    dataType: 'json',
+                    type: 'get',
+                    url: "${ctx}" + "/${relatedTree.moduleName}/${relatedTree.entityName}/list",
+                    dataFilter: function (treeId, parentNode, responseData) {
+                        return responseData.data;
+                    }
+                },
+                data: {
+                    key: {
+                        url: "none"
+                    },
+                    simpleData: {
+                        idKey: "id",
+                        pIdKey: "parent.id",
+                        enable: true,
+                    }
+                },
+                check: {enable: false},
+                callback: {
+                    onClick: function (event, treeId, treeNode, clickFlag) {
+                        $("#${relatedTree.entityName}Code").val(treeNode.code)
+                        pageObject.refresh();
+                    },
+                    onAsyncSuccess: function (event, treeId, treeNode, msg) {
+                        var treeObj = $.fn.zTree.getZTreeObj(treeId);
+                        var nodes = treeObj.getNodes();
+                        treeObj.expandNode(nodes[0], true, true, true);
+                    }
+                }
+            }
+            tree = $.fn.zTree.init($('#${relatedTree.entityName}Tree'), setting, null);
+            //查找功能
+            var to = false;
+            $('#search-q').keyup(function () {
+                if (to) {
+                    clearTimeout(to);
+                }
+                to = setTimeout(function () {
+                    var v = $('#search-q').val();
+                    pageObject.${relatedTree.entityName}TreeSearch(v);
+                }, 250);
+            });
+            $("#searchButton").click(function () {
+                var v = $('#search-q').val();
+                pageObject.${relatedTree.entityName}TreeSearch(v);
+            })
+        },
         initTable:function(){
             var option = {
                 url: "${r'${ctx}'}/${moduleName}/${entityName}/page",

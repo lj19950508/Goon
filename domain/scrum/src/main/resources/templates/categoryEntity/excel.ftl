@@ -19,8 +19,9 @@ public class ${upEntityName}Excel {
     @ExcelProperty("${item["itemDesc"]}")
     private ${item["itemType"]} ${item["itemName"]};
     //todo---------------- 所有模板这里都忘记判断excel
-    //todo -------------这里添加相应分类的树形---------------
 </#list>
+    @ExcelProperty("${relatedTree.entityName}")
+    private ${relatedTree.entityName?cap_first} ${relatedTree.entityName};
 
     public static List<${upEntityName}Excel> transform(List<${upEntityName}> ${entityName}s){
         List<${upEntityName}Excel> ${entityName}Excels = new ArrayList<>();
