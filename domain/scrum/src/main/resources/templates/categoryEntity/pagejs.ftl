@@ -228,6 +228,8 @@
     };
     $(function () {
         pageObject.initTable();
+        pageObject.init${relatedTree.entityName}Tree();
+
     })
 
 

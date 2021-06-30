@@ -28,7 +28,7 @@ ${r'<@'}layout("/include/_container.html", {title:"${entityName}", parent:"${mod
                         <i class="fa fa-close"></i>
                     </a>
                     <form id="searchForm">
-                        <input type="hidden" id="${relatedTree.entityDesc}Code" name="${relatedTree.entityDesc}.code">
+                        <input type="hidden" id="${relatedTree.entityName}Code" name="${relatedTree.entityName}.code">
                         <div class="form-row align-items-center">
                             <#list items as item>
                             <#if item.queryType!=0>
