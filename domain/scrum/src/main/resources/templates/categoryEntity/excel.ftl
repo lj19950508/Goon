@@ -20,7 +20,6 @@ public class ${upEntityName}Excel {
 <#list items as item>
     @ExcelProperty("${item["itemDesc"]}")
     private ${item["itemType"]} ${item["itemName"]};
-    //todo---------------- 所有模板这里都忘记判断excel
 </#list>
     @ExcelProperty("${relatedTree.entityName}")
     private ${relatedTree.entityName?cap_first} ${relatedTree.entityName};

@@ -1,20 +1,5 @@
 ### 记录近期工作
 
-
-
-
-
-
- 
-左树右表  左树模块名  表单有个 树形选择器指向左树
-controller
-entity
-form
-page
-pagejs
-
-需要分类名以及 分类的url
-
 5.生成log走 mq 到 es
 6.websocket 做这个消息通知
 4.redis
