@@ -2,6 +2,8 @@ package pers.gon.manage.${moduleName}.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import pers.gon.domain.${relatedTree.moduleName}.entity.${relatedTree.entityName?cap_first};
+
 import pers.gon.domain.${moduleName}.entity.${upEntityName};
 import java.math.*;
 import java.util.*;

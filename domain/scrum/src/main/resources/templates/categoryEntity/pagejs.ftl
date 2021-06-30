@@ -16,7 +16,7 @@
                     autoParam: ['id'],
                     dataType: 'json',
                     type: 'get',
-                    url: "${ctx}" + "/${relatedTree.moduleName}/${relatedTree.entityName}/list",
+                    url: "${r'${ctx}'}/${relatedTree.moduleName}/${relatedTree.entityName}/list",
                     dataFilter: function (treeId, parentNode, responseData) {
                         return responseData.data;
                     }

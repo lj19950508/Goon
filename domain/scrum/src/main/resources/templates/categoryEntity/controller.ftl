@@ -156,8 +156,8 @@ public class ${upEntityName}Controller extends BaseController {
             </#if>
             </#if>
             </#list>
-            if (${entityName}.get${relatedTree.entityName?cap_first}()!=null && StrUtil.isNotEmpty(${entityName}.get${relatedTree.entityName?cap_first}.getCode())) {
-                predicates.add(cb.like(root.get("${relatedTree.entityName}").get("code"), "%" + ${entityName}.get${relatedTree.entityName?cap_first}.getCode() + "%"));
+            if (${entityName}.get${relatedTree.entityName?cap_first}()!=null && StrUtil.isNotEmpty(${entityName}.get${relatedTree.entityName?cap_first}().getCode())) {
+                predicates.add(cb.like(root.get("${relatedTree.entityName}").get("code"), "%" + ${entityName}.get${relatedTree.entityName?cap_first}().getCode() + "%"));
             }
             if(predicates.isEmpty()){
                 return cq.getRestriction();

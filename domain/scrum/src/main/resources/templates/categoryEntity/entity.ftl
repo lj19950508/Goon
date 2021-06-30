@@ -1,10 +1,12 @@
 package pers.gon.domain.${moduleName}.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pers.gon.domain.DataEntity;
+import pers.gon.domain.${relatedTree.moduleName}.repository.${relatedTree.entityName?cap_first}Repository;
 import pers.gon.domain.${moduleName}.repository.${upEntityName}Repository;
 import pers.gon.infrastructure.common.valid.InsertGroup;
 import pers.gon.infrastructure.common.valid.SaveGroup;
@@ -12,6 +14,7 @@ import pers.gon.infrastructure.common.valid.Unique;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import pers.gon.infrastructure.common.valid.Exist;
 import java.math.*;
 import java.util.*;
 <#list items as item>
@@ -50,7 +53,7 @@ ${r'@'}Unique(repository = ${upEntityName}Repository.class,fieldName = "${item["
  */
 public class ${upEntityName} extends DataEntity {
 
-    @Exist(groups = SaveGroup.class,repository = ${relatedTree.entityDesc?cap_first}Repository.class,message = "${relatedTree.entityDesc}不存在")
+    @Exist(groups = SaveGroup.class,repository = ${relatedTree.entityName?cap_first}Repository.class,message = "${relatedTree.entityDesc}不存在")
     @JsonIgnoreProperties(value = {"updateBy","createBy","parent","children"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "${relatedTree.entityDesc}_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
