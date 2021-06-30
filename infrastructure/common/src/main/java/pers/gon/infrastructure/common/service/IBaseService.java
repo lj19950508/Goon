@@ -42,14 +42,14 @@ public interface IBaseService<T, ID> {
 
     Page<T> findPage(Specification<T> specification, Pageable pageable);
 
-    /**
+    /** 只想好了下一页怎么做没想好上一页怎么做EMM
      *  由于ID有自增趋向 ，可以使用ID索引  id>最后一条  size = 条数来做分页， 这样数据都的时候效率会快
      * @param specification 过滤条件
-     * @param nextId 上一页的最后一条ID
+     * @param lastId 上一页的最后一条ID
      * @param pageable 分页参数 （不需要传pageNumber）
      * @return
      */
-    Page<T> findPage(Specification<T> specification,ID nextId, Pageable pageable);
+    Page<T> findPage(Specification<T> specification,ID lastId, Pageable pageable);
 
     void deleteById(ID id);
 

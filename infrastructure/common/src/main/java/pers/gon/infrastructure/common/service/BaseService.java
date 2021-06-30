@@ -1,5 +1,6 @@
 package pers.gon.infrastructure.common.service;
 
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -124,10 +125,12 @@ public abstract class BaseService<R extends BaseRepository<T,ID>,T extends BaseE
 	}
 
 	@Override
-	public Page<T> findPage(Specification<T> specification,ID nextId, Pageable pageable){
+	public Page<T> findPage(Specification<T> specification,ID lastId, Pageable pageable){
 		//传入分页最后一条ID为nextID,来做分页优化
 		specification = specification.and((Specification) (root, cq, cb) -> {
-			cq.where(cb.greaterThan(root.get("id"), (String) nextId));
+			if(StrUtil.isNotEmpty((String)lastId)){
+				cq.where(cb.greaterThan(root.get("id"), (String) lastId));
+			}
 			return cq.getRestriction();
 		});
 		return repository.findAll(specification,pageable);

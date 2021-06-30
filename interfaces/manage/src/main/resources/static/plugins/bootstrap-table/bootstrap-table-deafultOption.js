@@ -64,9 +64,7 @@ var defaultTreeTableOption = {
     pagination: false,
     sidePagination: "server",
     sortOrder: "asc",
-    // pageNumber:1,
-    // pageSize: 10,
-    // pageList: [10, 25, 50, 100],
+
     responseHandler: function(res) {
         return {"total": res.data.totalElements, "rows": res.data};
     },
