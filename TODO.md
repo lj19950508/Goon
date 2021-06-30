@@ -1,6 +1,4 @@
 ### 记录近期工作
-
-5.生成log走 mq 到 es
 6.websocket 做这个消息通知
 4.redis
 

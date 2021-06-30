@@ -59,9 +59,9 @@ public class LogInterceptor implements HandlerInterceptor {
 		if (log.isInfoEnabled()){
 			//入参出参
 			long beginTime = COUNT_TIME_THREAD_LOCAL.get();
+			COUNT_TIME_THREAD_LOCAL.remove();
 			long endTime = System.currentTimeMillis();
 	        log.info("计时结束:{}|耗时:{}ms", DateUtil.date(endTime),endTime-beginTime);
-
 		}
         // 保存日志
 
