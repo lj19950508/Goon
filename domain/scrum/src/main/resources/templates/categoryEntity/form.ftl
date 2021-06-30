@@ -25,7 +25,7 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                         </span>
                                     </td>
                                     <td>
-                                        ${r'<#'}treeselect id="${relatedTree.entityName}.id" name="${relatedTree.entityName}.id" value="${r'${'}${entityName}.${relatedTree.entityName}.id!}" labelValue="${r'${'}${entityName}.${relatedTree.entityName}.name!}" labelName="${relatedTree.entityName}.name" placeholder="选择${relatedTree.entityDesc}" title="所属${relatedTree.entityDesc}" url="/${relatedTree.moduleName}/${relatedTree.entityName}/list"   required="required" checked="false" allowClear="true" allowSearch="true" />
+                                        ${r'<#'}treeselect id="${relatedTree.entityName}" name="${relatedTree.entityName}.id" value="${r'${'}${entityName}.${relatedTree.entityName}.id!}" labelValue="${r'${'}${entityName}.${relatedTree.entityName}.name!}" labelName="${relatedTree.entityName}.name" placeholder="选择${relatedTree.entityDesc}" title="所属${relatedTree.entityDesc}" url="/${relatedTree.moduleName}/${relatedTree.entityName}/list"   required="required" checked="false" allowClear="true" allowSearch="true" />
                                     </td>
                                 </tr>
                                 <#list items as item>
