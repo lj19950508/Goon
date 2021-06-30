@@ -8,6 +8,10 @@ import org.springframework.data.jpa.domain.Specification;
 import pers.gon.infrastructure.common.entity.BaseEntity;
 import pers.gon.infrastructure.common.repository.BaseRepository;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Iterator;
 import java.util.List;
 
@@ -119,6 +123,15 @@ public abstract class BaseService<R extends BaseRepository<T,ID>,T extends BaseE
 		repository.deleteAll(entitys);
 	}
 
+	@Override
+	public Page<T> findPage(Specification<T> specification,ID nextId, Pageable pageable){
+		//传入分页最后一条ID为nextID,来做分页优化
+		specification = specification.and((Specification) (root, cq, cb) -> {
+			cq.where(cb.greaterThan(root.get("id"), (String) nextId));
+			return cq.getRestriction();
+		});
+		return repository.findAll(specification,pageable);
+	}
 //	DATARULE: 1.本人数据 2.所在部门数据    3.所在部门以及以下数据 ， 4部门以下数据 5.是否排除本人 (在 2，3有效) 部门级过滤
 
 }

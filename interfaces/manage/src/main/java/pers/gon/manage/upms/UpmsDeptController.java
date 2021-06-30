@@ -79,7 +79,7 @@ public class UpmsDeptController extends BaseController {
         };
         specification = specification.and(DataScopeUtils.dataScope(request));
 
-        Page<UpmsDept> pageData = upmsDeptService.findPage(specification, pageable);
+        Page<UpmsDept> pageData = upmsDeptService.findPage(specification,pageable);
         return CommonResult.ok(pageData);
     }
     @RequiresPermissions("UPMS:DEPT:LIST")
