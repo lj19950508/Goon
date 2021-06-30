@@ -126,37 +126,6 @@ public abstract class BaseService<R extends BaseRepository<T,ID>,T extends BaseE
 		repository.deleteAll(entitys);
 	}
 
-	@Override
-	public Page<T> findNextPage(Specification<T> specification,ID lastId, Pageable pageable){
-		//传入分页最后一条ID为nextID,来做分页优化
-		specification = specification.and((Specification) (root, cq, cb) -> {
-			if(StrUtil.isNotEmpty((String)lastId)){
-				cq.where(cb.greaterThan(root.get("id"), (String) lastId));
-			}
-			return cq.getRestriction();
-		});
-		return repository.findAll(specification,pageable);
-	}
-
-	@Override
-	public Page<T> findPrevPage(Specification<T> specification,ID firstId, Pageable pageable){
-		//传入分页最后一条ID为nextID,来做分页优化
-		specification = specification.and((Specification) (root, cq, cb) -> {
-			if(StrUtil.isNotEmpty((String)firstId)){
-				cq.where(cb.lessThan(root.get("id"), (String) firstId));
-				cq.orderBy(cb.desc(root.get("id")));
-			}
-			return cq.getRestriction();
-		});
-		Page<T> pageData = repository.findAll(specification,pageable);
-		if(StrUtil.isNotEmpty((String)firstId)) {
-			List<T> listData = pageData.getContent();
-			Collections.reverse(listData);
-			pageData = new PageImpl<T>(listData,pageable,pageData.getTotalElements());
-		}
-		return pageData;
-	}
-
 //	DATARULE: 1.本人数据 2.所在部门数据    3.所在部门以及以下数据 ， 4部门以下数据 5.是否排除本人 (在 2，3有效) 部门级过滤
 
 }

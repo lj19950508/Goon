@@ -44,6 +44,11 @@ public class GencodeEntity extends DataEntity {
     @Column(columnDefinition = "varchar(32) comment '模块名称'")
     private String moduleName;
 
+    //manytoone
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "related_tree_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+    private GencodeEntity relatedTree;
+
 
 
     //字段列表

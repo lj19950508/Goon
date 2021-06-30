@@ -83,10 +83,21 @@ var pageFormObject= {
                 go_into("${ctx}/scrum/gencode/entity");
             }
         },null,{error:true})
+
         <@ if(mode=='view'){ @>
-            $('#gencodeForm').find('input,textarea,select').prop('disabled',true);
-            $('#submit').prop('disabled',true);
+        $('#gencodeForm').find('input,textarea,select').prop('disabled',true);
+        $('#submit').prop('disabled',true);
         <@ } @>
+
+        $("#templateType").on('change',function(){
+            if($("#templateType").val()==2){
+                $(".related-tree").show()
+            }else{
+                $(".related-tree").hide()
+            }
+        })
+        $("#templateType").change()
+
     },
     initFieldTable:function(){
         let option = {

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -60,6 +61,9 @@ public class GencodeEntityController extends BaseController {
 
         model.addAttribute("mode",mode);
         model.addAttribute("dictList",sysDicts);
+        GencodeEntity gencodeEntity = new GencodeEntity();
+        gencodeEntity.setTemplateType(1);
+        model.addAttribute("treeList",gencodeEntityService.findList(gencodeEntity));
         return "modules/scrum/gencode/entity/entityForm.html";
     }
 
@@ -89,6 +93,7 @@ public class GencodeEntityController extends BaseController {
         Page<GencodeEntity> pageData =  gencodeEntityService.findPage(specification,pageable);
         return CommonResult.ok(pageData);
     }
+
 
     @RequiresPermissions(value = {"SCRUM:GENCODE:ADD", "SCRUM:GENCODE:EDIT"}, logical = Logical.OR)
     @ResponseBody

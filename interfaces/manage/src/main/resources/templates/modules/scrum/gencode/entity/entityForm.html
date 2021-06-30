@@ -69,7 +69,6 @@
                                 </td>
                             </tr>
                             <tr>
-
                                 <td class="active width-15 ">
                                         <span class="pull-right col-form-label">
                                             <span class="text-danger">*</span>所属模块：
@@ -78,9 +77,20 @@
                                 <td>
                                     <input type="text" class="form-control" value="${gencodeEntity.moduleName!}"
                                            name="moduleName" placeholder="输入所属模块（如:upms）" required="required">
-                                    <div class="invalid-feedback">请输入对象描述!</div>
+                                    <div class="invalid-feedback">请输入所属模块!</div>
+                                </td>
+                                <td class="active width-15 related-tree">
+                                    <span class="pull-right col-form-label">
+                                         关联树：
+                                    </span>
+                                </td>
+                                <td class="related-tree">
+                                    <#select value="${gencodeEntity.relatedTree.id!}" id="relatedTree.id" name="relatedTree.id"
+                                    items="${treeList}" itemLabel="entityDesc" itemValue="id"
+                                    />
                                 </td>
                             </tr>
+
                             <tr>
                                 <td class="table-title-td" colspan="6">
                                     <h5 class="table-title-info">字段信息

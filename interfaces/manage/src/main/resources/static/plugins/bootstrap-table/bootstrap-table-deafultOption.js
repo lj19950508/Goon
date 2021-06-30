@@ -16,6 +16,7 @@ var defaultTableOption = {
     pageSize: 10,
     pageList: [10, 25, 50, 100],
     responseHandler: function(res) {
+
         return {"total": res.data.totalElements, "rows": res.data.content};
     },
     queryParams : function(params) {
