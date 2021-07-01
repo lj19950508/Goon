@@ -66,7 +66,7 @@
         msgValidationError: '验证错误',
         msgLoading: '加载第 {index} 文件 共 {files} &hellip;',
         msgProgress: '加载第 {index} 文件 共 {files} - {name} - {percent}% 完成.',
-        msgSelected: '{n} {files} 选中',
+        msgSelected: '{n} {files}被选中',
         msgProcessing: '处理中 ...',
         msgFoldersNotAllowed: '只支持拖拽文件! 跳过 {n} 拖拽的文件夹.',
         msgImageWidthSmall: '图像文件的"{name}"的宽度必须是至少{size}像素.',
