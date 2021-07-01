@@ -28,7 +28,7 @@
         msgNoFilesSelected: '未选择文件',
         msgPaused: '已暂停',
         msgCancelled: '取消',
-        msgPlaceholder: '选择 {files} ...',
+        msgPlaceholder: '选择文件 ...',
         msgZoomModalHeading: '详细预览',
         msgFileRequired: '必须选择一个文件上传.',
         msgSizeTooSmall: '文件 "{name}" (<b>{size} KB</b>) 必须大于限定大小 <b>{minSize} KB</b>.',
