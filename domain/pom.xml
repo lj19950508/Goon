@@ -16,6 +16,7 @@
         <module>upms</module>
         <module>sys</module>
         <module>scrum</module>
+        <module>file</module>
     </modules>
     <artifactId>domain</artifactId>
     <packaging>pom</packaging>
