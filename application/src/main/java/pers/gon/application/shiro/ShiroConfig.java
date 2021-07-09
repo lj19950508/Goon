@@ -30,6 +30,7 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
+    //这是过滤器
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -54,6 +55,7 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+    //注入后台用户服务
     @Bean
     public AdminRealm realm(){
         AdminRealm adminRealm = new AdminRealm();
@@ -61,6 +63,7 @@ public class ShiroConfig {
         return adminRealm;
     }
 
+    //注入后台用户
     @Bean
     public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -83,7 +86,7 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
-        @Bean
+    @Bean
     public EhCacheManager ehCacheManager() {
         EhCacheManager ehCacheManager =new EhCacheManager();
         ehCacheManager.setCacheManagerConfigFile("classpath:shiro-ehcache.xml");

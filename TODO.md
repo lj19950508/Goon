@@ -2,7 +2,7 @@
 
 修改fws 库相关
 
-6.websocket 做这个消息通知
+6.websocket 做这个消息通知 一个网页放一个socket 还是多个的问题  spa 可以放一个 但是 mpa要放多个 不然页面通信不了
 4.redis
 
 文件存,;|  url网络路径
@@ -16,3 +16,8 @@ id     path filename               url                          source          
 删除图片  url->file_url    是否删除
 
 
+
+//关于文件系统准则
+2.文件可实现上传/断点续传
+3.文件可实现预览
+4.压缩功能
