@@ -13,13 +13,13 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pers.gon.application.utils.DataScopeUtils;
-import pers.gon.application.utils.DictUtils;
 import pers.gon.domain.upms.entity.UpmsRole;
 import pers.gon.domain.upms.service.IUpmsDatascopeService;
 import pers.gon.domain.upms.service.IUpmsRoleService;
 import pers.gon.infrastructure.common.controller.BaseController;
 import pers.gon.infrastructure.common.entity.CommonResult;
+import pers.gon.manage.utils.DataScopeUtils;
+import pers.gon.manage.utils.DictUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.*;

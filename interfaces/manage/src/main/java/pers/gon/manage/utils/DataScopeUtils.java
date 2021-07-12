@@ -1,4 +1,4 @@
-package pers.gon.application.utils;
+package pers.gon.manage.utils;
 
 import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.data.jpa.domain.Specification;
@@ -6,10 +6,6 @@ import pers.gon.domain.upms.entity.UpmsMenu;
 import pers.gon.domain.upms.entity.UpmsRole;
 import pers.gon.domain.upms.service.IUpmsMenuService;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 

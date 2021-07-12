@@ -1,4 +1,4 @@
-package pers.gon.application.shiro;
+package pers.gon.manage.shiro;
 
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;

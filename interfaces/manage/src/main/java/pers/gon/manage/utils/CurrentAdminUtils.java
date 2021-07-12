@@ -1,12 +1,9 @@
-package pers.gon.application.utils;
+package pers.gon.manage.utils;
 
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.mgt.RealmSecurityManager;
-import org.springframework.data.jpa.domain.Specification;
-import pers.gon.application.shiro.AdminRealm;
 import pers.gon.domain.upms.entity.UpmsAdmin;
 import pers.gon.domain.upms.entity.UpmsMenu;
 import pers.gon.domain.upms.entity.UpmsRole;
@@ -17,9 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static pers.gon.application.utils.DataScopeUtils.DS_ALL;
-import static pers.gon.application.utils.DataScopeUtils.DS_LE_DEPT;
 
 /**
  * @Author: Gon
