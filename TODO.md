@@ -21,3 +21,7 @@ id     path filename               url                          source          
 2.文件可实现上传/断点续传
 3.文件可实现预览
 4.压缩功能
+
+1.文件上传功能可做在 manage中 根据需要写各个接口
+2.文件访问共呢个可写在shiroConfig 中过滤
+
