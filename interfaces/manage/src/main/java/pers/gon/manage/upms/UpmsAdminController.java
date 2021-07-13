@@ -16,8 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pers.gon.application.utils.CurrentAdminUtils;
-import pers.gon.application.utils.DataScopeUtils;
 import pers.gon.domain.upms.entity.UpmsAdmin;
 import pers.gon.domain.upms.service.IUpmsAdminService;
 import pers.gon.domain.upms.service.IUpmsDeptService;
@@ -27,6 +25,8 @@ import pers.gon.infrastructure.common.controller.BaseController;
 import pers.gon.infrastructure.common.entity.CommonResult;
 import pers.gon.manage.upms.excel.UpmsAdminExcel;
 import pers.gon.manage.upms.excel.UpmsAdminExcelListener;
+import pers.gon.manage.utils.CurrentAdminUtils;
+import pers.gon.manage.utils.DataScopeUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.*;

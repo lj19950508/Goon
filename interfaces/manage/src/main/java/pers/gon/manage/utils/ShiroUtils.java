@@ -1,9 +1,7 @@
-package pers.gon.application.utils;
+package pers.gon.manage.utils;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-
-import java.util.Arrays;
 
 /**
  * @Author: Gon

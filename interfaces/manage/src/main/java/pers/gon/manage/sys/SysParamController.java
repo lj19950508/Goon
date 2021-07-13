@@ -13,11 +13,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pers.gon.application.utils.DataScopeUtils;
 import pers.gon.domain.sys.entity.SysParam;
 import pers.gon.domain.sys.service.ISysParamService;
 import pers.gon.infrastructure.common.controller.BaseController;
 import pers.gon.infrastructure.common.entity.CommonResult;
+import pers.gon.manage.utils.DataScopeUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;

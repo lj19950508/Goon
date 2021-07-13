@@ -1,4 +1,4 @@
-package pers.gon.application.auditor;
+package pers.gon.manage.auditor;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.data.domain.AuditorAware;
