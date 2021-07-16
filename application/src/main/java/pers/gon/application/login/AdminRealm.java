@@ -1,4 +1,4 @@
-package pers.gon.manage.shiro;
+package pers.gon.application.login;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;

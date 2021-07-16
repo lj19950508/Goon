@@ -13,6 +13,7 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pers.gon.application.login.AdminRealm;
 import pers.gon.infrastructure.common.config.global.GlobalProperties;
 
 import java.util.LinkedHashMap;
@@ -30,30 +31,6 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    //这是过滤器
-    @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        filterChainDefinitionMap.put("/static/**", "anon");
-
-        String adminPath  = globalProperties.getAdminPath();
-        String apiPath  = globalProperties.getApiPath();
-
-        filterChainDefinitionMap.put(apiPath+"/**", "anon");
-
-        filterChainDefinitionMap.put(adminPath+"/login", "anon");
-        filterChainDefinitionMap.put(adminPath+"/logout", "anon");
-        filterChainDefinitionMap.put(adminPath+"/test/**", "anon");
-        filterChainDefinitionMap.put(adminPath+"/**", "authc");
-
-        shiroFilterFactoryBean.setLoginUrl(adminPath+"/login");
-        shiroFilterFactoryBean.setSuccessUrl(adminPath+"/index");
-        shiroFilterFactoryBean.setUnauthorizedUrl(adminPath+"/unauth");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        return shiroFilterFactoryBean;
-    }
 
     //注入后台用户服务
     @Bean
@@ -72,18 +49,19 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    @Bean
-    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-        defaultAdvisorAutoProxyCreator.setUsePrefix(true);
-        return defaultAdvisorAutoProxyCreator;
-    }
 
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
         return authorizationAttributeSourceAdvisor;
+    }
+
+    @Bean
+    public static DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setUsePrefix(true);
+        return defaultAdvisorAutoProxyCreator;
     }
 
     @Bean
