@@ -34,14 +34,17 @@ public class ShiroFilterConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //通用静态文件夹过滤
         filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/files/**", "anon");
         //api模块过滤
         String apiPath  = globalProperties.getApiPath();
         filterChainDefinitionMap.put(apiPath+"/**", "anon");
         //app模块过滤
         String adminPath  = globalProperties.getAdminPath();
+
+        filterChainDefinitionMap.put(adminPath+"/test/**", "anon");
+
         filterChainDefinitionMap.put(adminPath+"/login", "anon");
         filterChainDefinitionMap.put(adminPath+"/logout", "anon");
-        filterChainDefinitionMap.put(adminPath+"/test/**", "anon");
         filterChainDefinitionMap.put(adminPath+"/**", "authc");
         shiroFilterFactoryBean.setLoginUrl(adminPath+"/login");
         shiroFilterFactoryBean.setSuccessUrl(adminPath+"/index");
