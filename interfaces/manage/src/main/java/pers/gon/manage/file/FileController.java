@@ -6,13 +6,16 @@ import cn.hutool.core.io.FileUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import pers.gon.infrastructure.common.config.global.GlobalProperties;
 import pers.gon.infrastructure.common.entity.CommonResult;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.Collections;
 import java.util.Date;
@@ -24,6 +27,12 @@ import java.util.Date;
 public class FileController {
     @Value("${file.path}")
     String storegePath;
+
+    @Autowired
+    HttpServletRequest request;
+
+    @Autowired
+    GlobalProperties globalProperties;
 
     //for bootstrap-fileinput
     @SneakyThrows
@@ -42,7 +51,7 @@ public class FileController {
         int day = DateUtil.dayOfMonth(now);
         String filename = uploadFile.getOriginalFilename();
         String realtivePath = uploadPath+"/"+year+"/"+month+"/"+day+"/";
-        String filepath = storegePath+"/"+realtivePath;
+        String filepath = storegePath+realtivePath;
 
         //如果文件名字重复自动重命名
         while (FileUtil.exist(filepath+filename)){
@@ -55,14 +64,15 @@ public class FileController {
         BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
         bootstrapFileInputResult.setCaption(filename);
         //网络地址
-        bootstrapFileInputResult.setDownloadUrl("http://localhost:8081/goon/files/"+realtivePath+filename);
+        String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
+        bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setSize(uploadFile.getSize());
-        bootstrapFileInputResult.setKey("http://localhost:8081/goon/files/"+realtivePath+filename);
-        //context+file/delete + path
-        bootstrapFileInputResult.setUrl("http://localhost:8081/goon/manage/file/delete?path="+filepath+filename);
+        bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
+        //这里有问题path不加storeagePath  要加
+        bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
         return CommonResult.ok()
                 //网络地址
-                .add("initialPreview", ListUtil.toList("http://localhost:8081/goon/files/"+realtivePath+filename))
+                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
                 .add("initialPreviewAsData",false)
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
@@ -72,7 +82,7 @@ public class FileController {
     @ResponseBody
     @RequestMapping("/delete")
     public CommonResult delete(String path) {
-        FileUtil.del(path);
+        FileUtil.del(storegePath+path);
         return CommonResult.ok();
     }
 }

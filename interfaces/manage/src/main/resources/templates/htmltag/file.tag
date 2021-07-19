@@ -30,17 +30,13 @@ $(function () {
 
     }).on('fileuploaded', function(event, data, index, fileId) {
         let val = $("#${id}").val()
-        console.log(val)
         let valArr = [] ;
         if(val){
             valArr = val.split(',')
         }
-        console.log(valArr)
         valArr.push(data.response.initialPreview[0])
-        console.log(valArr)
         val = valArr.join(',');
         $("#${id}").val(val)
-        console.log(val);
     }).on('filedeleted',function(event, key, jqXHR, data) {
         let val = $("#${id}").val()
         let valArr = val.split(',')
@@ -49,8 +45,6 @@ $(function () {
         })
         val = valArr.join(',');
         $("#${id}").val(val)
-        console.log(val)
-
     })
     //删除完成应该扣掉
 })
