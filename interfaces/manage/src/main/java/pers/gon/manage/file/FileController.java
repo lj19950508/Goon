@@ -60,11 +60,9 @@ public class FileController {
         File saveFile = FileUtil.touch(filepath+filename);
 
         uploadFile.transferTo(saveFile);
-
+        String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
         BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
         bootstrapFileInputResult.setCaption(filename);
-        //网络地址
-        String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
         bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setSize(uploadFile.getSize());
         bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
@@ -72,8 +70,8 @@ public class FileController {
         bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
         return CommonResult.ok()
                 //网络地址
-                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
-                .add("initialPreviewAsData",false)
+//                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
+                .add("initialPreviewAsData",true)
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 

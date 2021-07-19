@@ -34,7 +34,8 @@ $(function () {
         if(val){
             valArr = val.split(',')
         }
-        valArr.push(data.response.initialPreview[0])
+        console.log()
+        valArr.push(data.response.initialPreviewConfig[0].key)
         val = valArr.join(',');
         $("#${id}").val(val)
     }).on('filedeleted',function(event, key, jqXHR, data) {
