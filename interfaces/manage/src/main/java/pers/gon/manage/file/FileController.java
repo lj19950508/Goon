@@ -26,8 +26,8 @@ public class FileController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/upload")
-    public CommonResult upload(MultipartFile file, String uploadPath) {
-        if(file==null ){
+    public CommonResult upload(MultipartFile uploadFile, String uploadPath) {
+        if(uploadFile==null ){
             return CommonResult.fail("上传文件识别失败");
         }
         if(StringUtils.isEmpty(uploadPath)){
@@ -37,15 +37,25 @@ public class FileController {
         int month = DateUtil.month(now);
         int year = DateUtil.year(now);
         int day = DateUtil.dayOfMonth(now);
+        String filename = uploadFile.getOriginalFilename();
+        String realtivePath = "/"+uploadPath+"/"+year+"/"+month+"/"+day+"/";
+        String filepath = storegePath+realtivePath;
 
         //如果文件名字重复自动重命名
+        while (FileUtil.exist(filepath+filename)){
+            filename =   FileUtil.getPrefix(filename)+" - 副本"+"."+FileUtil.getSuffix(filename);
+        }
+        File saveFile = FileUtil.touch(filepath+filename);
 
-        File saveFile =  FileUtil.touch(storegePath+"/"+uploadPath+"/"+year+"/"+month+"/"+day+"/"+file.getOriginalFilename());
-        //在某个路径下 +uploadpath  +年月日+文件名创建文件
-
-        file.transferTo(saveFile);
-
-        return CommonResult.ok();
+        uploadFile.transferTo(saveFile);
+        return CommonResult.ok("http://localhost:8081/goon/files/"+realtivePath+filename);
     }
 
+
+    @SneakyThrows
+    @ResponseBody
+    @RequestMapping("/delete")
+    public CommonResult delete() {
+        return CommonResult.ok();
+    }
 }
