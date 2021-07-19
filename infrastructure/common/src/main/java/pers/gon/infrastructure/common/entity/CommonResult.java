@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
+
 @Getter
 @Setter
-public class CommonResult<T> {
+public class CommonResult<T> extends HashMap {
 
 
     private static final int DEFAULT_FAIL_CODE = 1;
@@ -19,6 +21,11 @@ public class CommonResult<T> {
     private int code;
     private boolean success;
     T data;
+
+    public <T> CommonResult add(Object k,Object v){
+        this.put(k,v);
+        return this;
+    }
 
     public static <T> CommonResult ok(){
         CommonResult commonResult = new CommonResult();

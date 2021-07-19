@@ -1,40 +1,88 @@
 package pers.gon.manage.file;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.FileUtil;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import pers.gon.application.utils.DataScopeUtils;
-import pers.gon.domain.upms.entity.UpmsDept;
+import pers.gon.infrastructure.common.config.global.GlobalProperties;
 import pers.gon.infrastructure.common.entity.CommonResult;
 
-import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Collections;
+import java.util.Date;
+
 
 @Slf4j
 @Controller
 @RequestMapping("${global.adminpath}/file")
 public class FileController {
+    @Value("${file.path}")
+    String storegePath;
 
-    /**
-     * 后台上传文件
-     * @param file 文件
-     * @param uploadPath 上传的路径
-     * @return
-     */
+    @Autowired
+    HttpServletRequest request;
+
+    @Autowired
+    GlobalProperties globalProperties;
+
+    //for bootstrap-fileinput
+    @SneakyThrows
     @ResponseBody
-    @PostMapping("/upload/{uploadPath}")
-    public CommonResult upload(MultipartFile file, @PathVariable(value = "uploadPath") String uploadPath) {
-        //todo 1.file存到相应物理路径  ip:port/file/path
-        //todo 2.file信息存储的数
-        //
+    @RequestMapping("/upload")
+    public CommonResult upload(MultipartFile uploadFile, String uploadPath) {
+        if(uploadFile==null ){
+            return CommonResult.fail("上传文件识别失败");
+        }
+        if(StringUtils.isEmpty(uploadPath)){
+            return CommonResult.fail("请输入上传路径");
+        }
+        Date now =new Date();
+        int month = DateUtil.month(now);
+        int year = DateUtil.year(now);
+        int day = DateUtil.dayOfMonth(now);
+        String filename = uploadFile.getOriginalFilename();
+        String realtivePath = uploadPath+"/"+year+"/"+month+"/"+day+"/";
+        String filepath = storegePath+realtivePath;
 
-        return CommonResult.ok();
+        //如果文件名字重复自动重命名
+        while (FileUtil.exist(filepath+filename)){
+            filename =   FileUtil.getPrefix(filename)+" - 副本"+"."+FileUtil.getSuffix(filename);
+        }
+        File saveFile = FileUtil.touch(filepath+filename);
+
+        uploadFile.transferTo(saveFile);
+
+        BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
+        bootstrapFileInputResult.setCaption(filename);
+        //网络地址
+        String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
+        bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
+        bootstrapFileInputResult.setSize(uploadFile.getSize());
+        bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
+        //这里有问题path不加storeagePath  要加
+        bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
+        return CommonResult.ok()
+                //网络地址
+                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
+                .add("initialPreviewAsData",false)
+                .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 
+
+    @SneakyThrows
+    @ResponseBody
+    @RequestMapping("/delete")
+    public CommonResult delete(String path) {
+        FileUtil.del(storegePath+path);
+        return CommonResult.ok();
+    }
 }
