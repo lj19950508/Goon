@@ -1,5 +1,6 @@
 package pers.gon.manage.file;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import lombok.SneakyThrows;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pers.gon.infrastructure.common.entity.CommonResult;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Date;
 
 
@@ -23,6 +25,7 @@ public class FileController {
     @Value("${file.path}")
     String storegePath;
 
+    //for bootstrap-fileinput
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/upload")
@@ -38,8 +41,8 @@ public class FileController {
         int year = DateUtil.year(now);
         int day = DateUtil.dayOfMonth(now);
         String filename = uploadFile.getOriginalFilename();
-        String realtivePath = "/"+uploadPath+"/"+year+"/"+month+"/"+day+"/";
-        String filepath = storegePath+realtivePath;
+        String realtivePath = uploadPath+"/"+year+"/"+month+"/"+day+"/";
+        String filepath = storegePath+"/"+realtivePath;
 
         //如果文件名字重复自动重命名
         while (FileUtil.exist(filepath+filename)){
@@ -48,17 +51,28 @@ public class FileController {
         File saveFile = FileUtil.touch(filepath+filename);
 
         uploadFile.transferTo(saveFile);
-        //initialPreview:[src,src]
-        //initialPreviewAsData:true
-        //initialPreviewConfig[{caption:,downloadurl,exif,key,size,url(for del)}]
-        return CommonResult.ok("http://localhost:8081/goon/files/"+realtivePath+filename);
+
+        BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
+        bootstrapFileInputResult.setCaption(filename);
+        //网络地址
+        bootstrapFileInputResult.setDownloadUrl("http://localhost:8081/goon/files/"+realtivePath+filename);
+        bootstrapFileInputResult.setSize(uploadFile.getSize());
+        bootstrapFileInputResult.setKey("http://localhost:8081/goon/files/"+realtivePath+filename);
+        //context+file/delete + path
+        bootstrapFileInputResult.setUrl("http://localhost:8081/goon/manage/file/delete?path="+filepath+filename);
+        return CommonResult.ok()
+                //网络地址
+                .add("initialPreview", ListUtil.toList("http://localhost:8081/goon/files/"+realtivePath+filename))
+                .add("initialPreviewAsData",false)
+                .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 
 
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/delete")
-    public CommonResult delete() {
+    public CommonResult delete(String path) {
+        FileUtil.del(path);
         return CommonResult.ok();
     }
 }
