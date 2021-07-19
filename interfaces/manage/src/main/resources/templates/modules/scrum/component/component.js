@@ -200,15 +200,15 @@ $(function () {
         showPreview:true,
         minFileCount: 1,
         //上传地址
-        uploadUrl: "http://localhost/file-upload.php",
+        uploadUrl: "/file/upload",
         //是否允许暂停上传
-        enableResumableUpload: true,
+        // enableResumableUpload: true,
         //断电续传选项
-        resumableUploadOptions: {
+        // resumableUploadOptions: {
             // uncomment below if you wish to test the file for previous partial uploaded chunks
             // to the server and resume uploads from that point afterwards
             // testUrl: "http://localhost/test-upload.php"
-        },
+        // },
         //上传额外参数
         uploadExtraData: {
             'uploadToken': 'SOME-TOKEN', // for access control / security

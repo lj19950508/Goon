@@ -41,7 +41,9 @@ public class ShiroFilterConfig {
         //app模块过滤
         String adminPath  = globalProperties.getAdminPath();
 
+        filterChainDefinitionMap.put(adminPath+"/file/**", "anon");
         filterChainDefinitionMap.put(adminPath+"/test/**", "anon");
+
 
         filterChainDefinitionMap.put(adminPath+"/login", "anon");
         filterChainDefinitionMap.put(adminPath+"/logout", "anon");

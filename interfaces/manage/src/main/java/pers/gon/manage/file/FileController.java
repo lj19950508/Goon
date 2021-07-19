@@ -40,8 +40,7 @@ public class FileController {
 
         //如果文件名字重复自动重命名
 
-        FileUtil.mkdir(storegePath+"/"+uploadPath+"/"+year+"/"+month+"/"+day);
-        File saveFile =  FileUtil.newFile(storegePath+"/"+uploadPath+"/"+year+"/"+month+"/"+day+"/"+file.getOriginalFilename());
+        File saveFile =  FileUtil.touch(storegePath+"/"+uploadPath+"/"+year+"/"+month+"/"+day+"/"+file.getOriginalFilename());
         //在某个路径下 +uploadpath  +年月日+文件名创建文件
 
         file.transferTo(saveFile);
