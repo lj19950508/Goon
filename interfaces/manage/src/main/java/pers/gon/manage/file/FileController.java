@@ -48,6 +48,9 @@ public class FileController {
         File saveFile = FileUtil.touch(filepath+filename);
 
         uploadFile.transferTo(saveFile);
+        //initialPreview:[src,src]
+        //initialPreviewAsData:true
+        //initialPreviewConfig[{caption:,downloadurl,exif,key,size,url(for del)}]
         return CommonResult.ok("http://localhost:8081/goon/files/"+realtivePath+filename);
     }
 
