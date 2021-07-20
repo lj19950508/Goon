@@ -19,7 +19,6 @@ public class BootstrapFileInputResult {
             case "jpeg":this.setType("image");break;
             case "png":this.setType("image");break;
             case "gif":this.setType("image");break;
-
             case "txt":this.setType("text");break;
             case "pdf":this.setType("pdf");break;
             case "html":this.setType("html");break;
