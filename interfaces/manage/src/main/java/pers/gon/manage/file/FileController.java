@@ -68,9 +68,8 @@ public class FileController {
         bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
         bootstrapFileInputResult.setTypeByFilename();
-        return CommonResult.ok()
-                //网络地址
-                    .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
+        return CommonResult.ok(fileNetworkUrl+realtivePath+filename)
+                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 

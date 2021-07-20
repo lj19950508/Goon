@@ -1,16 +1,16 @@
 package pers.gon.infrastructure.common.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.shiro.crypto.hash.Hash;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
-public class CommonResult<T> extends HashMap {
+public class CommonResult<T>  extends HashMap {
 
 
     private static final int DEFAULT_FAIL_CODE = 1;
@@ -29,61 +29,61 @@ public class CommonResult<T> extends HashMap {
 
     public static <T> CommonResult ok(){
         CommonResult commonResult = new CommonResult();
-        commonResult.setCode(DEFAULT_OK_CODE);
-        commonResult.setMsg(DEFAULT_OK_MSG);
-        commonResult.setSuccess(true);
+        commonResult.put("code",DEFAULT_OK_CODE);
+        commonResult.put("msg",DEFAULT_OK_MSG);
+        commonResult.put("success",true);
         return commonResult;
     }
 
     public static <T> CommonResult ok(T data){
         CommonResult commonResult = new CommonResult();
-        commonResult.setData(data);
-        commonResult.setCode(DEFAULT_OK_CODE);
-        commonResult.setMsg(DEFAULT_OK_MSG);
-        commonResult.setSuccess(true);
+        commonResult.put("code",DEFAULT_OK_CODE);
+        commonResult.put("msg",DEFAULT_OK_MSG);
+        commonResult.put("success",true);
+        commonResult.put("data",data);
         return commonResult;
     }
 
     public static <T>CommonResult ok(String msg,T data){
         CommonResult commonResult = new CommonResult();
-        commonResult.setData(data);
-        commonResult.setMsg(msg);
-        commonResult.setCode(DEFAULT_OK_CODE);
-        commonResult.setSuccess(true);
+        commonResult.put("code",DEFAULT_OK_CODE);
+        commonResult.put("msg",msg);
+        commonResult.put("success",true);
+        commonResult.put("data",data);
         return commonResult;
     }
 
     public static CommonResult fail(){
         CommonResult commonResult = new CommonResult();
-        commonResult.setCode(DEFAULT_FAIL_CODE);
-        commonResult.setMsg(DEFAULT_FAIL_MSG);
-        commonResult.setSuccess(false);
+        commonResult.put("code",DEFAULT_FAIL_CODE);
+        commonResult.put("msg",DEFAULT_FAIL_MSG);
+        commonResult.put("success",false);
         return commonResult;
     }
 
     public static CommonResult fail(String msg){
         CommonResult commonResult = new CommonResult();
-        commonResult.setMsg(msg);
-        commonResult.setCode(DEFAULT_FAIL_CODE);
-        commonResult.setSuccess(false);
+        commonResult.put("code",DEFAULT_FAIL_CODE);
+        commonResult.put("msg",msg);
+        commonResult.put("success",false);
         return commonResult;
     }
 
 
     public static CommonResult fail(String msg,int code){
         CommonResult commonResult = new CommonResult();
-        commonResult.setMsg(msg);
-        commonResult.setCode(code);
-        commonResult.setSuccess(false);
+        commonResult.put("code",code);
+        commonResult.put("msg",msg);
+        commonResult.put("success",false);
         return commonResult;
     }
 
     public static <T> CommonResult build(String msg,int code,boolean success,T data){
         CommonResult commonResult = new CommonResult();
-        commonResult.setData(data);
-        commonResult.setMsg(msg);
-        commonResult.setCode(code);
-        commonResult.setSuccess(success);
+        commonResult.put("code",code);
+        commonResult.put("msg",msg);
+        commonResult.put("success",success);
+        commonResult.put("data",data);
         return commonResult;
     }
 
