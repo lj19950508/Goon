@@ -3052,7 +3052,7 @@
             $h.setHtml($modal, self._getModalContent());
             self._setZoomContent($frame);
             $modal.data({backdrop: false});
-            //$modal.data('fileinputPluginId', self.$element.attr('id'));
+            // $modal.data('fileinputPluginId', self.$element.attr('id'));
             $modal.modal('show');
             self._initZoomButtons();
         },
@@ -3439,13 +3439,14 @@
                         data = self.previewCache.get(index, false);
                         $div = $h.createElement(data).hide().appendTo($thumb);
                         $newCache = $div.find('.kv-zoom-cache');
-                        if ($newCache && $newCache.length) {
-                            $newCache.appendTo($thumb);
-                        }
                         $thumb.fadeOut('slow', function () {
                             var $newThumb = $div.find('.file-preview-frame');
                             if ($newThumb && $newThumb.length) {
+                                $newThumb = $newThumb.slice(0, 1);
                                 $newThumb.insertBefore($thumb).fadeIn('slow').css('display:inline-block');
+                                if ($newCache && $newCache.length) {
+                                    $newCache.appendTo($newThumb);
+                                }
                             }
                             self._initPreviewActions();
                             self._clearFileInput();

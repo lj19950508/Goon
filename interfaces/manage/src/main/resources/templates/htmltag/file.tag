@@ -34,7 +34,6 @@ $(function () {
         if(val){
             valArr = val.split(',')
         }
-        console.log()
         valArr.push(data.response.initialPreviewConfig[0].key)
         val = valArr.join(',');
         $("#${id}").val(val)
@@ -46,7 +45,9 @@ $(function () {
         })
         val = valArr.join(',');
         $("#${id}").val(val)
-    })
+    }).on('fileselect', function(event, numFiles, label) {
+        console.log( $("#${name}file").fileinput('getPreview'));
+    });
     //删除完成应该扣掉
 })
 </script>

@@ -66,12 +66,11 @@ public class FileController {
         bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setSize(uploadFile.getSize());
         bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
-        bootstrapFileInputResult.setType("image");
         bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
+        bootstrapFileInputResult.setTypeByFilename();
         return CommonResult.ok()
                 //网络地址
                     .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
-                .add("initialPreviewAsData",true)
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 
