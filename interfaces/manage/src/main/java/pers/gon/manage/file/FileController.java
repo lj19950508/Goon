@@ -61,16 +61,8 @@ public class FileController {
 
         uploadFile.transferTo(saveFile);
         String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
-        BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
-        bootstrapFileInputResult.setCaption(filename);
-        bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
-        bootstrapFileInputResult.setSize(uploadFile.getSize());
-        bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
-        bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
-        bootstrapFileInputResult.setTypeByFilename();
-        return CommonResult.ok(fileNetworkUrl+realtivePath+filename)
-                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
-                .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
+
+        return CommonResult.ok(fileNetworkUrl+realtivePath+filename);
     }
 
 

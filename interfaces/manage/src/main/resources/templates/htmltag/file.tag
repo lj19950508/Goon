@@ -5,6 +5,28 @@
 
 <script type="text/javascript">
 $(function () {
+    let val = '${value!}';
+    let initalPreview =[];
+    let initialPreviewConfig = [];
+    if(val){
+        initalPreview = val.split(',');
+        for(let i = 0 ; i < initalPreview.length; i++){
+            initialPreviewConfig.push({
+                caption:'caption',
+                size:
+                type:
+                key:
+            })
+        }
+        // for(let i = 0 ; i < )
+        //filename
+        //size
+        //key
+        //url
+        //type
+    }
+
+
     $("#${name}file").fileinput({
         language: 'zh',
         theme:'fas',
@@ -15,18 +37,14 @@ $(function () {
         overwriteInitial: false,//不覆盖图片
         //上传地址
         uploadUrl: "/goon/manage/file/upload",
-        // deleteUrl:function(obj){
-        //     console.log(obj)
-        // },
-        deleteUrl: "/goon/manage/file/delete",
         //file参数
         uploadExtraData: {
             'uploadPath': '${uploadPath}', // for access control / security
         },
         // allowedFileTypes: ['image'],    // allow only images
         //初始化图片
-        // initialPreview: [],          // if you have previously uploaded preview files
-        // initialPreviewConfig: [],    // if you have previously uploaded preview files
+        initialPreview:initalPreview,          // if you have previously uploaded preview files
+        // initialPreviewConfig:initialPreviewConfig,    // if you have previously uploaded preview files
 
     }).on('fileuploaded', function(event, data, index, fileId) {
         let val = $("#${id}").val()
@@ -45,9 +63,7 @@ $(function () {
         })
         val = valArr.join(',');
         $("#${id}").val(val)
-    }).on('fileselect', function(event, numFiles, label) {
-        console.log( $("#${name}file").fileinput('getPreview'));
-    });
+    })
     //删除完成应该扣掉
 })
 </script>
