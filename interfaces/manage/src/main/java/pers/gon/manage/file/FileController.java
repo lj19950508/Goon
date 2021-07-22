@@ -38,18 +38,18 @@ public class FileController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/upload")
-    public CommonResult upload(MultipartFile uploadFile, String uploadPath) {
-        if(uploadFile==null ){
+    public CommonResult upload(MultipartFile file, String uploadPath) {
+        if(file==null ){
             return CommonResult.fail("上传文件识别失败");
         }
         if(StringUtils.isEmpty(uploadPath)){
             return CommonResult.fail("请输入上传路径");
         }
         Date now =new Date();
-        int month = DateUtil.month(now);
+        int month = DateUtil.month(now)+1;
         int year = DateUtil.year(now);
         int day = DateUtil.dayOfMonth(now);
-        String filename = uploadFile.getOriginalFilename();
+        String filename = file.getOriginalFilename();
         String realtivePath = uploadPath+"/"+year+"/"+month+"/"+day+"/";
         String filepath = storegePath+realtivePath;
 
@@ -59,7 +59,7 @@ public class FileController {
         }
         File saveFile = FileUtil.touch(filepath+filename);
 
-        uploadFile.transferTo(saveFile);
+        file.transferTo(saveFile);
         String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
 
         return CommonResult.ok(fileNetworkUrl+realtivePath+filename);
