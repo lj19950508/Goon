@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import pers.gon.infrastructure.common.config.global.GlobalProperties;
 import pers.gon.infrastructure.common.entity.CommonResult;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 
 @Slf4j
@@ -67,12 +67,38 @@ public class FileController {
         bootstrapFileInputResult.setSize(uploadFile.getSize());
         bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
-        bootstrapFileInputResult.setTypeByFilename();
+        bootstrapFileInputResult.setFiletype(new MimetypesFileTypeMap().getContentType(filename));
         return CommonResult.ok(fileNetworkUrl+realtivePath+filename)
                 .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 
+    @SneakyThrows
+    @ResponseBody
+    @RequestMapping("/info")
+    public CommonResult info(String urls) {
+        List<BootstrapFileInputResult> configList = new ArrayList<>();
+        String[] urlArray = urls.split(",");
+        for(int i = 0 ; i < urlArray.length ; i++){
+            String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
+            String relativeFile = urls.replaceAll(fileNetworkUrl,"");
+            String localFile = storegePath+relativeFile;
+            File file = FileUtil.file(localFile);
+            BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
+            bootstrapFileInputResult.setSize(file.length());
+            bootstrapFileInputResult.setCaption(file.getName());
+            bootstrapFileInputResult.setDownloadUrl(urls);
+            bootstrapFileInputResult.setKey(urls);
+            bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+relativeFile);
+            bootstrapFileInputResult.setFiletype(new MimetypesFileTypeMap().getContentType(urls));
+            configList.add(bootstrapFileInputResult);
+        }
+        return CommonResult.ok()
+                .add("initialPreview", ListUtil.toList(urlArray))
+                .add("initialPreviewConfig",configList);
+    }
+
+    //多提供一个接口 根据URl信息返回
 
     @SneakyThrows
     @ResponseBody

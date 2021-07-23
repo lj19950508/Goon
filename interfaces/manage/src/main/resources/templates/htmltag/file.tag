@@ -9,19 +9,18 @@ $(function () {
     let initalPreview =[];
     let initialPreviewConfig = [];
     if(val){
-        initalPreview = val.split(',');
-        for(let i = 0 ; i < initalPreview.length; i++){
-            initialPreviewConfig.push({
-                caption:'caption',
-                size:100,
-                type:'image',
-                key:initalPreview[i]
-            })
-        }
-
+        $req.get("${ctx}/file/info",{urls:val},function(res){
+            initalPreview = res.initialPreview
+            initialPreviewConfig = res. initialPreviewConfig
+            init${name}FileSelect(initalPreview,initialPreviewConfig)
+        })
+    }else{
+        init${name}FileSelect(initalPreview,initialPreviewConfig)
     }
 
+})
 
+function init${name}FileSelect(initalPreview,initialPreviewConfig){
     $("#${name}file").fileinput({
         language: 'zh',
         theme:'fas',
@@ -59,6 +58,6 @@ $(function () {
         val = valArr.join(',');
         $("#${id}").val(val)
     })
-    //删除完成应该扣掉
-})
+}
+
 </script>
