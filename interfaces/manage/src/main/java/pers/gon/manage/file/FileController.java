@@ -38,18 +38,18 @@ public class FileController {
     @SneakyThrows
     @ResponseBody
     @RequestMapping("/upload")
-    public CommonResult upload(MultipartFile file, String uploadPath) {
-        if(file==null ){
+    public CommonResult upload(MultipartFile uploadFile, String uploadPath) {
+        if(uploadFile==null ){
             return CommonResult.fail("上传文件识别失败");
         }
         if(StringUtils.isEmpty(uploadPath)){
             return CommonResult.fail("请输入上传路径");
         }
         Date now =new Date();
-        int month = DateUtil.month(now)+1;
+        int month = DateUtil.month(now);
         int year = DateUtil.year(now);
         int day = DateUtil.dayOfMonth(now);
-        String filename = file.getOriginalFilename();
+        String filename = uploadFile.getOriginalFilename();
         String realtivePath = uploadPath+"/"+year+"/"+month+"/"+day+"/";
         String filepath = storegePath+realtivePath;
 
@@ -59,10 +59,18 @@ public class FileController {
         }
         File saveFile = FileUtil.touch(filepath+filename);
 
-        file.transferTo(saveFile);
+        uploadFile.transferTo(saveFile);
         String fileNetworkUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"files/";
-
-        return CommonResult.ok(fileNetworkUrl+realtivePath+filename);
+        BootstrapFileInputResult bootstrapFileInputResult = new BootstrapFileInputResult();
+        bootstrapFileInputResult.setCaption(filename);
+        bootstrapFileInputResult.setDownloadUrl(fileNetworkUrl+realtivePath+filename);
+        bootstrapFileInputResult.setSize(uploadFile.getSize());
+        bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
+        bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
+        bootstrapFileInputResult.setTypeByFilename();
+        return CommonResult.ok(fileNetworkUrl+realtivePath+filename)
+                .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
+                .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
     }
 
 
