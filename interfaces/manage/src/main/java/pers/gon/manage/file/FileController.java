@@ -67,7 +67,7 @@ public class FileController {
         bootstrapFileInputResult.setSize(uploadFile.getSize());
         bootstrapFileInputResult.setKey(fileNetworkUrl+realtivePath+filename);
         bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+realtivePath+filename);
-        bootstrapFileInputResult.setFiletype(new MimetypesFileTypeMap().getContentType(filename));
+        bootstrapFileInputResult.setTypeByFilename();
         return CommonResult.ok(fileNetworkUrl+realtivePath+filename)
                 .add("initialPreview", ListUtil.toList(fileNetworkUrl+realtivePath+filename))
                 .add("initialPreviewConfig",ListUtil.toList(bootstrapFileInputResult));
@@ -90,7 +90,7 @@ public class FileController {
             bootstrapFileInputResult.setDownloadUrl(urls);
             bootstrapFileInputResult.setKey(urls);
             bootstrapFileInputResult.setUrl(request.getContextPath()+"/"+globalProperties.getAdminPath()+"/file/delete?path="+relativeFile);
-            bootstrapFileInputResult.setFiletype(new MimetypesFileTypeMap().getContentType(urls));
+            bootstrapFileInputResult.setTypeByFilename();
             configList.add(bootstrapFileInputResult);
         }
         return CommonResult.ok()
