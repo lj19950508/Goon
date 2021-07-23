@@ -54,6 +54,9 @@ ${r'<@'} layout("/include/_container.html", {title:"${entityName}", parent:"${mo
                                         <#if item.formType ==9>
                                         ${r'<#'}treeselect id="${item["itemName"]}" name="${item["itemName"]}.id" value="${r'${'}${entityName}.${item["itemName"]}.id!}" labelValue="${r'${'}${entityName}.${item["itemName"]}.name!}" labelName="${item["itemName"]}.name" placeholder="选择单位" title="所属单位" url="/upms/dept/list"   <#if item.must==true>required="required"</#if> checked="false" allowClear="true" allowSearch="true" />
                                         </#if>
+                                        <#if item.formType ==10>
+                                        ${r'<#'}file id="${item["itemName"]}" name="${item["itemName"]}" value="${r'${'}${entityName}.${item["itemName"]}!}" uploadPath="${moduleName}"  />
+                                        </#if>
                                         <#if item.must==true><div class="invalid-feedback">输入${item["itemDesc"]}!</div></#if>
                                     </td>
                                 </tr>

@@ -1,4 +1,4 @@
-<input id="${id}" name="${name}" type="hidden" name="">
+<input id="${id}" name="${name}" value="${value!}" type="hidden" name="">
 <div class="file-loading">
     <input id="${name}file"  name="uploadFile"  type="file" multiple  >
 </div>

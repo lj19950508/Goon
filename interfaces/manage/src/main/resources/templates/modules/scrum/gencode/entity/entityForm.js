@@ -21,6 +21,7 @@ var pageFormObject= {
         {value:7,label:"日期",filterItemType:['Date'],filterQueryType:[0,5],dictable:false},
         {value:8,label:"数字",filterItemType:['Integer','BigDecimal','Double','Float','Long'],filterQueryType:[0,6,7],dictable:false},
         {value:9,label:"部门选择器",filterItemType:['UpmsDept'],filterQueryType:[0],dictable:false},
+        {value:10,label:"文件选择器",filterItemType:['String'],filterQueryType:[0],dictable:false},
         // {/*{value:9,label:"开关"}*/}
     ],
     //取决于form

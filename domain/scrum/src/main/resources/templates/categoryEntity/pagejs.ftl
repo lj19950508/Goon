@@ -100,6 +100,28 @@
                         </#if>
 
                         },
+                         <#else>
+                        formatter:function (val,row,index) {
+                        <#if item.formType==10 >
+                            if(val){
+                                let arr = val.split(',');
+                                let html = '';
+                                for(let i = 0 ; i < arr.length ; i++){
+                                    let link = arr[i];
+                                    let index = link.lastIndexOf("/")
+                                    let name = link.substring(index+1,link.length);
+                                    html+='<a target="_blank" href="'+link+'">'+name+'</a>'
+                                    if(arr.length!=i-1){
+                                        html+='</br>'
+                                    }
+                                }
+                                return html;
+                            }
+                        </#if>
+                       <#if item.formType!=10 >
+                           return val;
+                        </#if>
+                        },
                         </#if>
                         field: '${item["itemName"]}<#if item.formType==9>.name</#if>',
                         title: '${item["itemDesc"]}',
