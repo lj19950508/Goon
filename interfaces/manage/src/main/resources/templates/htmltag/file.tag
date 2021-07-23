@@ -13,17 +13,12 @@ $(function () {
         for(let i = 0 ; i < initalPreview.length; i++){
             initialPreviewConfig.push({
                 caption:'caption',
-                // size:
-                // type:
-                // key:
+                size:100,
+                type:'image',
+                key:initalPreview[i]
             })
         }
-        // for(let i = 0 ; i < )
-        //filename
-        //size
-        //key
-        //url
-        //type
+
     }
 
 
@@ -36,7 +31,7 @@ $(function () {
         initialPreviewAsData: true,
         overwriteInitial: false,//不覆盖图片
         //上传地址
-        uploadUrl: "/goon/manage/file/upload",
+        uploadUrl: "${ctx}/file/upload",
         //file参数
         uploadExtraData: {
             'uploadPath': '${uploadPath}', // for access control / security
@@ -44,7 +39,7 @@ $(function () {
         // allowedFileTypes: ['image'],    // allow only images
         //初始化图片
         initialPreview:initalPreview,          // if you have previously uploaded preview files
-        // initialPreviewConfig:initialPreviewConfig,    // if you have previously uploaded preview files
+        initialPreviewConfig:initialPreviewConfig,    // if you have previously uploaded preview files
 
     }).on('fileuploaded', function(event, data, index, fileId) {
         let val = $("#${id}").val()
