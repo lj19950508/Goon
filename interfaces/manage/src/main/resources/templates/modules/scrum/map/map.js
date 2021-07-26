@@ -1,7 +1,14 @@
 <script>
+    var mapRef;//地图引用
 
     $(function(){
-        let map =new ol.Map({
+        initMap();
+        OlUtil.draw.circle(mapRef);
+
+    })
+
+    function initMap(){
+        mapRef =new ol.Map({
             target: 'map',
             controls: ol.control.defaults({
                 zoom: false,
@@ -13,14 +20,9 @@
             layers:[
                 new ol.layer.Tile({
                     source: new ol.source.XYZ({
-                        url: OlUtil.wmts.aMap('6'),
+                        url: OlUtil.wmts.aMap('7'),
                     })
                 }),
-                new ol.layer.Tile({
-                    source: new ol.source.XYZ({
-                        url: OlUtil.wmts.aMap('8'),
-                    })
-                })
             ],
             view: new ol.View({
                 //坐标系
@@ -29,5 +31,5 @@
             }),
         })
 
-    })
+    }
 </script>
