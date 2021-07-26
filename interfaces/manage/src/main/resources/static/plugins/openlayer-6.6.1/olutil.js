@@ -19,6 +19,10 @@ var OlUtil = {
         layer:new ol.layer.Vector({
             source: this.source,
         }),
+        enable:function(map){
+            console.log(this.layer)
+            this.layer.setMap(map);
+        },
         point: function () {
         },
         line:function(map){

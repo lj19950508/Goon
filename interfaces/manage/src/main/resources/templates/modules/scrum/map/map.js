@@ -3,6 +3,7 @@
 
     $(function(){
         initMap();
+        OlUtil.draw.enable(mapRef)
         OlUtil.draw.circle(mapRef);
 
     })
