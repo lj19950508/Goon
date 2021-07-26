@@ -6,7 +6,6 @@ var $file={
         if(fileType=='jpg'|| fileType=='jpeg'||fileType=="png"||fileType=="bmp"||fileType=="gif"){
             return '<a  target="_blank" href="'+url+'" ><img style="width: 50px;height: 50px" class="img-thumbnail" src="'+url+'" alt="'+name+'"></a>'
         }else{
-            console.log(123)
             return '<a target="_blank" href="'+url+'">'+name+'</a></br>'
         }
     }

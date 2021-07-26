@@ -165,3 +165,27 @@ var reqLayerOption = {
     }
 }
 
+var dealFormArray= function(form,searchParam){
+    //处理名字一样的非[] 数组
+    let array =  form.serializeArray()
+    let result = {};
+    for(let i in array){
+        for(let j in array){
+            if(i!=j && array[i].name == array[j].name){
+                if(result[array[i].name]==null){
+                    result[array[i].name]=[]
+                }
+                result[array[i].name].push(array[i].value)
+            }
+        }
+    }
+    for(var i in result){
+        searchParam[i] =  result[i].join(',')
+    }
+
+}
+
+var bootstrapTableQueryParam = function(){
+
+}
+
