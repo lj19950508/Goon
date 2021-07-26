@@ -1,9 +1,11 @@
 <script>
     var pageObject = {
         tableRef:null,
-        initTable:function(){
+        initTable:function(opt){
             var option = {
                 url: "${r'${ctx}'}/${moduleName}/${entityName}/page",
+                pageSize:opt.pageSize,
+                pageNumber:opt.pageNumber,
                 columns: [
                     {checkbox: true,}
                     <#list items as item>
@@ -117,12 +119,15 @@
             });
         },
         add:function(){
+            this.storegeCurSearch()
             go_into("${r'${ctx}'}/${moduleName}/${entityName}/form/add");
         },
         view:function(id){
+            this.storegeCurSearch()
             go_into("${r'${ctx}'}/${moduleName}/${entityName}/form/view?id="+id);
         },
         edit:function(id){
+            this.storegeCurSearch()
             go_into("${r'${ctx}'}/${moduleName}/${entityName}/form/edit?id="+id);
         },
         del:function(id){
@@ -185,10 +190,36 @@
                     $('#edit').prop('disabled', true);
                 }
             });
-        }
+        },
+        storegeCurSearch:function(){
+            let pageSize =this.tableRef.bootstrapTable('getOptions').pageSize;
+            let pageNumber = this.tableRef.bootstrapTable('getOptions').pageNumber
+            var searchParam = this.tableRef.bootstrapTable('getOptions').queryParams({
+                limit:pageSize,
+                offset:(pageNumber-1)*pageSize
+            })
+            sessionStorage.setItem("${entityName}-searchParam",JSON.stringify(searchParam))
+        },
+        setSearchStorge:function(){
+            let item = sessionStorage.getItem("${entityName}-searchParam");
+            if(item){
+                let data = JSON.parse(item)
+                for(let item in data){
+                    $("input[name='"+item+"']").val(data[item])
+                }
+                sessionStorage.removeItem("${entityName}-searchParam")
+                return {
+                    pageSize: data['size'],
+                    pageNumber: data['page']+1
+                }
+            }else{
+                return {};
+            }
+        },
     };
     $(function () {
-        pageObject.initTable();
+        let opt = pageObject.setSearchStorge()
+        pageObject.initTable(opt);
     })
 
 
