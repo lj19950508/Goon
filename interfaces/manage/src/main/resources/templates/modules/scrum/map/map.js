@@ -1,15 +1,16 @@
 <script>
-    var mapRef;//地图引用
+    var map;//地图引用
 
     $(function(){
         initMap();
-        OlUtil.draw.enable(mapRef)
-        OlUtil.draw.circle(mapRef);
+        OlUtil.draw.enable(map)
+        OlUtil.draw.circle();
+
 
     })
 
     function initMap(){
-        mapRef =new ol.Map({
+        map =new ol.Map({
             target: 'map',
             controls: ol.control.defaults({
                 zoom: false,

@@ -14,40 +14,40 @@ var OlUtil = {
 
     },
     draw: {
+        mapRef:null,
         tool:null,
-        source: new ol.source.Vector(),
         layer:new ol.layer.Vector({
-            source: this.source,
+            source:  new ol.source.Vector(),
         }),
         enable:function(map){
-            console.log(this.layer)
-            this.layer.setMap(map);
+            this.mapRef=map;
+            console.log(this.layer.setMap(map));
         },
         point: function () {
         },
-        line:function(map){
+        line:function(){
             this.tool =  new ol.interaction.Draw({
                 source: this.source,
                 type: 'LineString'
             });
-            map.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.tool)
         },
-        polygon:function(map){
+        polygon:function(){
             this.tool =  new ol.interaction.Draw({
                 source: this.source,
                 type: 'Polygon'
             });
-            map.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.tool)
         },
-        circle:function(map){
+        circle:function(){
             this.tool =  new ol.interaction.Draw({
                 source: this.source,
                 type: 'Circle'
             });
-            map.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.tool)
         },
-        stopDraw:function(mapRef){
-            mapRef.removeInteraction(this.tool);
+        stopDraw:function(){
+            this.mapRef.removeInteraction(this.tool);
         }
     },
     transformCoord(coord,source,target){
