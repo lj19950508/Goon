@@ -15,39 +15,86 @@ var OlUtil = {
     },
     draw: {
         mapRef:null,
-        tool:null,
-        layer:new ol.layer.Vector({
-            source:  new ol.source.Vector(),
-        }),
+        engine:null,
+        source: null,
+        layer:null,
+        snap:null,
+        modify:null,
         enable:function(map){
             this.mapRef=map;
-            console.log(this.layer.setMap(map));
+            this.source= new ol.source.Vector();
+            this.layer = new ol.layer.Vector({
+                source: this.source
+            })
+            this.layer.setMap(this.mapRef);
         },
         point: function () {
+            this.engine =  new ol.interaction.Draw({
+                source: this.source,
+                type: 'Point'
+            });
+            this.mapRef.addInteraction(this.engine)
+            this.snap = new ol.interaction.Snap({
+                source: this.source
+            })
+            map.addInteraction(this.snap);
+            this.modify = new ol.interaction.Modify({
+                source:this.source
+            })
+
+            this.mapRef.addInteraction(this.modify)
+
         },
         line:function(){
-            this.tool =  new ol.interaction.Draw({
+            this.engine =  new ol.interaction.Draw({
                 source: this.source,
                 type: 'LineString'
             });
-            this.mapRef.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.engine)
+            this.snap = new ol.interaction.Snap({
+                source: this.source
+            })
+            map.addInteraction(this.snap);
+            this.modify = new ol.interaction.Modify({
+                source:this.source
+            })
+            this.mapRef.addInteraction(this.modify)
+
         },
         polygon:function(){
-            this.tool =  new ol.interaction.Draw({
+            this.engine =  new ol.interaction.Draw({
                 source: this.source,
                 type: 'Polygon'
             });
-            this.mapRef.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.engine)
+            this.modify = new ol.interaction.Modify({
+                source:this.source
+            })
+            this.snap = new ol.interaction.Snap({
+                source: this.source
+            })
+            map.addInteraction(this.snap);
+            this.mapRef.addInteraction(this.modify)
+
         },
         circle:function(){
-            this.tool =  new ol.interaction.Draw({
+            this.engine =  new ol.interaction.Draw({
                 source: this.source,
-                type: 'Circle'
+                type: 'Circle',
             });
-            this.mapRef.addInteraction(this.tool)
+            this.mapRef.addInteraction(this.draw)
+            this.modify = new ol.interaction.Modify({
+                source:this.source
+            })
+            this.snap = new ol.interaction.Snap({
+                source: this.source
+            })
+            map.addInteraction(this.snap);
+            this.mapRef.addInteraction(this.modify)
         },
         stopDraw:function(){
-            this.mapRef.removeInteraction(this.tool);
+            this.mapRef.removeInteraction(this.engine);
+            this.mapRef.removeInteraction(this.engine);
         }
     },
     transformCoord(coord,source,target){

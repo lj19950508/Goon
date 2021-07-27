@@ -4,9 +4,7 @@
     $(function(){
         initMap();
         OlUtil.draw.enable(map)
-        OlUtil.draw.circle();
-
-
+        OlUtil.draw.point();
     })
 
     function initMap(){
