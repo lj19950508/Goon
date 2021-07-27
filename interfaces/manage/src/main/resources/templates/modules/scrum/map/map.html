@@ -3,9 +3,17 @@
 <link href="${ctxStatic}/plugins/openlayer-6.6.1/ol.css" rel="stylesheet">
 <script src="${ctxStatic}/plugins/openlayer-6.6.1/ol.js"></script>
 <script src="${ctxStatic}/plugins/openlayer-6.6.1/olutil.js"></script>
-
   <div id="map">
+    <div class="tool-container">
+      <div class="btn-group" role="group" aria-label="...">
+        <button onclick=" OlUtil.draw.point();" type="button" class="btn btn-default">绘点</button>
+        <button onclick=" OlUtil.draw.line();" type="button" class="btn btn-default">绘线</button>
+        <button onclick=" OlUtil.draw.circle();"  type="button" class="btn btn-default">绘圆</button>
+        <button onclick="OlUtil.draw.polygon();" type="button" class="btn btn-default">绘多边形</button>
+        <button onclick="OlUtil.measure.line();" type="button" class="btn btn-default">测距</button>
+        <button onclick="OlUtil.measure.polygon();" type="button" class="btn btn-default">测面</button>
 
+      </div>
   </div>
 <@}@>
 
