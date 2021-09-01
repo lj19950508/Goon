@@ -6,4 +6,13 @@
     top: 0;
     bottom: 0;
 }
+
+.tool-container{
+    height: 30px;
+    background: rgba(255,255,255,0.5);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+}
 </style>
